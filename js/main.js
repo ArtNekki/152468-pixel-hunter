@@ -9,10 +9,6 @@
     prev: `prev`
   };
 
-  // if (`content` in document.createElement(`template`)) {
-  //
-  // }
-
   const screens = document.querySelectorAll(`template`);
   const container = document.body.querySelector(`.central`);
   const lastScreen = screens.length - 1;
@@ -27,9 +23,6 @@
     container.appendChild(screenContent);
   };
 
-  // Показываем начальный экран
-  showScreen(0);
-
   // Переход по экранам
   const navigate = function (dir) {
     if (dir === DIRECTION.next) {
@@ -41,11 +34,18 @@
     showScreen(currentScreen);
   };
 
+  // Показываем начальный экран
+  showScreen(0);
+
   document.addEventListener(`keydown`, (e) => {
-    if ((e.keyCode === KEY_CODE.left) && e.altKey) {
-      navigate(DIRECTION.next);
-    } else if ((e.keyCode === KEY_CODE.right) && e.altKey) {
-      navigate(DIRECTION.prev);
+    if (!e.altKey) {
+      return;
     }
+
+    if (e.keyCode !== KEY_CODE.left && e.keyCode !== KEY_CODE.right) {
+      return;
+    }
+
+    navigate(e.keyCode === KEY_CODE.left ? DIRECTION.prev : DIRECTION.next);
   });
 })();
