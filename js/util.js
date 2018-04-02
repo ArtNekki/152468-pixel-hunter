@@ -9,7 +9,6 @@ const container = document.body.querySelector(`#main`);
 
 // Показывает экран в зависимости от переданного числа
 export const changeView = (element) => {
-  console.log('element', element);
   container.innerHTML = ``;
   container.appendChild(element);
 };

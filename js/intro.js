@@ -1,16 +1,23 @@
 import {getElementFromTemplate, changeView} from './util';
-import greeting from './greeting';
+import renderGreeting from './greeting';
 
-const intro = getElementFromTemplate(
-    `<div id='intro' class='intro'>
-      <h1 class='intro__asterisk'>*</h1>
-      <p class='intro__motto'><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
-    </div>`);
+const render = () => {
+  // Генерируем Dom - элементы из шаблона
+  const intro = getElementFromTemplate(
+      `<div id='intro' class='intro'>
+        <h1 class='intro__asterisk'>*</h1>
+        <p class='intro__motto'><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
+      </div>`);
 
-const goNextButton = intro.querySelector(`.intro__asterisk`);
+  // Добавляем логику работы
+  const goNextButton = intro.querySelector(`.intro__asterisk`);
 
-goNextButton.addEventListener(`click`, () => {
-  changeView(greeting);
-});
+  goNextButton.addEventListener(`click`, () => {
+    changeView(renderGreeting());
+  });
 
-export default intro;
+  // Возвращаем dom - элементы
+  return intro;
+};
+
+export default render;

@@ -1,9 +1,12 @@
 import {changeView} from './util';
-import intro from './intro';
+import renderIntro from './intro';
 
 document.addEventListener(`DOMContentLoaded`, () => {
-  changeView(intro);
+  // Показываем первый экран, как только DOM загружен
+  changeView(renderIntro());
 
+  // Если в разметке есть кнопка, для возврата назад, то при нажатии на нее
+  // возвращаемся на первый экран
   document.addEventListener(`click`, (e) => {
     const goHomeButton = e.target.closest(`.back`);
 
@@ -11,6 +14,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
       return;
     }
 
-    changeView(intro);
+    changeView(renderIntro());
   });
 });
