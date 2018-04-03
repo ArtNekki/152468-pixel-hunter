@@ -1,51 +1,19 @@
-(function () {
-  const KEY_CODE = {
-    left: 37,
-    right: 39
-  };
+import {changeView} from './util';
+import renderIntro from './intro';
 
-  const DIRECTION = {
-    next: `next`,
-    prev: `prev`
-  };
+document.addEventListener(`DOMContentLoaded`, () => {
+  // Показываем первый экран, как только DOM загружен
+  changeView(renderIntro());
 
-  // if (`content` in document.createElement(`template`)) {
-  //
-  // }
+  // Если в разметке есть кнопка, для возврата назад, то при нажатии на нее
+  // возвращаемся на первый экран
+  document.addEventListener(`click`, (e) => {
+    const goHomeButton = e.target.closest(`.back`);
 
-  const screens = document.querySelectorAll(`template`);
-  const container = document.body.querySelector(`.central`);
-  const lastScreen = screens.length - 1;
-  let currentScreen = 0;
-
-  // Показывает экран в зависимости от переданного числа
-  const showScreen = function (current) {
-    const screen = screens[current];
-    const screenContent = screen.content.cloneNode(true);
-
-    container.innerHTML = ``;
-    container.appendChild(screenContent);
-  };
-
-  // Показываем начальный экран
-  showScreen(0);
-
-  // Переход по экранам
-  const navigate = function (dir) {
-    if (dir === DIRECTION.next) {
-      currentScreen = currentScreen < lastScreen ? currentScreen + 1 : 0;
-    } else {
-      currentScreen = currentScreen > 0 ? currentScreen - 1 : lastScreen;
+    if (!goHomeButton) {
+      return;
     }
 
-    showScreen(currentScreen);
-  };
-
-  document.addEventListener(`keydown`, (e) => {
-    if ((e.keyCode === KEY_CODE.left) && e.altKey) {
-      navigate(DIRECTION.next);
-    } else if ((e.keyCode === KEY_CODE.right) && e.altKey) {
-      navigate(DIRECTION.prev);
-    }
+    changeView(renderIntro());
   });
-})();
+});
