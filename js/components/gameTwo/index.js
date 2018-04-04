@@ -1,5 +1,5 @@
-import {getElementFromTemplate, changeView} from './util';
-import renderStats from './stats';
+import {getElementFromTemplate, changeView} from '../../util';
+import renderGameThree from '../gameThree';
 
 // Получаем documentFragment с dom-узлами из шаблона
 const documentFragmentBase = getElementFromTemplate(
@@ -19,16 +19,18 @@ const documentFragmentBase = getElementFromTemplate(
         </div>
       </header>
       <div class='game'>
-        <p class='game__task'>Найдите рисунок среди изображений</p>
-        <form class='game__content  game__content--triple'>
+        <p class='game__task'>Угадай, фото или рисунок?</p>
+        <form class='game__content  game__content--wide'>
           <div class='game__option'>
-            <img src='http://placehold.it/304x455' alt='Option 1' width='304' height='455'>
-          </div>
-          <div class='game__option'>
-            <img src='http://placehold.it/304x455' alt='Option 1' width='304' height='455'>
-          </div>
-          <div class='game__option'>
-            <img src='http://placehold.it/304x455' alt='Option 1' width='304' height='455'>
+            <img src='http://placehold.it/705x455' alt='Option 1' width='705' height='455'>
+            <label class='game__answer  game__answer--photo'>
+              <input name='question1' type='radio' value='photo'>
+              <span>Фото</span>
+            </label>
+            <label class='game__answer  game__answer--wide  game__answer--paint'>
+              <input name='question1' type='radio' value='paint'>
+              <span>Рисунок</span>
+            </label>
           </div>
         </form>
         <div class='stats'>
@@ -54,35 +56,20 @@ export default () => {
 
   // Добавляем логику работы
   const content = documentFragment.querySelector(`.game__content`);
-  const answers = Array.from(documentFragment.querySelectorAll(`.game__option`));
-
-  const clearAnswersSelection = () => {
-    answers.forEach((answer) => {
-      answer.classList.remove(`game__option--selected`);
-    });
-  };
+  const answers = Array.from(documentFragment.querySelectorAll(`[type='radio']`));
 
   const getSelectedAnswers = () => {
     return answers.some(((answer) => {
-      return answer.classList.contains(`game__option--selected`);
+      return answer.checked;
     }));
   };
 
-  content.addEventListener(`click`, (e) => {
-    const option = e.target.closest(`.game__option`);
-
-    if (!option) {
-      return;
-    }
-
-    clearAnswersSelection();
-    option.classList.add(`game__option--selected`);
-
+  content.addEventListener(`change`, () => {
     if (!getSelectedAnswers()) {
       return;
     }
 
-    changeView(renderStats());
+    changeView(renderGameThree());
   });
 
   // Возвращаем dom - элементы
