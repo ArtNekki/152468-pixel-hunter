@@ -72,8 +72,8 @@ export const calculateAnswerPoints = (answer) => {
 };
 
 export const calculateTotalGamePoints = (answers, lives) => {
-  if (!answers.reduce) {
-    throw new Error(`answers should be an array`);
+  if (!Array.isArray(answers)) {
+    throw new Error(`Параметр 'answers' должен быть массивом`);
   }
 
   if (answers.length < ANSWERS_AMOUNT) {
@@ -81,7 +81,7 @@ export const calculateTotalGamePoints = (answers, lives) => {
   }
 
   if (typeof lives !== `number`) {
-    throw new Error(`lives should be an number`);
+    throw new Error(`Параметр 'lives' должен быть числом`);
   }
 
   if (lives < LIFE.none || lives > LIFE.full) {
