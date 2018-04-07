@@ -1,15 +1,15 @@
-const getClass = (obj) => {
-  return {}.toString.call(obj).slice(8, -1);
+// Определяет является ли параметр обьектом
+const isObject = (obj) => {
+  return !(obj instanceof Array) && (typeof obj === `object`);
 };
 
 // Бонус за оставшуюся жизнь
 const LIFE_BONUS = 50;
 
 // Количество очков за ответ
-export const ANSWER_POINTS = {
-  slow: 50,
-  normal: 100,
-  fast: 150
+export const ANSWER_POINT = {
+  default: 100,
+  add: 50
 };
 
 // Количество ответов
@@ -24,15 +24,14 @@ export const ANSWER_SPEED = {
 
 // Количество жизней
 export const LIFE = {
-  full: 3,
-  normal: 2,
-  minimum: 1,
+  max: 3,
+  medium: 2,
+  min: 1,
   none: 0
 };
 
-export const calculateAnswerPoints = (answer) => {
-
-  if (getClass(answer) !== `Object`) {
+export const calculateAnswerScore = (answer) => {
+  if (!isObject(answer)) {
     throw new Error(`Параметр 'answer' должен быть обьектом`);
   }
 
@@ -52,26 +51,26 @@ export const calculateAnswerPoints = (answer) => {
     throw new Error(`свойство answer.time должно быть числом`);
   }
 
-  let points = 0;
+  let score = 0;
 
   if (answer.success === false) {
-    return points;
+    return score;
   }
 
-  points = ANSWER_POINTS.normal;
+  score = ANSWER_POINT.default;
 
   if (answer.time <= ANSWER_SPEED.fast) {
-    points = ANSWER_POINTS.fast;
+    score += ANSWER_POINT.add;
   }
 
   if (answer.time >= ANSWER_SPEED.slow) {
-    points = ANSWER_POINTS.slow;
+    score -= ANSWER_POINT.add;
   }
 
-  return points;
+  return score;
 };
 
-export const calculateTotalGamePoints = (answers, lives) => {
+export const calculateTotalGameScore = (answers, lives) => {
   if (!Array.isArray(answers)) {
     throw new Error(`Параметр 'answers' должен быть массивом`);
   }
@@ -84,13 +83,13 @@ export const calculateTotalGamePoints = (answers, lives) => {
     throw new Error(`Параметр 'lives' должен быть числом`);
   }
 
-  if (lives < LIFE.none || lives > LIFE.full) {
+  if (lives < LIFE.none || lives > LIFE.max) {
     throw new Error(`Переданное количество жизней должно быть от 0 до 3`);
   }
 
-  const answersPoints = answers.reduce((sum, current) => {
-    return sum + calculateAnswerPoints(current);
+  const answersScore = answers.reduce((sum, current) => {
+    return sum + calculateAnswerScore(current);
   }, 0);
 
-  return answersPoints + lives * LIFE_BONUS;
+  return answersScore + lives * LIFE_BONUS;
 };
