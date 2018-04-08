@@ -1,6 +1,6 @@
 import {assert} from 'chai';
 import {answer, answers} from './mock';
-import {LIFE, calculateAnswerScore, calculateTotalGameScore} from './game';
+import {LIFE, Timer, calculateAnswerScore, calculateTotalGameScore} from './game';
 
 describe(`функция calculateAnswerScore: проверка параметров`, () => {
   it(`Параметр 'answer' должен быть обьектом`, () => {
@@ -87,5 +87,30 @@ describe(`Функция calculateTotalGameScore: подсчет общего к
     assert.equal(1600, calculateTotalGameScore(answers.fast, LIFE.medium));
     assert.equal(1550, calculateTotalGameScore(answers.fast, LIFE.min));
     assert.equal(1500, calculateTotalGameScore(answers.fast, LIFE.none));
+  });
+});
+
+describe(`Таймер`, () => {
+  let timer;
+
+  before(() => {
+    timer = new Timer(30);
+    timer.run();
+  });
+
+  it(`Параметр 'time' должен быть числом`, () => {
+    assert.isNumber(timer._time);
+  });
+
+  it(`Параметр 'time' должен быть больше 0`, () => {
+    assert.isAbove(timer._time, 0);
+  });
+
+  it(`Метод 'tick' должен уменьшать значение на 1`, () => {
+    // assert.decreasesBy(timer._tick, timer, `_time`, 1);
+  });
+
+  after(() => {
+    timer.stop();
   });
 });

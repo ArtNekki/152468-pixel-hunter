@@ -79,7 +79,7 @@ export const calculateTotalGameScore = (answers, lives) => {
     return -1;
   }
 
-  if (typeof lives !== `number`) {
+  if (typeof lives !== `number` || !isFinite(lives)) {
     throw new Error(`Параметр 'lives' должен быть числом`);
   }
 
@@ -93,3 +93,50 @@ export const calculateTotalGameScore = (answers, lives) => {
 
   return answersScore + lives * LIFE_BONUS;
 };
+
+export class Timer {
+  constructor(time) {
+    // if (typeof time !== `number` || !isFinite(time)) {
+    //   throw new Error(`Параметр 'time' должен быть числом`);
+    // }
+    //
+    // if (time <= 0) {
+    //   throw new Error(`Параметр 'time' должен быть больше нуля`);
+    // }
+
+
+    this._time = time;
+    this._step = 1000;
+    // this._createElement();
+  }
+
+  run() {
+    return new Promise((resolve) => {
+      this._timerId = setInterval(() => {
+        if (!this._tick()) {
+          this.stop();
+          resolve(`time is out`);
+        }
+
+      }, this._step);
+    });
+  }
+
+  stop() {
+    clearInterval(this._timerId);
+  }
+
+  _tick() {
+    // this._updateElement();
+    return this._time--;
+  }
+
+  // _createElement() {
+  //   this._el = document.createElement(`div`);
+  //   document.body.appendChild(this._el);
+  // }
+  //
+  // _updateElement() {
+  //   this._el.innerHTML = this._time;
+  // }
+}
