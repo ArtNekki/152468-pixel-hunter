@@ -107,7 +107,7 @@ describe(`Таймер`, () => {
   });
 
   it(`Метод 'tick' должен уменьшать значение на 1`, () => {
-    // assert.decreasesBy(timer._tick, timer, `_time`, 1);
+    assert.decreasesBy(timer._tick.bind(timer), timer, `_time`, 1);
   });
 
   after(() => {
