@@ -98,6 +98,10 @@ describe(`Таймер`, () => {
     timer.run();
   });
 
+  after(() => {
+    timer.stop();
+  });
+
   it(`Параметр 'time' должен быть числом`, () => {
     assert.isNumber(timer._time);
   });
@@ -108,9 +112,5 @@ describe(`Таймер`, () => {
 
   it(`Метод 'tick' должен уменьшать значение на 1`, () => {
     assert.decreasesBy(timer._tick.bind(timer), timer, `_time`, 1);
-  });
-
-  after(() => {
-    timer.stop();
   });
 });
