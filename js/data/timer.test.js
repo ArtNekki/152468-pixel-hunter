@@ -1,18 +1,32 @@
 import {assert} from 'chai';
-import {Timer} from './timer';
+import {createTimer} from './timer';
 
-// describe(`Таймер`, () => {
-//   let timer = new Timer(30);
-//
-//   it(`Параметр 'time' должен быть числом`, () => {
-//     assert.isNumber(timer._time);
-//   });
-//
-//   it(`Параметр 'time' должен быть больше 0`, () => {
-//     assert.isAbove(timer._time, 0);
-//   });
-//
-//   it(`Метод 'tick' должен уменьшать значение на 1`, () => {
-//     assert.decreasesBy(timer.tick.bind(timer), timer, `_time`, 1);
-//   });
-// });
+describe(`Проверка параметров таймера`, () => {
+
+  it(`Должен выбрасывать ошибку, если параметр 'time' не число`, () => {
+    assert.throws(() => createTimer(``));
+  });
+
+  it(`Должен выбрасывать ошибку, если параметр 'time' < 0`, () => {
+    assert.throws(() => createTimer(-6));
+  });
+
+});
+
+describe(`Проверка работы таймера`, () => {
+  it(`Создает таймер с заданным количеством секунд`, () => {
+    assert.equal(createTimer(30).time, 30);
+  });
+
+  it(`Уменьшает заданное время с каждым тиком`, () => {
+    const timer = createTimer(30);
+    assert.equal(timer.tick(), 29);
+    assert.equal(timer.tick(), 28);
+  });
+
+  it(`Возвращает сообщение 'Время вышло', когда time === 0`, () => {
+    const timer = createTimer(1);
+    assert.equal(timer.tick(), `Время вышло`);
+  });
+
+});

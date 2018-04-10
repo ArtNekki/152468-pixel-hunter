@@ -1,37 +1,12 @@
-export class Timer {
-  constructor(time) {
+import {isNumber} from '../is';
 
-    if (typeof time !== `number` || !isFinite(time)) {
-      throw new Error(`Параметр 'time' должен быть числом`);
-    }
-
-    if (time <= 0) {
-      throw new Error(`Параметр 'time' должен быть больше нуля`);
-    }
-
-    this._time = time;
-  }
-
-  tick() {
-    if (this._time > 0) {
-      this._time--;
-    }
-
-    if (this._time === 0) {
-      return `Время вышло`;
-    }
-
-    return this._time;
-  }
-}
-
-const timer = (time) => {
-  if (typeof time !== `number` || !isFinite(time)) {
+export const createTimer = (time) => {
+  if (!isNumber(time)) {
     throw new Error(`Параметр 'time' должен быть числом`);
   }
 
-  if (time <= 0) {
-    throw new Error(`Параметр 'time' должен быть больше нуля`);
+  if (time < 0) {
+    throw new Error(`Параметр 'time' должен не должен быть < 0`);
   }
 
   return {

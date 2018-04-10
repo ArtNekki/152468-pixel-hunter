@@ -3,10 +3,7 @@ import {LIFE, answer, answers} from './mock';
 import {calculateAnswerScore, calculateTotalGameScore} from './game-score';
 
 describe(`функция calculateAnswerScore: проверка параметров`, () => {
-  const objDefault = {
-    isCorrect: true,
-    time: 0
-  };
+  const objDefault = answer.normal;
 
   it(`Должен выдывать ошибку, если параметр 'answer' не обьект`, () => {
     const types = [[], ``, 2, null, true];
@@ -36,7 +33,7 @@ describe(`функция calculateAnswerScore: проверка параметр
 
   it(`Должен выбрасывать ошибку, если значение параметра 'answer.time' не число`, () => {
     const obj = Object.assign({}, objDefault);
-    obj.isCorrect = NaN;
+    obj.time = NaN;
     assert.throw(() => calculateAnswerScore(obj));
   });
 
