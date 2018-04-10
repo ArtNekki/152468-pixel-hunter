@@ -1,11 +1,19 @@
-import {ANSWERS_AMOUNT, ANSWER_SPEED} from './game';
+import {ANSWERS_COUNT, ANSWER_TIME} from './game-score';
+
+// Количество жизней
+export const LIFE = {
+  max: 3,
+  medium: 2,
+  min: 1,
+  none: 0
+};
 
 // Формируем массив ответов
-const getAnswers = ({success, time}) => {
-  let answers = new Array(ANSWERS_AMOUNT).fill({});
+const getAnswers = ({isCorrect, time}) => {
+  let answers = new Array(ANSWERS_COUNT).fill({});
 
   return answers.map((answer) => {
-    answer.success = success;
+    answer.isCorrect = isCorrect;
     answer.time = time;
 
     return answer;
@@ -15,19 +23,19 @@ const getAnswers = ({success, time}) => {
 // Ответ
 export const answer = {
   slow: {
-    success: true,
-    time: ANSWER_SPEED.slow
+    isCorrect: true,
+    time: ANSWER_TIME.slow + 1
   },
   normal: {
-    success: true,
-    time: ANSWER_SPEED.normal
+    isCorrect: true,
+    time: 12
   },
   fast: {
-    success: true,
-    time: ANSWER_SPEED.fast
+    isCorrect: true,
+    time: ANSWER_TIME.fast - 1
   },
   failed: {
-    success: false,
+    isCorrect: false,
     time: 0
   }
 };
