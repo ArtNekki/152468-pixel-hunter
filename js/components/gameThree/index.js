@@ -1,5 +1,5 @@
 import {getElementFromTemplate, changeView} from '../../util';
-import renderStats from '../stats';
+import renderStats from '../stats/index.js';
 
 // Получаем documentFragment с dom-узлами из шаблона
 const documentFragmentBase = getElementFromTemplate(

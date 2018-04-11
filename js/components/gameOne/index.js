@@ -1,5 +1,5 @@
 import {getElementFromTemplate, changeView} from '../../util';
-import renderGameTwo from '../gameTwo';
+import renderGameTwo from '../gameTwo/index.js';
 
 // Получаем documentFragment с dom-узлами из шаблона
 const documentFragmentBase = getElementFromTemplate(
