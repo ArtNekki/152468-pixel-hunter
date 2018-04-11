@@ -1,10 +1,9 @@
-import {getElementFromTemplate, changeView} from '../../util';
+import {createElement, changeView} from '../../util';
 import renderGameOne from '../gameOne/index.js';
 
 // Получаем documentFragment с dom-узлами из шаблона
-const documentFragmentBase = getElementFromTemplate(
-    `<template>
-      <header class='header'>
+const documentFragmentBase = createElement(
+    `<header class='header'>
         <div class='header__back'>
           <button class='back'>
             <img src='img/arrow_left.svg' width='45' height='45' alt='Back'>
@@ -27,8 +26,7 @@ const documentFragmentBase = getElementFromTemplate(
           <input class='rules__input' type='text' placeholder='Ваше Имя'>
           <button class='rules__button  continue' type='submit' disabled>Go!</button>
         </form>
-      </div>
-    </template>`
+      </div>`
 );
 
 export default () => {

@@ -1,10 +1,9 @@
-import {getElementFromTemplate, changeView} from '../../util';
+import {createElement, changeView} from '../../util';
 import renderStats from '../stats/index.js';
 
 // Получаем documentFragment с dom-узлами из шаблона
-const documentFragmentBase = getElementFromTemplate(
-    `<template>
-      <header class='header'>
+const documentFragmentBase = createElement(
+    `<header class='header'>
         <div class='header__back'>
           <button class='back'>
             <img src='img/arrow_left.svg' width='45' height='45' alt='Back'>
@@ -45,8 +44,7 @@ const documentFragmentBase = getElementFromTemplate(
             <li class='stats__result stats__result--unknown'></li>
           </ul>
         </div>
-      </div>
-    </template>`
+      </div>`
 );
 
 export default () => {

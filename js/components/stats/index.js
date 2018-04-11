@@ -1,8 +1,7 @@
-import {getElementFromTemplate} from '../../util';
+import {createElement} from '../../util';
 
-const documentFragmentBase = getElementFromTemplate(
-    `<template>
-      <header class='header'>
+const documentFragmentBase = createElement(
+    `<header class='header'>
         <div class='header__back'>
           <button class='back'>
             <img src='img/arrow_left.svg' width='45' height='45' alt='Back'>
@@ -109,8 +108,7 @@ const documentFragmentBase = getElementFromTemplate(
             <td colspan='5' class='result__total  result__total--final'>950</td>
           </tr>
         </table>
-      </div>
-    </template>`
+      </div>`
 );
 
 export default () => {

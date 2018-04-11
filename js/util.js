@@ -1,8 +1,8 @@
-export const getElementFromTemplate = (template) => {
-  const element = document.createElement(`div`);
+export const createElement = (template = ``, tagName = `div`) => {
+  const element = document.createElement(tagName);
   element.innerHTML = template;
 
-  return element.children[0].content || element.children[0];
+  return element;
 };
 
 const container = document.querySelector(`#main`);
