@@ -20,7 +20,6 @@ export const createTimer = (time) => {
 
       if (time === 0) {
         result.done = true;
-        return result;
       }
 
       return result;
