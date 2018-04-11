@@ -1,14 +1,12 @@
-import {getElementFromTemplate, changeView} from './util';
-import renderGreeting from './greeting';
+import {createElement, changeView} from '../../util';
+import renderGreeting from '../greeting/index.js';
 
 // Получаем documentFragment с dom-узлами из шаблона
-const documentFragmentBase = getElementFromTemplate(
-    `<template>
-      <div id='intro' class='intro'>
+const documentFragmentBase = createElement(
+    `<div id='intro' class='intro'>
         <h1 class='intro__asterisk'>*</h1>
         <p class='intro__motto'><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
-      </div>
-    </template>`
+      </div>`
 );
 
 export default () => {

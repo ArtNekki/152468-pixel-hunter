@@ -1,10 +1,9 @@
-import {getElementFromTemplate, changeView} from './util';
-import renderGameTwo from './game-2';
+import {createElement, changeView} from '../../util';
+import renderGameThree from '../gameThree/index.js';
 
 // Получаем documentFragment с dom-узлами из шаблона
-const documentFragmentBase = getElementFromTemplate(
-    `<template>
-      <header class='header'>
+const documentFragmentBase = createElement(
+    `<header class='header'>
         <div class='header__back'>
           <button class='back'>
             <img src='img/arrow_left.svg' width='45' height='45' alt='Back'>
@@ -19,27 +18,16 @@ const documentFragmentBase = getElementFromTemplate(
         </div>
       </header>
       <div class='game'>
-        <p class='game__task'>Угадайте для каждого изображения фото или рисунок?</p>
-        <form class='game__content'>
+        <p class='game__task'>Угадай, фото или рисунок?</p>
+        <form class='game__content  game__content--wide'>
           <div class='game__option'>
-            <img src='http://placehold.it/468x458' alt='Option 1' width='468' height='458'>
-            <label class='game__answer game__answer--photo'>
+            <img src='http://placehold.it/705x455' alt='Option 1' width='705' height='455'>
+            <label class='game__answer  game__answer--photo'>
               <input name='question1' type='radio' value='photo'>
               <span>Фото</span>
             </label>
-            <label class='game__answer game__answer--paint'>
+            <label class='game__answer  game__answer--wide  game__answer--paint'>
               <input name='question1' type='radio' value='paint'>
-              <span>Рисунок</span>
-            </label>
-          </div>
-          <div class='game__option'>
-            <img src='http://placehold.it/468x458' alt='Option 2' width='468' height='458'>
-            <label class='game__answer  game__answer--photo'>
-              <input name='question2' type='radio' value='photo'>
-              <span>Фото</span>
-            </label>
-            <label class='game__answer  game__answer--paint'>
-              <input name='question2' type='radio' value='paint'>
               <span>Рисунок</span>
             </label>
           </div>
@@ -50,32 +38,28 @@ const documentFragmentBase = getElementFromTemplate(
             <li class='stats__result stats__result--slow'></li>
             <li class='stats__result stats__result--fast'></li>
             <li class='stats__result stats__result--correct'></li>
+            <li class='stats__result stats__result--wrong'></li>
             <li class='stats__result stats__result--unknown'></li>
+            <li class='stats__result stats__result--slow'></li>
             <li class='stats__result stats__result--unknown'></li>
-            <li class='stats__result stats__result--unknown'></li>
-            <li class='stats__result stats__result--unknown'></li>
-            <li class='stats__result stats__result--unknown'></li>
+            <li class='stats__result stats__result--fast'></li>
             <li class='stats__result stats__result--unknown'></li>
           </ul>
         </div>
-      </div>
-    </template>`
+      </div>`
 );
 
 export default () => {
   const documentFragment = documentFragmentBase.cloneNode(true);
 
   // Добавляем логику работы
-  const REQUIRED_ANSWERS_COUNT = 2;
   const content = documentFragment.querySelector(`.game__content`);
   const answers = Array.from(documentFragment.querySelectorAll(`[type='radio']`));
 
   const getSelectedAnswers = () => {
-    const result = answers.filter(((answer) => {
+    return answers.some(((answer) => {
       return answer.checked;
     }));
-
-    return result.length === REQUIRED_ANSWERS_COUNT;
   };
 
   content.addEventListener(`change`, () => {
@@ -83,7 +67,7 @@ export default () => {
       return;
     }
 
-    changeView(renderGameTwo());
+    changeView(renderGameThree());
   });
 
   // Возвращаем dom - элементы
