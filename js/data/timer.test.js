@@ -1,7 +1,7 @@
 import {assert} from 'chai';
 import {createTimer} from './timer';
 
-describe(`Проверка параметров таймера`, () => {
+describe(`Функция создания таймера`, () => {
 
   it(`Должен выбрасывать ошибку, если параметр 'time' не число`, () => {
     assert.throws(() => createTimer(``));
@@ -11,22 +11,45 @@ describe(`Проверка параметров таймера`, () => {
     assert.throws(() => createTimer(-6));
   });
 
+  it(`Возвращает обьект`, () => {
+    assert.isObject(createTimer(30));
+  });
+
+  it(`Возвращамый обьект содержить параметр 'tick', значение которого функция`, () => {
+    const timer = createTimer(30);
+    assert.property(timer, `tick`);
+    assert.isFunction(timer.tick);
+  });
 });
 
 describe(`Проверка работы таймера`, () => {
-  it(`Создает таймер с заданным количеством секунд`, () => {
-    assert.equal(createTimer(30).time, 30);
+  it(`Должен вернуть обьект при каждом вызове метода 'tick'`, () => {
+    assert.isObject(createTimer(30).tick());
   });
 
-  it(`Уменьшает заданное время с каждым тиком`, () => {
+  it(`Возвращаемый обьект содержит параметр 'done' с булевым значением`, () => {
     const timer = createTimer(30);
-    assert.equal(timer.tick(), 29);
-    assert.equal(timer.tick(), 28);
+    assert.property(timer.tick(), `done`);
+    assert.isBoolean(timer.tick().done);
   });
 
-  it(`Возвращает сообщение 'Время вышло', когда time === 0`, () => {
-    const timer = createTimer(1);
-    assert.equal(timer.tick(), `Время вышло`);
+  it(`Возвращаемый обьект содержит параметр 'time' c числовым значением`, () => {
+    const timer = createTimer(30);
+    assert.property(timer.tick(), `time`);
+    assert.isNumber(timer.tick().time);
   });
 
+  it(`Каждый вызов метода tick, уменьшает время на 1`, () => {
+    const timer = createTimer(30);
+    assert.equal(timer.tick().time, 29);
+    assert.equal(timer.tick().time, 28);
+  });
+
+  it(`Если время таймера > 0, параметр 'done' === false`, () => {
+    assert.equal(createTimer(30).tick().done, false);
+  });
+
+  it(`Если время таймера === 0, параметр 'done' === true`, () => {
+    assert.equal(createTimer(0).tick().done, true);
+  });
 });

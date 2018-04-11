@@ -1,26 +1,29 @@
-import {isNumber} from '../is';
-
 export const createTimer = (time) => {
-  if (!isNumber(time)) {
+  if (!Number.isFinite(time)) {
     throw new Error(`Параметр 'time' должен быть числом`);
   }
 
   if (time < 0) {
-    throw new Error(`Параметр 'time' должен не должен быть < 0`);
+    throw new Error(`Параметр 'time' не должен быть < 0`);
   }
 
   return {
-    time,
     tick() {
-      if (this.time > 0) {
-        this.time--;
+      if (time > 0) {
+        time--;
       }
 
-      if (this.time === 0) {
-        return `Время вышло`;
+      const result = {
+        done: false,
+        time
+      };
+
+      if (time === 0) {
+        result.done = true;
+        return result;
       }
 
-      return this.time;
+      return result;
     }
   };
 };

@@ -1,4 +1,4 @@
-import {isNumber, isObject} from '../is';
+import {isObject} from '../is';
 
 // Бонус за оставшуюся жизнь
 const LIFE_BONUS = 50;
@@ -16,7 +16,6 @@ export const ANSWER_POINT = {
   fine: -50
 };
 
-// J
 export const ANSWER_TIME = {
   slow: 20,
   fast: 10
@@ -39,7 +38,7 @@ export const calculateAnswerScore = (answer) => {
     throw new Error(`Свойство answer.isCorrect должно быть true или false`);
   }
 
-  if (!isNumber(answer.time)) {
+  if (!Number.isFinite(answer.time)) {
     throw new Error(`свойство answer.time должно быть числом`);
   }
 
@@ -67,7 +66,7 @@ export const calculateTotalGameScore = (answers, lives) => {
     throw new Error(`Параметр 'answers' должен быть массивом`);
   }
 
-  if (!isNumber(lives)) {
+  if (!Number.isFinite(lives)) {
     throw new Error(`Параметр 'lives' должен быть числом`);
   }
 
