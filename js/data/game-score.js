@@ -12,7 +12,8 @@ export const ANSWERS_COUNT = 10;
 // Количество очков за ответ
 export const ANSWER_POINT = {
   default: 100,
-  add: 50
+  bonus: 50,
+  fine: -50
 };
 
 // J
@@ -48,14 +49,14 @@ export const calculateAnswerScore = (answer) => {
     return score;
   }
 
-  score = ANSWER_POINT.default;
+  score += ANSWER_POINT.default;
 
   if (answer.time < ANSWER_TIME.fast) {
-    score += ANSWER_POINT.add;
+    score += ANSWER_POINT.bonus;
   }
 
   if (answer.time > ANSWER_TIME.slow) {
-    score -= ANSWER_POINT.add;
+    score += ANSWER_POINT.fine;
   }
 
   return score;
