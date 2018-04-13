@@ -17,7 +17,7 @@ export default (data) => {
       <div class='game'>
           <p class='game__task'>${data.game.title}</p>
           <form class='game__content ${CONTENT_TYPE[questions.length] || ``}'>
-            ${renderQuestions({questions, answers})}
+            ${renderQuestions(questions)}
           </form>
           <div class='stats'>
             ${renderStats(data.stats)}

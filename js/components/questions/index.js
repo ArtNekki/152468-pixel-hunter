@@ -6,9 +6,11 @@ const IMG_SIZE = {
   3: `width='304' height='455'`
 };
 
-export default ({questions, answers}) => questions.map((q, i) =>
-  `<div class='game__option'>
-      <img src=${q.img} alt='Option ${i + 1}' ${IMG_SIZE[questions.length]}>
-      ${answers ? renderAnswer(answers[i], i) : ``}
-    </div>`
-).join(``);
+export default (questions) => questions.map((q, i = i + 1) => {
+  i += 1;
+console.log(questions);
+  return `<div class='game__option'>
+      <img src=${q.img} alt='Option ${i}' ${IMG_SIZE[questions.length]}>
+      ${(`isSelected` in q) ? `` : renderAnswer(i)}
+    </div>`;
+}).join(``);

@@ -1,10 +1,9 @@
-const ANSWER_NAME = {
-  'photo': `Фото`,
-  'paint': `Рисунок`
-};
-
-export default (data, index) => data.map((type) =>
-  `<label class='game__answer game__answer--${type}'>
-    <input name='question${index + 1}' type='radio' value=${type}>
-    <span>${ANSWER_NAME[type]}</span>
-  </label>`).join(``);
+export default (i) =>
+  `<label class="game__answer game__answer--photo">
+    <input name="question${i}" type="radio" value="photo">
+    <span>Фото</span>
+  </label>
+  <label class="game__answer game__answer--paint">
+    <input name="question${i}" type="radio" value="paint">
+    <span>Рисунок</span>
+  </label>`;
