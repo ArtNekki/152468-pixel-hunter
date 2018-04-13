@@ -10,13 +10,14 @@ const CONTENT_TYPE = {
 
 export default (data) => {
   const questions = data.game.questions;
+  const answers = data.game.answers;
 
   const element = createElement(
       `${renderHeader(data)}
       <div class='game'>
           <p class='game__task'>${data.game.title}</p>
           <form class='game__content ${CONTENT_TYPE[questions.length] || ``}'>
-            ${renderQuestions(questions)}
+            ${renderQuestions({questions, answers})}
           </form>
           <div class='stats'>
             ${renderStats(data.stats)}
@@ -27,7 +28,7 @@ export default (data) => {
   // Добавляем логику работы - больше это не работает))
   const REQUIRED_ANSWERS_COUNT = 2;
   const content = element.querySelector(`.game__content`);
-  const answers = Array.from(element.querySelectorAll(`[type='radio']`));
+  // const answers = Array.from(element.querySelectorAll(`[type='radio']`));
 
   const getSelectedAnswers = () => {
     const result = answers.filter(((answer) => {

@@ -11,7 +11,8 @@ const games = [
         type: `paint`,
         img: `https://k42.kn3.net/CF42609C8.jpg`
       }
-    ]
+    ],
+    answers: [[`photo`, `paint`], [`photo`, `paint`]]
   },
   {
     type: `two`,
@@ -21,7 +22,8 @@ const games = [
         type: `photo`,
         img: `https://i.imgur.com/DiHM5Zb.jpg`,
       }
-    ]
+    ],
+    answers: [[`photo`, `paint`]]
   },
   {
     type: `three`,
