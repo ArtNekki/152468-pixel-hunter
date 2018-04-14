@@ -10,7 +10,6 @@ const CONTENT_TYPE = {
 
 export default (data) => {
   const questions = data.game.questions;
-  const answers = data.game.answers;
 
   const element = createElement(
       `${renderHeader(data)}
@@ -28,7 +27,7 @@ export default (data) => {
   // Добавляем логику работы - больше это не работает))
   const REQUIRED_ANSWERS_COUNT = 2;
   const content = element.querySelector(`.game__content`);
-  // const answers = Array.from(element.querySelectorAll(`[type='radio']`));
+  const answers = Array.from(element.querySelectorAll(`[type='radio']`));
 
   const getSelectedAnswers = () => {
     const result = answers.filter(((answer) => {

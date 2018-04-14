@@ -6,7 +6,7 @@ const IMG_SIZE = {
   3: `width='304' height='455'`
 };
 
-export default (questions) => questions.map((q, i = i + 1) => {
+export default (questions) => questions.map((q, i) => {
   i += 1;
 
   return `<div class='game__option'>
