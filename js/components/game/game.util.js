@@ -1,22 +1,22 @@
-import {taskType} from '../../data/task.data';
+import {TaskType} from '../../data/task.data';
 
 // Сопоставление количества картинок и типа контейнера
-export const CONTENT_TYPE = {
-  [taskType.GUESS_ONE]: `game__content--wide`,
-  [taskType.FIND]: `game__content--triple`
+export const ContentType = {
+  [TaskType.GUESS_ONE]: `game__content--wide`,
+  [TaskType.FIND]: `game__content--triple`
 };
 
 // Сопоставление типа игры и вида события
-export const EVENT = {
-  [taskType.GUESS_TWO]: `change`,
-  [taskType.GUESS_ONE]: `change`,
-  [taskType.FIND]: `click`
+export const Event = {
+  [TaskType.GUESS_TWO]: `change`,
+  [TaskType.GUESS_ONE]: `change`,
+  [TaskType.FIND]: `click`
 };
 
-export const CONTROLS = {
-  [taskType.GUESS_ONE]: `[type='radio']`,
-  [taskType.GUESS_TWO]: `[type='radio']`,
-  [taskType.FIND]: `.game__option`
+export const Controls = {
+  [TaskType.GUESS_ONE]: `[type='radio']`,
+  [TaskType.GUESS_TWO]: `[type='radio']`,
+  [TaskType.FIND]: `.game__option`
 };
 
 export const getCheckedControls = (answers) => {

@@ -1,11 +1,11 @@
 import {createElement, changeView} from '../../util';
-import {CONTENT_TYPE, EVENT, CONTROLS, getCheckedControls, nextTask, addAnswer, selectImage} from './game.util';
+import {ContentType, Event, Controls, getCheckedControls, nextTask, addAnswer, selectImage} from './game.util';
 import renderHeader from '../header/index';
 import renderQuestions from '../questions/index';
 import getStats from '../stats/index';
 import renderResult from '../result/index';
 import {INITIAL_GAME, die, canContinue} from '../../data/task';
-import {TASKS, taskType} from '../../data/task.data';
+import {TASKS, TaskType} from '../../data/task.data';
 
 let game;
 
@@ -29,7 +29,7 @@ const updateGame = (state) => {
       `${renderHeader(state)}
       <div class='game'>
           <p class='game__task'>${title}</p>
-          <form class='game__content ${CONTENT_TYPE[type] || ``}'>
+          <form class='game__content ${ContentType[type] || ``}'>
             ${renderQuestions(questions)}
           </form>
           <div class='stats'>
@@ -40,19 +40,19 @@ const updateGame = (state) => {
 
   // Элементы
   const content = screen.querySelector(`.game__content`);
-  const answerControls = Array.from(screen.querySelectorAll(CONTROLS[type]));
+  const answerControls = Array.from(screen.querySelectorAll(Controls[type]));
 
-  content.addEventListener(EVENT[type], (e) => {
+  content.addEventListener(Event[type], (e) => {
     const checkedAnswerControls = getCheckedControls(answerControls);
 
-    if (!checkedAnswerControls.length || ((type === taskType.GUESS_TWO)
+    if (!checkedAnswerControls.length || ((type === TaskType.GUESS_TWO)
         && checkedAnswerControls.length !== 2)) {
       return;
     }
 
     let correctAnswer;
 
-    if (type === taskType.FIND) {
+    if (type === TaskType.FIND) {
       correctAnswer = selectImage(e);
     } else {
       correctAnswer = questions.every((question, i) => {

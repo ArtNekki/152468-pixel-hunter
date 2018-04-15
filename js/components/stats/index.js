@@ -1,19 +1,27 @@
 import {ANSWER_TIME, ANSWERS_COUNT, SUCCESS, FAIL} from '../../data/game-score';
 
+const STATUS_STATE = {
+  unknown: `unknown`,
+  correct: `correct`,
+  fast: `fast`,
+  slow: `slow`,
+  wrong: `wrong`
+};
+
 const getStatItem = ({isCorrect, time} = {}) => {
-  let status = `unknown`;
+  let status = STATUS_STATE.unknown;
 
   if (isCorrect === SUCCESS) {
-    status = `correct`;
+    status = STATUS_STATE.correct;
 
     if (time < ANSWER_TIME.fast) {
-      status = `fast`;
+      status = STATUS_STATE.fast;
     } else if (time > ANSWER_TIME.slow) {
-      status = `slow`;
+      status = STATUS_STATE.slow;
     }
 
   } else if (isCorrect === FAIL) {
-    status = `wrong`;
+    status = STATUS_STATE.wrong;
   }
 
   return `<li class='stats__result stats__result--${status}'></li>`;

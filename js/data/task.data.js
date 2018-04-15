@@ -1,19 +1,19 @@
-export const taskType = {
+export const TaskType = {
   GUESS_TWO: `game-1`,
   GUESS_ONE: `game-2`,
   FIND: `game-3`
 };
 
-const taskTitle = {
-  [taskType.GUESS_TWO]: `Угадайте для каждого изображения фото или рисунок?`,
-  [taskType.GUESS_ONE]: `Угадайте для каждого изображения фото или рисунок?`,
-  [taskType.FIND]: `Угадайте для каждого изображения фото или рисунок?`,
+const TaskTitle = {
+  [TaskType.GUESS_TWO]: `Угадайте для каждого изображения фото или рисунок?`,
+  [TaskType.GUESS_ONE]: `Угадайте для каждого изображения фото или рисунок?`,
+  [TaskType.FIND]: `Угадайте для каждого изображения фото или рисунок?`,
 };
 
 export const TASKS = [
   {
-    type: taskType.GUESS_TWO,
-    title: taskTitle[taskType.GUESS_TWO],
+    type: TaskType.GUESS_TWO,
+    title: TaskTitle[TaskType.GUESS_TWO],
     questions: [
       {
         type: `photo`,
@@ -26,8 +26,8 @@ export const TASKS = [
     ]
   },
   {
-    type: taskType.GUESS_ONE,
-    title: taskTitle[taskType.GUESS_ONE],
+    type: TaskType.GUESS_ONE,
+    title: TaskTitle[TaskType.GUESS_ONE],
     questions: [
       {
         type: `photo`,
@@ -36,8 +36,8 @@ export const TASKS = [
     ]
   },
   {
-    type: taskType.FIND,
-    title: taskTitle[taskType.FIND],
+    type: TaskType.FIND,
+    title: TaskTitle[TaskType.FIND],
     questions: [
       {
         type: `photo`,
@@ -57,8 +57,8 @@ export const TASKS = [
     ]
   },
   {
-    type: taskType.GUESS_TWO,
-    title: taskTitle[taskType.GUESS_TWO],
+    type: TaskType.GUESS_TWO,
+    title: TaskTitle[TaskType.GUESS_TWO],
     questions: [
       {
         type: `photo`,
@@ -71,8 +71,8 @@ export const TASKS = [
     ]
   },
   {
-    type: taskType.GUESS_ONE,
-    title: taskTitle[taskType.GUESS_ONE],
+    type: TaskType.GUESS_ONE,
+    title: TaskTitle[TaskType.GUESS_ONE],
     questions: [
       {
         type: `photo`,
@@ -81,8 +81,8 @@ export const TASKS = [
     ]
   },
   {
-    type: taskType.FIND,
-    title: taskTitle[taskType.FIND],
+    type: TaskType.FIND,
+    title: TaskTitle[TaskType.FIND],
     questions: [
       {
         type: `photo`,
@@ -102,8 +102,8 @@ export const TASKS = [
     ]
   },
   {
-    type: taskType.GUESS_TWO,
-    title: taskTitle[taskType.GUESS_TWO],
+    type: TaskType.GUESS_TWO,
+    title: TaskTitle[TaskType.GUESS_TWO],
     questions: [
       {
         type: `photo`,
@@ -116,8 +116,8 @@ export const TASKS = [
     ]
   },
   {
-    type: taskType.GUESS_TWO,
-    title: taskTitle[taskType.GUESS_TWO],
+    type: TaskType.GUESS_TWO,
+    title: TaskTitle[TaskType.GUESS_TWO],
     questions: [
       {
         type: `photo`,
@@ -130,8 +130,8 @@ export const TASKS = [
     ]
   },
   {
-    type: taskType.GUESS_ONE,
-    title: taskTitle[taskType.GUESS_ONE],
+    type: TaskType.GUESS_ONE,
+    title: TaskTitle[TaskType.GUESS_ONE],
     questions: [
       {
         type: `photo`,
@@ -140,8 +140,8 @@ export const TASKS = [
     ]
   },
   {
-    type: taskType.FIND,
-    title: taskTitle[taskType.FIND],
+    type: TaskType.FIND,
+    title: TaskTitle[TaskType.FIND],
     questions: [
       {
         type: `photo`,

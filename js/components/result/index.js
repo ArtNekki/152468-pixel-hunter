@@ -1,5 +1,5 @@
 import {createElement} from '../../util';
-import {calculateTotalGameScore, LIFE_BONUS, ANSWER_POINT} from '../../data/game-score';
+import {calculateTotalGameScore, LIFE_BONUS, ANSWER_POINT, ANSWERS_COUNT, ANSWER_TIME} from '../../data/game-score';
 import renderHeader from '../header/index';
 import renderStats from '../stats/index';
 
@@ -21,16 +21,16 @@ export default (state) => {
   const {answers, lives} = state;
 
   // Определяем победа или поражение
-  const isWin = answers.length === 10;
+  const isWin = answers.length === ANSWERS_COUNT;
 
   // Получаем список быстрых ответов
   const fastAnswers = answers.filter((answer) => {
-    return answer.time < 10;
+    return answer.time < ANSWER_TIME.fast;
   });
 
   // Получаем список медленных ответов
   const slowAnswers = answers.filter((answer) => {
-    return answer.time > 22;
+    return answer.time > ANSWER_TIME.slow;
   });
 
   // Заголовок результата
