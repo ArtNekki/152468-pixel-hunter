@@ -46,5 +46,5 @@ export const selectImage = (e) => {
     return;
   }
 
-  option.classList.add(`game__option--selected`);
+  return option.classList.contains(`game__option--selected`);
 };

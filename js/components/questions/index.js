@@ -9,7 +9,7 @@ const IMG_SIZE = {
 export default (questions) => questions.map((q, i) => {
   i += 1;
 
-  return `<div class='game__option'>
+  return `<div class='game__option ${q.isSelected ? `game__option--selected` : ``}'>
       <img src=${q.img} alt='Option ${i}' ${IMG_SIZE[questions.length]}>
       ${(`isSelected` in q) ? `` : renderAnswerControls(i)}
     </div>`;

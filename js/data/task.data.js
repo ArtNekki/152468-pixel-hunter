@@ -82,7 +82,7 @@ export const TASKS = [
   },
   {
     type: taskType.FIND,
-    title: taskTitle[taskType.GUESS_FIND],
+    title: taskTitle[taskType.FIND],
     questions: [
       {
         type: `photo`,
@@ -141,7 +141,7 @@ export const TASKS = [
   },
   {
     type: taskType.FIND,
-    title: taskTitle[taskType.GUESS_TWO],
+    title: taskTitle[taskType.FIND],
     questions: [
       {
         type: `photo`,
@@ -159,5 +159,5 @@ export const TASKS = [
         img: `http://i.imgur.com/1KegWPz.jpg`,
       }
     ]
-  },
+  }
 ];

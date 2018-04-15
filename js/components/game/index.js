@@ -43,10 +43,6 @@ const updateGame = (state) => {
   const answerControls = Array.from(screen.querySelectorAll(CONTROLS[type]));
 
   content.addEventListener(EVENT[type], (e) => {
-    if (type === taskType.FIND) {
-      selectImage(e);
-    }
-
     const checkedAnswerControls = getCheckedControls(answerControls);
 
     if (!checkedAnswerControls.length || ((type === taskType.GUESS_TWO)
@@ -54,13 +50,21 @@ const updateGame = (state) => {
       return;
     }
 
-    console.log('можно продолжать');
+    let correctAnswer;
 
-    if (false) {
+    if (type === taskType.FIND) {
+      correctAnswer = selectImage(e);
+    } else {
+      correctAnswer = questions.every((question, i) => {
+        return question.type === checkedAnswerControls[i].value;
+      });
+    }
+
+    if (!correctAnswer) {
       state = die(state);
     }
 
-    state = addAnswer(state, {isCorrect: true, time: 12});
+    state = addAnswer(state, {isCorrect: correctAnswer, time: 12});
 
     if (canContinue(state)) {
       changeView(updateGame(nextTask(state)));
