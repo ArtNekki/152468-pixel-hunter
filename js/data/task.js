@@ -2,7 +2,8 @@ export const INITIAL_GAME = {
   task: {},
   tasks: [],
   answers: [],
-  lives: 3
+  lives: 3,
+  timer: 13
 };
 
 export const canContinue = ({lives, answers}) => {

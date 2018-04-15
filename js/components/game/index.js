@@ -21,7 +21,7 @@ const initGame = () => {
 const updateGame = (state) => {
 
   // Получение Задания
-  const {task, answers} = state;
+  const {task, answers, timer} = state;
   const {type, title, questions} = task;
 
   // Создаем игровой экран
@@ -64,7 +64,7 @@ const updateGame = (state) => {
       state = die(state);
     }
 
-    state = addAnswer(state, {isCorrect: correctAnswer, time: 12});
+    state = addAnswer(state, {isCorrect: correctAnswer, time: timer});
 
     if (canContinue(state)) {
       changeView(updateGame(nextTask(state)));
