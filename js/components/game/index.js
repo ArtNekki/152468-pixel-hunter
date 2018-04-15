@@ -1,5 +1,5 @@
 import {createElement, changeView} from '../../util';
-import {CONTENT_TYPE, EVENT, getSelectedAnswers, clearAnswersSelection} from './utils';
+import {CONTENT_TYPE, EVENT, CONTROLS, getCheckedControls, nextTask, addAnswer, selectImage} from './game.util';
 import renderHeader from '../header/index';
 import renderQuestions from '../questions/index';
 import getStats from '../stats/index';
@@ -8,12 +8,6 @@ import {INITIAL_GAME, die, canContinue} from '../../data/task';
 import {TASKS, taskType} from '../../data/task.data';
 
 let game;
-
-const nextTask = (state) => {
-  return Object.assign({}, state, {
-    task: state.tasks.pop()
-  });
-};
 
 const initGame = () => {
   const tasks = [...TASKS];
@@ -24,12 +18,6 @@ const initGame = () => {
   });
 };
 
-const addAnswer = (state, answer) => {
-  return Object.assign({}, state, {
-    answers: [...state.answers, ...[answer]]
-  });
-};
-
 const updateGame = (state) => {
 
   // Получение Задания
@@ -37,7 +25,7 @@ const updateGame = (state) => {
   const {type, title, questions} = task;
 
   // Создаем игровой экран
-  const element = createElement(
+  const screen = createElement(
       `${renderHeader(state)}
       <div class='game'>
           <p class='game__task'>${title}</p>
@@ -51,42 +39,28 @@ const updateGame = (state) => {
   );
 
   // Элементы
-  const content = element.querySelector(`.game__content`);
-  const radioButtons = Array.from(element.querySelectorAll(`[type='radio']`));
-  const options = Array.from(element.querySelectorAll(`.game__option`));
-
-  // Сопоставление типа игры и типа ответов
-  const answerControls = {
-    [taskType.GUESS_ONE]: radioButtons,
-    [taskType.GUESS_TWO]: radioButtons,
-    [taskType.FIND]: options
-  };
-
-  const selectOption = (e) => {
-    const option = e.target.closest(`.game__option`);
-
-    if (!option) {
-      return;
-    }
-
-    // clearAnswersSelection(option.parentNode.children);
-    option.classList.add(`game__option--selected`);
-  };
+  const content = screen.querySelector(`.game__content`);
+  const answerControls = Array.from(screen.querySelectorAll(CONTROLS[type]));
 
   content.addEventListener(EVENT[type], (e) => {
     if (type === taskType.FIND) {
-      selectOption(e);
+      selectImage(e);
     }
 
-    if (!getSelectedAnswers[type](answerControls[type], questions)) {
+    const checkedAnswerControls = getCheckedControls(answerControls);
+
+    if (!checkedAnswerControls.length || ((type === taskType.GUESS_TWO)
+        && checkedAnswerControls.length !== 2)) {
       return;
     }
 
-    if (false) {
+    console.log('можно продолжать');
+
+    if (true) {
       state = die(state);
     }
 
-    state = addAnswer(state, {isCorrect: true, time: 12});
+    state = addAnswer(state, {isCorrect: false, time: 12});
 
     if (canContinue(state)) {
       changeView(updateGame(nextTask(state)));
@@ -95,8 +69,8 @@ const updateGame = (state) => {
     }
   });
 
-  // Возвращаем dom - элементы
-  return element;
+  // Возвращаем игровой экран
+  return screen;
 };
 
 export default () => {
