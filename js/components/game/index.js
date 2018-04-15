@@ -1,50 +1,105 @@
 import {createElement, changeView} from '../../util';
+import {CONTENT_TYPE, EVENT, getSelectedAnswers, clearAnswersSelection} from './utils';
 import renderHeader from '../header/index';
 import renderQuestions from '../questions/index';
-import renderStats from '../stats/index';
+import getStats from '../stats/index';
+import renderResult from '../result/index';
+import {INITIAL_GAME, die, canContinue} from '../../data/task';
+import {TASKS, taskType} from '../../data/task.data';
 
-const CONTENT_TYPE = {
-  1: `game__content--wide`,
-  3: `game__content--triple`
+let game;
+
+const nextTask = (state) => {
+  return Object.assign({}, state, {
+    task: state.tasks.pop()
+  });
 };
 
-export default (data) => {
-  const questions = data.game.questions;
+const initGame = () => {
+  const tasks = [...TASKS];
 
+  game = Object.assign({}, INITIAL_GAME, {
+    task: tasks.pop(),
+    tasks
+  });
+};
+
+const addAnswer = (state, answer) => {
+  return Object.assign({}, state, {
+    answers: [...state.answers, ...[answer]]
+  });
+};
+
+const updateGame = (state) => {
+
+  // Получение Задания
+  const {task, answers} = state;
+  const {type, title, questions} = task;
+
+  // Создаем игровой экран
   const element = createElement(
-      `${renderHeader(data)}
+      `${renderHeader(state)}
       <div class='game'>
-          <p class='game__task'>${data.game.title}</p>
-          <form class='game__content ${CONTENT_TYPE[questions.length] || ``}'>
+          <p class='game__task'>${title}</p>
+          <form class='game__content ${CONTENT_TYPE[type] || ``}'>
             ${renderQuestions(questions)}
           </form>
           <div class='stats'>
-            ${renderStats(data.stats)}
+            ${getStats(answers)}
           </div>
         </div>`
   );
 
-  // Добавляем логику работы - больше это не работает))
-  const REQUIRED_ANSWERS_COUNT = 2;
+  // Элементы
   const content = element.querySelector(`.game__content`);
-  const answers = Array.from(element.querySelectorAll(`[type='radio']`));
+  const radioButtons = Array.from(element.querySelectorAll(`[type='radio']`));
+  const options = Array.from(element.querySelectorAll(`.game__option`));
 
-  const getSelectedAnswers = () => {
-    const result = answers.filter(((answer) => {
-      return answer.checked;
-    }));
-
-    return result.length === REQUIRED_ANSWERS_COUNT;
+  // Сопоставление типа игры и типа ответов
+  const answerControls = {
+    [taskType.GUESS_ONE]: radioButtons,
+    [taskType.GUESS_TWO]: radioButtons,
+    [taskType.FIND]: options
   };
 
-  content.addEventListener(`change`, () => {
-    if (!getSelectedAnswers()) {
+  const selectOption = (e) => {
+    const option = e.target.closest(`.game__option`);
+
+    if (!option) {
       return;
     }
 
-    changeView();
+    // clearAnswersSelection(option.parentNode.children);
+    option.classList.add(`game__option--selected`);
+  };
+
+  content.addEventListener(EVENT[type], (e) => {
+    if (type === taskType.FIND) {
+      selectOption(e);
+    }
+
+    if (!getSelectedAnswers[type](answerControls[type], questions)) {
+      return;
+    }
+
+    if (false) {
+      state = die(state);
+    }
+
+    state = addAnswer(state, {isCorrect: true, time: 12});
+
+    if (canContinue(state)) {
+      changeView(updateGame(nextTask(state)));
+    } else {
+      changeView(renderResult(state));
+    }
   });
 
   // Возвращаем dom - элементы
   return element;
+};
+
+export default () => {
+  initGame();
+  return updateGame(game);
 };

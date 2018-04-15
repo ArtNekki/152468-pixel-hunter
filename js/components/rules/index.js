@@ -1,7 +1,6 @@
 import {createElement, changeView} from '../../util';
 import renderHeader from '../header/index';
 import startGame from '../game/index';
-import {INITIAL_GAME} from '../../data/data';
 
 // Получаем documentFragment с dom-узлами из шаблона
 const documentFragmentBase = createElement(
@@ -45,7 +44,7 @@ export default () => {
   inputField.addEventListener(`input`, typeTextHandler);
   form.addEventListener(`submit`, (e) => {
     e.preventDefault();
-    changeView(startGame(INITIAL_GAME));
+    changeView(startGame());
   });
 
   // Возвращаем dom - элементы

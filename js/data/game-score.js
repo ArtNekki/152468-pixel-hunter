@@ -1,7 +1,7 @@
 import {isObject} from '../is';
 
 // Бонус за оставшуюся жизнь
-const LIFE_BONUS = 50;
+export const LIFE_BONUS = 50;
 
 // Количество жизней
 const LIVES_COUNT = 3;
@@ -20,6 +20,9 @@ export const ANSWER_TIME = {
   slow: 20,
   fast: 10
 };
+
+export const SUCCESS = true;
+export const FAIL = false;
 
 export const calculateAnswerScore = (answer) => {
   if (!isObject(answer)) {
