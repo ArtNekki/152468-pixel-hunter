@@ -1,3 +1,5 @@
+import {ANSWERS_COUNT} from './game-score';
+
 export const INITIAL_GAME = {
   task: {},
   tasks: [],
@@ -7,7 +9,7 @@ export const INITIAL_GAME = {
 };
 
 export const canContinue = ({lives, answers}) => {
-  return (lives > -1) && answers.length < 10;
+  return (lives > -1) && answers.length < ANSWERS_COUNT;
 };
 
 export const die = (game) => {

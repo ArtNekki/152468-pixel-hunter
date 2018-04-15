@@ -1,11 +1,11 @@
 const drawHeart = (full) => `<img src='img/heart__${full ? `full` : `empty`}.svg' class='game__heart' alt='Life' width='32' height='32'>`;
 
-const renderContentWithData = (data) =>
-  `<h1 class='game__timer'>NN</h1>
+const renderContentWithData = ({timer, lives}) =>
+  `<h1 class='game__timer'>${timer}</h1>
   <div class='game__lives'>
-    ${drawHeart(data.lives > 2)}
-    ${drawHeart(data.lives > 1)}
-    ${drawHeart(data.lives > 0)}
+    ${drawHeart(lives > 2)}
+    ${drawHeart(lives > 1)}
+    ${drawHeart(lives > 0)}
   </div>`;
 
 export default (data) =>
