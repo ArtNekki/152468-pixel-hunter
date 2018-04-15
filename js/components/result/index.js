@@ -33,6 +33,11 @@ export default (state) => {
     return answer.time > ANSWER_TIME.slow;
   });
 
+  // Получаем список правильных ответов
+  const correctAnswers = answers.filter((answer) => {
+    return answer.isCorrect;
+  });
+
   // Заголовок результата
   const RESULT_TITLE = {
     [true]: `Победа!`,
@@ -72,7 +77,7 @@ export default (state) => {
                 ${renderStats(answers)}
               </td>
               <td class='result__points'>${isWin ? `×&nbsp;100` : ``}</td>
-              <td class='result__total ${!isWin ? `result__total--final` : ``}'>${isWin ? answers.length * ANSWER_POINT.default : `FAIL`}</td>
+              <td class='result__total ${!isWin ? `result__total--final` : ``}'>${isWin ? correctAnswers.length * ANSWER_POINT.default : `FAIL`}</td>
             </tr>
             ${isWin ? renderBonusList(bonusList) : ``}
             <tr>

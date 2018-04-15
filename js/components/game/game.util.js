@@ -43,7 +43,7 @@ export const selectImage = (e) => {
   const option = e.target.closest(`.game__option`);
 
   if (!option) {
-    return;
+    return false;
   }
 
   return option.classList.contains(`game__option--selected`);
