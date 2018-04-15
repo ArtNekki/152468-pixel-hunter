@@ -56,11 +56,11 @@ const updateGame = (state) => {
 
     console.log('можно продолжать');
 
-    if (true) {
+    if (false) {
       state = die(state);
     }
 
-    state = addAnswer(state, {isCorrect: false, time: 12});
+    state = addAnswer(state, {isCorrect: true, time: 12});
 
     if (canContinue(state)) {
       changeView(updateGame(nextTask(state)));

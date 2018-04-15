@@ -20,14 +20,26 @@ const renderBonusList = (bonusList) => {
 export default (state) => {
   const {answers, lives} = state;
 
+  // Определяем победа или поражение
+  const isWin = answers.length === 10;
+
+  // Получаем список быстрых ответов
   const fastAnswers = answers.filter((answer) => {
     return answer.time < 10;
   });
 
+  // Получаем список медленных ответов
   const slowAnswers = answers.filter((answer) => {
     return answer.time > 22;
   });
 
+  // Заголовок результата
+  const RESULT_TITLE = {
+    [true]: `Победа!`,
+    [false]: `Поражение!`
+  };
+
+  // Список бонусов
   const bonusList = [
     {
       type: `fast`,
@@ -52,19 +64,19 @@ export default (state) => {
   const element = createElement(
       `${renderHeader()}
         <div class='result'>
-          <h1>Победа!</h1>
+          <h1>${RESULT_TITLE[isWin]}</h1>
           <table class='result__table'>
             <tr>
               <td class='result__number'>1.</td>
               <td colspan='2'>
                 ${renderStats(answers)}
               </td>
-              <td class='result__points'>×&nbsp;100</td>
-              <td class='result__total'>${answers.length * ANSWER_POINT.default}</td>
+              <td class='result__points'>${isWin ? `×&nbsp;100` : ``}</td>
+              <td class='result__total ${!isWin ? `result__total--final` : ``}'>${isWin ? answers.length * ANSWER_POINT.default : `FAIL`}</td>
             </tr>
-            ${renderBonusList(bonusList)}
+            ${isWin ? renderBonusList(bonusList) : ``}
             <tr>
-              <td colspan='5' class='result__total  result__total--final'>${calculateTotalGameScore(answers, lives)}</td>
+              <td colspan='5' class='result__total  result__total--final'>${isWin ? calculateTotalGameScore(answers, lives) : ``}</td>
             </tr>
           </table>
         </div>`
