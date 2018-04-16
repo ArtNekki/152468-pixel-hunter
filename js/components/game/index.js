@@ -1,7 +1,7 @@
 import {createElement, changeView} from '../../util';
-import {INITIAL_GAME} from '../../data/game-params';
+import {INITIAL_GAME, TIMER_TIME} from '../../data/game-params';
 import {TASKS, TaskType} from '../../data/structure';
-import {ContentType, Event, Controls, getCheckedControls, nextTask, addAnswer, selectImage, die, canContinue} from './game.util';
+import {ContentType, Event, Control, getCheckedControls, nextTask, addAnswer, selectImage, die, canContinue} from './util';
 import renderHeader from '../header/index';
 import renderQuestions from '../questions/index';
 import getStats from '../stats/index';
@@ -39,7 +39,7 @@ const updateGame = (state) => {
   );
 
   const content = screen.querySelector(`.game__content`);
-  const answerControls = Array.from(screen.querySelectorAll(Controls[type]));
+  const answerControls = Array.from(screen.querySelectorAll(Control[type]));
 
   content.addEventListener(Event[type], (e) => {
     const checkedAnswerControls = getCheckedControls(answerControls);
@@ -63,7 +63,7 @@ const updateGame = (state) => {
       state = die(state);
     }
 
-    state = addAnswer(state, {isCorrect: correctAnswer, time: timer});
+    state = addAnswer(state, {isCorrect: correctAnswer, time: TIMER_TIME - timer});
 
     if (canContinue(state)) {
       changeView(updateGame(nextTask(state)));

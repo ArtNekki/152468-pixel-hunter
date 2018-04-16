@@ -15,7 +15,7 @@ export const Event = {
 };
 
 // Сопоставление типа игры и типа элементов выбора ответа
-export const Controls = {
+export const Control = {
   [TaskType.GUESS_ONE]: `[type='radio']`,
   [TaskType.GUESS_TWO]: `[type='radio']`,
   [TaskType.FIND]: `.game__option`

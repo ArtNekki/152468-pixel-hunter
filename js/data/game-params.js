@@ -10,6 +10,9 @@ export const INITIAL_GAME = {
 // Количество раундов в игре
 export const GAME_ROUNDS_COUNT = 10;
 
+// Начальное время таймера
+export const TIMER_TIME = 30;
+
 // Жизнь
 export const Life = {
   count: INITIAL_GAME.lives,
