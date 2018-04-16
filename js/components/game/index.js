@@ -1,11 +1,11 @@
 import {createElement, changeView} from '../../util';
-import {ContentType, Event, Controls, getCheckedControls, nextTask, addAnswer, selectImage} from './game.util';
+import {INITIAL_GAME} from '../../data/game-params';
+import {TASKS, TaskType} from '../../data/structure';
+import {ContentType, Event, Controls, getCheckedControls, nextTask, addAnswer, selectImage, die, canContinue} from './game.util';
 import renderHeader from '../header/index';
 import renderQuestions from '../questions/index';
 import getStats from '../stats/index';
 import renderResult from '../result/index';
-import {INITIAL_GAME, die, canContinue} from '../../data/task';
-import {TASKS, TaskType} from '../../data/task.data';
 
 let game;
 
@@ -38,7 +38,6 @@ const updateGame = (state) => {
         </div>`
   );
 
-  // Элементы
   const content = screen.querySelector(`.game__content`);
   const answerControls = Array.from(screen.querySelectorAll(Controls[type]));
 

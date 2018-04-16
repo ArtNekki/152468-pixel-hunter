@@ -1,6 +1,6 @@
-import {ANSWER_TIME, ANSWERS_COUNT, SUCCESS, FAIL} from '../../data/game-score';
+import {AnswerTime, GAME_ROUNDS_COUNT} from '../../data/game-params';
 
-const STATUS_STATE = {
+const StatusState = {
   unknown: `unknown`,
   correct: `correct`,
   fast: `fast`,
@@ -9,24 +9,24 @@ const STATUS_STATE = {
 };
 
 const getStatItem = ({isCorrect, time} = {}) => {
-  let status = STATUS_STATE.unknown;
+  let status = StatusState.unknown;
 
-  if (isCorrect === SUCCESS) {
-    status = STATUS_STATE.correct;
+  if (isCorrect) {
+    status = StatusState.correct;
 
-    if (time < ANSWER_TIME.fast) {
-      status = STATUS_STATE.fast;
-    } else if (time > ANSWER_TIME.slow) {
-      status = STATUS_STATE.slow;
+    if (time < AnswerTime.fast) {
+      status = StatusState.fast;
+    } else if (time > AnswerTime.slow) {
+      status = StatusState.slow;
     }
 
-  } else if (isCorrect === FAIL) {
-    status = STATUS_STATE.wrong;
+  } else if (isCorrect === false) {
+    status = StatusState.wrong;
   }
 
   return `<li class='stats__result stats__result--${status}'></li>`;
 };
 
 export default (answers = []) => {
-  return [...answers, ...(new Array(ANSWERS_COUNT - answers.length))].map(getStatItem).join(``);
+  return [...answers, ...(new Array(GAME_ROUNDS_COUNT - answers.length))].map(getStatItem).join(``);
 };

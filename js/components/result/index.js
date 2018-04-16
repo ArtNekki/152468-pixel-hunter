@@ -1,5 +1,6 @@
 import {createElement} from '../../util';
-import {calculateTotalGameScore, LIFE_BONUS, ANSWER_POINT, ANSWERS_COUNT, ANSWER_TIME} from '../../data/game-score';
+import {Life, AnswerPoint, GAME_ROUNDS_COUNT, AnswerTime} from '../../data/game-params';
+import {calculateTotalGameScore} from '../../data/game-score';
 import renderHeader from '../header/index';
 import renderStats from '../stats/index';
 
@@ -21,16 +22,16 @@ export default (state) => {
   const {answers, lives} = state;
 
   // Определяем победа или поражение
-  const isWin = answers.length === ANSWERS_COUNT;
+  const isWin = answers.length === GAME_ROUNDS_COUNT;
 
   // Получаем список быстрых ответов
   const fastAnswers = answers.filter((answer) => {
-    return answer.time < ANSWER_TIME.fast;
+    return (answer.time < AnswerTime.fast) && answer.isCorrect;
   });
 
   // Получаем список медленных ответов
   const slowAnswers = answers.filter((answer) => {
-    return answer.time > ANSWER_TIME.slow;
+    return (answer.time > AnswerTime.slow) && answer.isCorrect;
   });
 
   // Получаем список правильных ответов
@@ -38,8 +39,8 @@ export default (state) => {
     return answer.isCorrect;
   });
 
-  // Заголовок результата
-  const RESULT_TITLE = {
+  // Сопоставление результата и заголовка
+  const resultToTitle = {
     [true]: `Победа!`,
     [false]: `Поражение!`
   };
@@ -50,26 +51,26 @@ export default (state) => {
       type: `fast`,
       title: `Бонус за скорость:`,
       count: fastAnswers.length,
-      points: fastAnswers.length * ANSWER_POINT.bonus
+      points: fastAnswers.length * AnswerPoint.bonus
     },
     {
       type: `alive`,
       title: `Бонус за жизни:`,
       count: lives,
-      points: lives * LIFE_BONUS
+      points: lives * Life.bonus
     },
     {
       type: `slow`,
       title: `Штраф за медлительность:`,
       count: slowAnswers.length,
-      points: slowAnswers.length * ANSWER_POINT.fine
+      points: slowAnswers.length * AnswerPoint.fine
     }
   ];
 
   const element = createElement(
       `${renderHeader()}
         <div class='result'>
-          <h1>${RESULT_TITLE[isWin]}</h1>
+          <h1>${resultToTitle[isWin]}</h1>
           <table class='result__table'>
             <tr>
               <td class='result__number'>1.</td>
@@ -77,7 +78,7 @@ export default (state) => {
                 ${renderStats(answers)}
               </td>
               <td class='result__points'>${isWin ? `×&nbsp;100` : ``}</td>
-              <td class='result__total ${!isWin ? `result__total--final` : ``}'>${isWin ? correctAnswers.length * ANSWER_POINT.default : `FAIL`}</td>
+              <td class='result__total ${!isWin ? `result__total--final` : ``}'>${isWin ? correctAnswers.length * AnswerPoint.default : `FAIL`}</td>
             </tr>
             ${isWin ? renderBonusList(bonusList) : ``}
             <tr>

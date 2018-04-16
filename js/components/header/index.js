@@ -1,11 +1,16 @@
+import {Life} from '../../data/game-params';
+
 const drawHeart = (full) => `<img src='img/heart__${full ? `full` : `empty`}.svg' class='game__heart' alt='Life' width='32' height='32'>`;
 
 const renderContentWithData = ({timer, lives}) =>
   `<h1 class='game__timer'>${timer}</h1>
   <div class='game__lives'>
-    ${drawHeart(lives > 2)}
-    ${drawHeart(lives > 1)}
-    ${drawHeart(lives > 0)}
+    ${new Array(Life.count - lives)
+      .fill(drawHeart(false))
+      .join(``)}
+    ${new Array(lives)
+      .fill(drawHeart(true))
+      .join(``)}
   </div>`;
 
 export default (data) =>
