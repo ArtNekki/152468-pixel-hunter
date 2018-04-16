@@ -1,25 +1,5 @@
-import {isObject} from '../is';
-
-// Бонус за оставшуюся жизнь
-const LIFE_BONUS = 50;
-
-// Количество жизней
-const LIVES_COUNT = 3;
-
-// Количество ответов
-export const ANSWERS_COUNT = 10;
-
-// Количество очков за ответ
-export const ANSWER_POINT = {
-  default: 100,
-  bonus: 50,
-  fine: -50
-};
-
-export const ANSWER_TIME = {
-  slow: 20,
-  fast: 10
-};
+import {GAME_ROUNDS_COUNT, AnswerPoint, AnswerTime, Life} from '../../data/game-params';
+import {isObject} from '../../is';
 
 export const calculateAnswerScore = (answer) => {
   if (!isObject(answer)) {
@@ -48,14 +28,14 @@ export const calculateAnswerScore = (answer) => {
     return score;
   }
 
-  score += ANSWER_POINT.default;
+  score += AnswerPoint.default;
 
-  if (answer.time < ANSWER_TIME.fast) {
-    score += ANSWER_POINT.bonus;
+  if (answer.time < AnswerTime.fast) {
+    score += AnswerPoint.bonus;
   }
 
-  if (answer.time > ANSWER_TIME.slow) {
-    score += ANSWER_POINT.fine;
+  if (answer.time > AnswerTime.slow) {
+    score += AnswerPoint.fine;
   }
 
   return score;
@@ -70,11 +50,11 @@ export const calculateTotalGameScore = (answers, lives) => {
     throw new Error(`Параметр 'lives' должен быть числом`);
   }
 
-  if (answers.length < ANSWERS_COUNT) {
+  if (answers.length < GAME_ROUNDS_COUNT) {
     return -1;
   }
 
-  if (lives < 0 || lives > LIVES_COUNT) {
+  if (lives < 0 || lives > Life.count) {
     throw new Error(`Переданное количество жизней должно быть от 0 до 3`);
   }
 
@@ -82,5 +62,5 @@ export const calculateTotalGameScore = (answers, lives) => {
     return sum + calculateAnswerScore(current);
   }, 0);
 
-  return answersScore + lives * LIFE_BONUS;
+  return answersScore + lives * Life.bonus;
 };

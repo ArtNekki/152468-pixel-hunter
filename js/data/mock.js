@@ -1,4 +1,4 @@
-import {ANSWERS_COUNT, ANSWER_TIME} from './game-score';
+import {GAME_ROUNDS_COUNT, AnswerTime} from './game-params';
 
 // Количество жизней
 export const LIFE = {
@@ -10,7 +10,7 @@ export const LIFE = {
 
 // Формируем массив ответов
 const getAnswers = ({isCorrect, time}) => {
-  let answers = new Array(ANSWERS_COUNT).fill({});
+  let answers = new Array(GAME_ROUNDS_COUNT).fill({});
 
   return answers.map((answer) => {
     answer.isCorrect = isCorrect;
@@ -24,7 +24,7 @@ const getAnswers = ({isCorrect, time}) => {
 export const answer = {
   slow: {
     isCorrect: true,
-    time: ANSWER_TIME.slow + 1
+    time: AnswerTime.slow + 1
   },
   normal: {
     isCorrect: true,
@@ -32,7 +32,7 @@ export const answer = {
   },
   fast: {
     isCorrect: true,
-    time: ANSWER_TIME.fast - 1
+    time: AnswerTime.fast - 1
   },
   failed: {
     isCorrect: false,

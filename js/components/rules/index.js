@@ -1,16 +1,10 @@
 import {createElement, changeView} from '../../util';
-import renderGameOne from '../gameOne/index.js';
+import renderHeader from '../header/index';
+import startGame from '../game/index';
 
 // Получаем documentFragment с dom-узлами из шаблона
 const documentFragmentBase = createElement(
-    `<header class='header'>
-        <div class='header__back'>
-          <button class='back'>
-            <img src='img/arrow_left.svg' width='45' height='45' alt='Back'>
-            <img src='img/logo_small.svg' width='101' height='44'>
-          </button>
-        </div>
-      </header>
+    `${renderHeader()}
       <div class='rules'>
         <h1 class='rules__title'>Правила</h1>
         <p class='rules__description'>Угадай 10 раз для каждого изображения фото <img
@@ -50,7 +44,7 @@ export default () => {
   inputField.addEventListener(`input`, typeTextHandler);
   form.addEventListener(`submit`, (e) => {
     e.preventDefault();
-    changeView(renderGameOne());
+    changeView(startGame());
   });
 
   // Возвращаем dom - элементы

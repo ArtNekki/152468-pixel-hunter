@@ -1,5 +1,5 @@
 import {createElement, changeView} from '../../util';
-import renderRules from '../rules/index.js';
+import renderRules from '../rules/index';
 
 // Получаем documentFragment с dom-узлами из шаблона
 const documentFragmentBase = createElement(

@@ -1,5 +1,5 @@
 import {changeView} from './util';
-import renderIntro from './components/intro/index.js';
+import renderIntro from './components/intro/index';
 
 document.addEventListener(`DOMContentLoaded`, () => {
   // Показываем первый экран, как только DOM загружен
