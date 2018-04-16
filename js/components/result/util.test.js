@@ -1,6 +1,6 @@
 import {assert} from 'chai';
-import {LIFE, answer, answers} from './mock';
-import {calculateAnswerScore, calculateTotalGameScore} from './game-score';
+import {LIFE, answer, answers} from '../../data/mock';
+import {calculateAnswerScore, calculateTotalGameScore} from './util';
 
 describe(`функция calculateAnswerScore: проверка параметров`, () => {
   const objDefault = answer.normal;

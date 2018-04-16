@@ -1,6 +1,6 @@
 import {createElement} from '../../util';
+import {calculateTotalGameScore} from './util';
 import {Life, AnswerPoint, GAME_ROUNDS_COUNT, AnswerTime} from '../../data/game-params';
-import {calculateTotalGameScore} from '../../data/game-score';
 import renderHeader from '../header/index';
 import renderStats from '../stats/index';
 
