@@ -1,11 +1,17 @@
-import {createElement, changeView} from '../../util';
+import {changeView, updateView, createElement} from '../../util';
 import {INITIAL_GAME, TIMER_TIME} from '../../data/game-params';
-import {TASKS, TaskType} from '../../data/structure';
-import {ContentType, Event, Control, getCheckedControls, nextTask, addAnswer, selectImage, die, canContinue} from './util';
+import {TASKS} from '../../data/structure';
+import {nextTask, addAnswer, die, canContinue} from './util';
 import HeaderView from '../header/index';
-import renderQuestions from '../questions/index';
-import getStats from '../stats/index';
+import GameView from './game';
 import renderResult from '../result/index';
+
+const gameContainer = createElement();
+const gameHeader = createElement();
+const gameContent = createElement();
+
+gameContainer.append(gameHeader);
+gameContainer.append(gameContent);
 
 let game;
 
@@ -19,48 +25,15 @@ const initGame = () => {
 };
 
 const updateGame = (state) => {
+  updateView(gameHeader, new HeaderView(state));
 
-  // Получение Задания
-  const {task, answers, timer} = state;
-  const {type, title, questions} = task;
+  const gameView = new GameView(state);
+  updateView(gameContent, gameView);
 
-  const header = new HeaderView(state).template;
+  // Время игры
+  const {timer} = state;
 
-  // Создаем игровой экран
-  const screen = createElement(
-      `${header}
-      <div class='game'>
-          <p class='game__task'>${title}</p>
-          <form class='game__content ${ContentType[type] || ``}'>
-            ${renderQuestions(questions)}
-          </form>
-          <div class='stats'>
-            ${getStats(answers)}
-          </div>
-        </div>`
-  );
-
-  const content = screen.querySelector(`.game__content`);
-  const answerControls = Array.from(screen.querySelectorAll(Control[type]));
-
-  content.addEventListener(Event[type], (e) => {
-    const checkedAnswerControls = getCheckedControls(answerControls);
-
-    if (!checkedAnswerControls.length || ((type === TaskType.GUESS_TWO)
-        && checkedAnswerControls.length !== 2)) {
-      return;
-    }
-
-    let correctAnswer;
-
-    if (type === TaskType.FIND) {
-      correctAnswer = selectImage(e);
-    } else {
-      correctAnswer = questions.every((question, i) => {
-        return question.type === checkedAnswerControls[i].value;
-      });
-    }
-
+  gameView.onAnswer = (correctAnswer) => {
     if (!correctAnswer) {
       state = die(state);
     }
@@ -72,13 +45,13 @@ const updateGame = (state) => {
     } else {
       changeView(renderResult(state));
     }
-  });
+  };
 
-  // Возвращаем игровой экран
-  return screen;
+  return gameContainer;
 };
 
 export default () => {
   initGame();
-  return updateGame(game);
+  updateGame(game);
+  return gameContainer;
 };
