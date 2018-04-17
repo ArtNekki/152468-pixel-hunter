@@ -1,19 +1,37 @@
 import {changeView} from './util';
-import renderIntro from './components/intro/index';
+import IntroView from './components/intro/index';
+import GreetingView from './components/greeting/index';
+import RulesView from './components/rules/index';
+
+let introView;
+let greetingView;
+let rulesView;
+let gameView;
+let resultView;
 
 document.addEventListener(`DOMContentLoaded`, () => {
-  // Показываем первый экран, как только DOM загружен
-  changeView(renderIntro());
+  introView = new IntroView();
+  changeView(introView.element);
 
-  // Если в разметке есть кнопка, для возврата назад, то при нажатии на нее
-  // возвращаемся на первый экран
-  document.addEventListener(`click`, (e) => {
-    const goHomeButton = e.target.closest(`.back`);
+  introView.onNextClick = () => {
+    greetingView = new GreetingView();
+    changeView(greetingView.element);
 
-    if (!goHomeButton) {
-      return;
-    }
-
-    changeView(renderIntro());
-  });
+    greetingView.onNextClick = () => {
+      rulesView = new RulesView();
+      changeView(rulesView.element);
+    };
+  };
 });
+
+// Если в разметке есть кнопка, для возврата назад, то при нажатии на нее
+// возвращаемся на первый экран
+// document.addEventListener(`click`, (e) => {
+//   const goHomeButton = e.target.closest(`.back`);
+//
+//   if (!goHomeButton) {
+//     return;
+//   }
+//
+//   changeView(renderIntro());
+// });

@@ -1,9 +1,8 @@
-import {createElement, changeView} from '../../util';
-import renderRules from '../rules/index';
+import AbstractView from '../../abstract-view';
 
-// Получаем documentFragment с dom-узлами из шаблона
-const documentFragmentBase = createElement(
-    `<div class='greeting central--blur'>
+export default class GreetingView extends AbstractView {
+  get template() {
+    return `<div class='greeting central--blur'>
         <div class='greeting__logo'><img src='img/logo_big.png' width='201' height='89' alt='Pixel Hunter'></div>
         <h1 class='greeting__asterisk'>*</h1>
         <div class='greeting__challenge'>
@@ -15,19 +14,16 @@ const documentFragmentBase = createElement(
             Помни, главное — смотреть очень внимательно.</p>
         </div>
         <div class='greeting__continue'><span><img src='img/arrow_right.svg' width='64' height='64' alt='Next'></span></div>
-      </div>`
-);
+      </div>`;
+  }
 
-export default () => {
-  const documentFragment = documentFragmentBase.cloneNode(true);
+  onNextClick() {
 
-  // Добавляем логику работы
-  const goNextButton = documentFragment.querySelector(`.greeting__continue`);
+  }
 
-  goNextButton.addEventListener(`click`, () => {
-    changeView(renderRules());
-  });
-
-  // Возвращаем dom - элементы
-  return documentFragment;
-};
+  bind() {
+    this.element.querySelector(`.greeting__continue`).addEventListener(`click`, () => {
+      this.onNextClick();
+    });
+  }
+}

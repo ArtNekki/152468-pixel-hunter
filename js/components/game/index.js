@@ -2,7 +2,7 @@ import {createElement, changeView} from '../../util';
 import {INITIAL_GAME, TIMER_TIME} from '../../data/game-params';
 import {TASKS, TaskType} from '../../data/structure';
 import {ContentType, Event, Control, getCheckedControls, nextTask, addAnswer, selectImage, die, canContinue} from './util';
-import renderHeader from '../header/index';
+import HeaderView from '../header/index';
 import renderQuestions from '../questions/index';
 import getStats from '../stats/index';
 import renderResult from '../result/index';
@@ -24,9 +24,11 @@ const updateGame = (state) => {
   const {task, answers, timer} = state;
   const {type, title, questions} = task;
 
+  const header = new HeaderView(state).template;
+
   // Создаем игровой экран
   const screen = createElement(
-      `${renderHeader(state)}
+      `${header}
       <div class='game'>
           <p class='game__task'>${title}</p>
           <form class='game__content ${ContentType[type] || ``}'>

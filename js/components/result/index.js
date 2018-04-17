@@ -68,7 +68,7 @@ export default (state) => {
   ];
 
   const element = createElement(
-      `${renderHeader()}
+      `
         <div class='result'>
           <h1>${resultToTitle[isWin]}</h1>
           <table class='result__table'>
