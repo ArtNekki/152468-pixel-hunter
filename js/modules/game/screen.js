@@ -2,7 +2,7 @@ import {changeView} from '../../util';
 import {INITIAL_GAME, TIMER_TIME} from '../../data/game-params';
 import {TASKS} from '../../data/structure';
 import {nextTask, addAnswer, die, canContinue} from './util';
-import HeaderView from '../header/view';
+import renderHeader from '../header/screen';
 import GameView from './view';
 import showResult from '../result/screen';
 
@@ -22,7 +22,7 @@ const updateGame = (state) => {
   const gameView = new GameView(state);
 
   gameContainer = document.createDocumentFragment();
-  gameContainer.appendChild(new HeaderView(state).element);
+  gameContainer.appendChild(renderHeader(state));
   gameContainer.appendChild(gameView.element);
 
   // Время игры
