@@ -1,7 +1,5 @@
-import AbstractView from '../../../abstract-view';
-import {changeView} from '../../../util';
-import startGame from '../../../game/index';
-import HeaderView from '../header/index';
+import AbstractView from '../../abstract-view';
+import HeaderView from '../header/view';
 
 export default class RulesView extends AbstractView {
   get template() {
@@ -24,6 +22,10 @@ export default class RulesView extends AbstractView {
             </div>`;
   }
 
+  goNext() {
+
+  }
+
   bind() {
     const form = this.element.querySelector(`.rules__form`);
     const inputField = form.querySelector(`.rules__input`);
@@ -42,7 +44,7 @@ export default class RulesView extends AbstractView {
     inputField.addEventListener(`input`, typeTextHandler);
     form.addEventListener(`submit`, (e) => {
       e.preventDefault();
-      changeView(startGame());
+      this.goNext();
     });
   }
 }

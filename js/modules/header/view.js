@@ -1,5 +1,5 @@
-import AbstractView from '../../../abstract-view';
-import {Life} from '../../../data/game-params';
+import AbstractView from '../../abstract-view';
+import {Life} from '../../data/game-params';
 
 const drawHeart = (full) => {
   return `<img src='img/heart__${full ? `full` : `empty`}.svg' class='game__heart' alt='Life' width='32' height='32'>`;
@@ -29,5 +29,17 @@ export default class HeaderView extends AbstractView {
               </div>
               ${this.state ? renderContentWithData(this.state) : ``}
             </header>`;
+  }
+
+  goBack() {
+
+  }
+
+  bind() {
+    const backButton = this.element.querySelector(`.back`);
+
+    backButton.addEventListener(`click`, () => {
+      this.goBack();
+    });
   }
 }

@@ -1,10 +1,7 @@
-import {changeView} from './util';
-import IntroView from './components/views/intro/index';
+import showIntro from './modules/intro/screen';
 
 document.addEventListener(`DOMContentLoaded`, () => {
-  const introView = new IntroView();
-  changeView(introView.element);
-
+  showIntro();
   // Если в разметке есть кнопка, для возврата назад, то при нажатии на нее
   // возвращаемся на первый экран
   document.addEventListener(`click`, (e) => {
@@ -14,6 +11,6 @@ document.addEventListener(`DOMContentLoaded`, () => {
       return;
     }
 
-    changeView(introView.element);
+    showIntro();
   });
 });

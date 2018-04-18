@@ -1,6 +1,4 @@
-import AbstractView from '../../../abstract-view';
-import {changeView} from '../../../util';
-import GreetingView from '../greeting/index';
+import AbstractView from '../../abstract-view';
 
 export default class IntroView extends AbstractView {
   get template() {
@@ -10,9 +8,13 @@ export default class IntroView extends AbstractView {
             </div>`;
   }
 
+  goNext() {
+
+  }
+
   bind() {
     this.element.querySelector(`.intro__asterisk`).addEventListener(`click`, () => {
-      changeView(new GreetingView().element);
+      this.goNext();
     });
   }
 }
