@@ -4,7 +4,7 @@ import {TASKS} from '../../data/structure';
 import {nextTask, addAnswer, die, canContinue} from './util';
 import HeaderView from '../header/index';
 import GameView from './game';
-import renderResult from '../result/index';
+import ResultView from '../result/index';
 
 const gameContainer = createElement();
 const gameHeader = createElement();
@@ -43,7 +43,7 @@ const updateGame = (state) => {
     if (canContinue(state)) {
       changeView(updateGame(nextTask(state)));
     } else {
-      changeView(renderResult(state));
+      changeView(new ResultView(state).element);
     }
   };
 
