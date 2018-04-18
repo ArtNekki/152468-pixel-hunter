@@ -2,7 +2,7 @@ export const createElement = (template = ``, tagName = `div`) => {
   const element = document.createElement(tagName);
   element.innerHTML = template;
 
-  return element;
+  return element.content || element;
 };
 
 const container = document.querySelector(`#main`);
