@@ -1,5 +1,5 @@
-import AbstractView from '../../abstract-view';
-import {changeView} from '../../util';
+import AbstractView from '../../../abstract-view';
+import {changeView} from '../../../util';
 import RulesView from '../rules/index';
 
 export default class GreetingView extends AbstractView {

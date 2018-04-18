@@ -1,11 +1,4 @@
-import {GAME_ROUNDS_COUNT} from '../../data/game-params';
-
-// Возвращает массив элементов, которые были выбраны
-export const getCheckedControls = (answers) => {
-  return answers.filter(((answer) => {
-    return answer.checked;
-  }));
-};
+import {GAME_ROUNDS_COUNT} from '../data/game-params';
 
 // Получает новое задание
 export const nextTask = (state) => {

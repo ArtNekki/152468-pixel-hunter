@@ -1,8 +1,8 @@
-import AbstractView from '../../abstract-view';
+import AbstractView from '../../../abstract-view';
 import {calculateTotalGameScore} from './util';
-import {Life, AnswerPoint, GAME_ROUNDS_COUNT, AnswerTime} from '../../data/game-params';
+import {Life, AnswerPoint, GAME_ROUNDS_COUNT, AnswerTime} from '../../../data/game-params';
 import HeaderView from '../header/index';
-import renderStats from '../stats/index';
+import renderStats from '../../partials/stats/index';
 
 // Сопоставление результата и заголовка
 const resultToTitle = {

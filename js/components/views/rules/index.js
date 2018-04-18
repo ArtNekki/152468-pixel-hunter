@@ -1,7 +1,7 @@
-import AbstractView from '../../abstract-view';
-import {changeView} from '../../util';
+import AbstractView from '../../../abstract-view';
+import {changeView} from '../../../util';
+import startGame from '../../../game/index';
 import HeaderView from '../header/index';
-import startGame from '../game/index';
 
 export default class RulesView extends AbstractView {
   get template() {

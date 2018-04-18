@@ -1,5 +1,5 @@
 import {changeView} from './util';
-import IntroView from './components/intro/index';
+import IntroView from './components/views/intro/index';
 
 document.addEventListener(`DOMContentLoaded`, () => {
   const introView = new IntroView();

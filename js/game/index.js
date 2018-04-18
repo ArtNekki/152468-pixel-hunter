@@ -1,10 +1,10 @@
-import {changeView, updateView, createElement} from '../../util';
-import {INITIAL_GAME, TIMER_TIME} from '../../data/game-params';
-import {TASKS} from '../../data/structure';
+import {changeView, updateView, createElement} from '../util';
+import {INITIAL_GAME, TIMER_TIME} from '../data/game-params';
+import {TASKS} from '../data/structure';
 import {nextTask, addAnswer, die, canContinue} from './util';
-import HeaderView from '../header/index';
-import GameView from './game';
-import ResultView from '../result/index';
+import HeaderView from '../components/views/header/index';
+import GameView from '../components/views/game/index';
+import ResultView from '../components/views/result/index';
 
 const gameContainer = createElement();
 const gameHeader = createElement();

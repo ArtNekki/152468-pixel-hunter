@@ -1,8 +1,8 @@
-import AbstractView from '../../abstract-view';
-import {TaskType} from '../../data/structure';
+import AbstractView from '../../../abstract-view';
+import {TaskType} from '../../../data/structure';
 import {getCheckedControls} from './util';
-import renderQuestions from '../questions/index';
-import renderStats from '../stats/index';
+import renderQuestions from '../../partials/questions/index';
+import renderStats from '../../partials/stats/index';
 
 const REQUIRED_ANSWERS_COUNT = 2;
 
