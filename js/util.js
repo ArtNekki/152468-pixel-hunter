@@ -1,4 +1,4 @@
-export const createElement = (template = ``, tagName = `div`) => {
+export const createElement = (template = ``, tagName = `template`) => {
   const element = document.createElement(tagName);
   element.innerHTML = template;
 
