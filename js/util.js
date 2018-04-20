@@ -1,8 +1,8 @@
-export const createElement = (template = ``, tagName = `div`) => {
+export const createElement = (template = ``, tagName = `template`) => {
   const element = document.createElement(tagName);
   element.innerHTML = template;
 
-  return element;
+  return element.content || element;
 };
 
 const container = document.querySelector(`#main`);
@@ -10,5 +10,10 @@ const container = document.querySelector(`#main`);
 // Показывает экран в зависимости от переданного числа
 export const changeView = (element) => {
   container.innerHTML = ``;
-  container.appendChild(element);
+  container.append(element);
+};
+
+export const updateView = (parent, view) => {
+  parent.innerHTML = ``;
+  parent.append(view.element);
 };

@@ -1,7 +1,8 @@
-import {createElement} from '../../util';
+import AbstractView from '../../abstract-view';
 
-export default createElement(
-    `<footer class="footer">
+export default class FooterView extends AbstractView {
+  get template() {
+    return `<footer class="footer">
       <a href="https://htmlacademy.ru" class="social-link social-link--academy">HTML Academy</a>
       <span class="footer__made-in">Сделано в <a href="https://htmlacademy.ru" class="footer__link">HTML Academy</a> &copy; 2016</span>
       <div class="footer__social-links">
@@ -10,4 +11,6 @@ export default createElement(
         <a href="https://www.facebook.com/htmlacademy" class="social-link  social-link--fb">Фэйсбук</a>
         <a href="https://vk.com/htmlacademy" class="social-link  social-link--vk">Вконтакте</a>
       </div>
-    </footer>`);
+    </footer>`;
+  }
+}
