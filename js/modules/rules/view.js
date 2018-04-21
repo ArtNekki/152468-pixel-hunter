@@ -44,7 +44,7 @@ export default class RulesView extends AbstractView {
     inputField.addEventListener(`input`, typeTextHandler);
     form.addEventListener(`submit`, (e) => {
       e.preventDefault();
-      this.goNext();
+      this.goNext(inputField.value);
     });
   }
 }

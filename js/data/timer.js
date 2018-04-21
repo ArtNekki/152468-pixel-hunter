@@ -1,4 +1,4 @@
-export const createTimer = (time) => {
+export default (time) => {
   if (!Number.isFinite(time)) {
     throw new Error(`Параметр 'time' должен быть числом`);
   }

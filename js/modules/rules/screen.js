@@ -1,13 +1,13 @@
 import {changeView} from '../../util';
 import RulesView from './view';
-import startGame from '../game/screen';
+import Application from '../../Application';
 
 export default () => {
   const rulesView = new RulesView();
 
   changeView(rulesView.element);
 
-  rulesView.goNext = () => {
-    startGame();
+  rulesView.goNext = (name) => {
+    Application.showGame(name);
   };
 };

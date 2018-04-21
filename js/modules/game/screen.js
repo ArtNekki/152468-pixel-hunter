@@ -1,52 +1,48 @@
+import {TIMER_TIME} from '../../data/game-params';
 import {changeView} from '../../util';
-import {INITIAL_GAME, TIMER_TIME} from '../../data/game-params';
-import {TASKS} from '../../data/structure';
-import {nextTask, addAnswer, die, canContinue} from './util';
 import renderHeader from '../header/screen';
 import GameView from './view';
-import showResult from '../result/screen';
+import Application from '../../Application';
 
-let gameContainer;
-let game;
+export default class GameScreen {
+  constructor(model) {
+    this.model = model;
 
-const initGame = () => {
-  const tasks = [...TASKS];
+    this.updateGame();
+    this._timer = null;
+  }
 
-  game = Object.assign({}, INITIAL_GAME, {
-    task: tasks.pop(),
-    tasks
-  });
-};
+  get element() {
+    return this.root;
+  }
 
-const updateGame = (state) => {
-  const gameView = new GameView(state);
+  startGame() {
+    // this.model.nextTask();
+  }
 
-  gameContainer = document.createDocumentFragment();
-  gameContainer.appendChild(renderHeader(state));
-  gameContainer.appendChild(gameView.element);
+  updateGame() {
+    this.header = renderHeader(this.model.state);
+    this.game = new GameView(this.model.state);
+    this.game.onAnswer = this.answer.bind(this);
 
-  // Время игры
-  const {timer} = state;
+    this.root = document.createDocumentFragment();
+    this.root.appendChild(this.header);
+    this.root.appendChild(this.game.element);
+  }
 
-  gameView.onAnswer = (correctAnswer) => {
+  answer(correctAnswer) {
     if (!correctAnswer) {
-      state = die(state);
+      this.model.die();
     }
 
-    state = addAnswer(state, {isCorrect: correctAnswer, time: TIMER_TIME - timer});
+    this.model.addAnswer({isCorrect: correctAnswer, time: TIMER_TIME});
 
-    if (canContinue(state)) {
-      changeView(updateGame(nextTask(state)));
+    if (this.model.canContinue()) {
+      this.model.nextTask();
+      this.updateGame();
+      changeView(this.element);
     } else {
-      showResult(state);
+      Application.showResult(this.model.state);
     }
-  };
-
-  return gameContainer;
-};
-
-export default () => {
-  initGame();
-  updateGame(game);
-  changeView(gameContainer);
-};
+  }
+}
