@@ -6,8 +6,8 @@ import {changeView} from './util';
 export default class Application {
   static showGame(playerName) {
     const gameScreen = new GameScreen(new GameModel(playerName));
-    gameScreen.startGame();
     changeView(gameScreen.element);
+    gameScreen.startGame();
   }
 
   static showResult(state) {

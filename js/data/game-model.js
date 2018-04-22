@@ -1,4 +1,4 @@
-import {INITIAL_GAME, GAME_ROUNDS_COUNT} from './game-params';
+import {INITIAL_GAME, GAME_ROUNDS_COUNT, TIMER_TIME} from './game-params';
 import {TASKS} from './structure';
 import createTimer from './timer';
 
@@ -16,13 +16,14 @@ export default class GameModel {
     this._state = Object.assign({}, INITIAL_GAME, {
       tasks: [...TASKS]
     });
-    this.timer = createTimer(this._state.timer);
   }
 
   nextTask() {
     this._state = Object.assign({}, this._state, {
       task: this._state.tasks.pop()
     });
+    this.resetTime();
+    this.timer = createTimer(this._state.timer);
   }
 
   addAnswer(answer) {
@@ -45,8 +46,18 @@ export default class GameModel {
   }
 
   tick() {
+    const result = this.timer.tick();
+
     this._state = Object.assign({}, this._state, {
-      timer: this.timer.tick().time
+      timer: result.time
+    });
+
+    return result;
+  }
+
+  resetTime() {
+    this._state = Object.assign({}, this._state, {
+      timer: TIMER_TIME
     });
   }
 }

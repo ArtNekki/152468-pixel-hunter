@@ -1,17 +1,17 @@
+// Начальное время таймера
+export const TIMER_TIME = 5;
+
 // Начальные параметры игры
 export const INITIAL_GAME = {
   task: {},
   tasks: [],
   answers: [],
   lives: 3,
-  timer: 30
+  timer: TIMER_TIME
 };
 
 // Количество раундов в игре
 export const GAME_ROUNDS_COUNT = 10;
-
-// Начальное время таймера
-export const TIMER_TIME = 30;
 
 // Жизнь
 export const Life = {

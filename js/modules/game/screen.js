@@ -17,8 +17,23 @@ export default class GameScreen {
   startGame() {
     this.model.nextTask();
     this.updateGame();
+    this.runTimer();
+  }
+
+  stopGame() {
+    clearInterval(this._interval);
+  }
+
+  runTimer() {
     this._interval = setInterval(() => {
       this.model.tick();
+      if (!this.model.state.timer) {
+        this.stopGame();
+        this.model.nextTask();
+        this.runTimer();
+        console.log('как такое возможно:???');
+              console.log(this.model.state.timer);
+      }
       this.updateGame();
     }, 1000);
   }
