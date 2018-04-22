@@ -7,9 +7,7 @@ import Application from '../../Application';
 export default class GameScreen {
   constructor(model) {
     this.model = model;
-
-    this.updateGame();
-    this._timer = null;
+    this._interval = null;
   }
 
   get element() {
@@ -17,7 +15,12 @@ export default class GameScreen {
   }
 
   startGame() {
-    // this.model.nextTask();
+    this.model.nextTask();
+    this.updateGame();
+    this._interval = setInterval(() => {
+      this.model.tick();
+      this.updateGame();
+    }, 1000);
   }
 
   updateGame() {
@@ -28,6 +31,8 @@ export default class GameScreen {
     this.root = document.createDocumentFragment();
     this.root.appendChild(this.header);
     this.root.appendChild(this.game.element);
+
+    changeView(this.element);
   }
 
   answer(correctAnswer) {
@@ -40,7 +45,6 @@ export default class GameScreen {
     if (this.model.canContinue()) {
       this.model.nextTask();
       this.updateGame();
-      changeView(this.element);
     } else {
       Application.showResult(this.model.state);
     }

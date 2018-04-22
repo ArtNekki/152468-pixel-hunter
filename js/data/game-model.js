@@ -6,7 +6,6 @@ export default class GameModel {
   constructor(playerName) {
     this.playerName = playerName;
     this.init();
-    this.timer = createTimer(this._state.timer);
   }
 
   get state() {
@@ -14,12 +13,10 @@ export default class GameModel {
   }
 
   init() {
-    const tasks = [...TASKS];
-
     this._state = Object.assign({}, INITIAL_GAME, {
-      task: tasks.pop(),
-      tasks
+      tasks: [...TASKS]
     });
+    this.timer = createTimer(this._state.timer);
   }
 
   nextTask() {
@@ -48,6 +45,8 @@ export default class GameModel {
   }
 
   tick() {
-    return this.timer.tick().time;
+    this._state = Object.assign({}, this._state, {
+      timer: this.timer.tick().time
+    });
   }
 }

@@ -4,7 +4,7 @@ export const INITIAL_GAME = {
   tasks: [],
   answers: [],
   lives: 3,
-  timer: 25
+  timer: 30
 };
 
 // Количество раундов в игре
