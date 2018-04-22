@@ -1,5 +1,9 @@
-// Начальное время таймера
-export const TIMER_TIME = 5;
+// Время
+export const Time = {
+  start: 30,
+  critical: 5,
+  frequency: 1000
+};
 
 // Начальные параметры игры
 export const INITIAL_GAME = {
@@ -7,7 +11,7 @@ export const INITIAL_GAME = {
   tasks: [],
   answers: [],
   lives: 3,
-  timer: TIMER_TIME
+  timer: Time.start
 };
 
 // Количество раундов в игре

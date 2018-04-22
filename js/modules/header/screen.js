@@ -8,5 +8,5 @@ export default (state) => {
     showIntro();
   };
 
-  return headerView.element;
+  return headerView;
 };

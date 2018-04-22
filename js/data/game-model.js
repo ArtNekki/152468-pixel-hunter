@@ -1,4 +1,4 @@
-import {INITIAL_GAME, GAME_ROUNDS_COUNT, TIMER_TIME} from './game-params';
+import {INITIAL_GAME, GAME_ROUNDS_COUNT, Time} from './game-params';
 import {TASKS} from './structure';
 import createTimer from './timer';
 
@@ -10,6 +10,10 @@ export default class GameModel {
 
   get state() {
     return this._state;
+  }
+
+  get time() {
+    return this._state.timer;
   }
 
   init() {
@@ -57,7 +61,7 @@ export default class GameModel {
 
   resetTime() {
     this._state = Object.assign({}, this._state, {
-      timer: TIMER_TIME
+      timer: Time.start
     });
   }
 }

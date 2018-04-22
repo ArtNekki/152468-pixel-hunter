@@ -1,6 +1,6 @@
-import {TIMER_TIME} from '../../data/game-params';
+import {Time} from '../../data/game-params';
 import {changeView} from '../../util';
-import renderHeader from '../header/screen';
+import headerView from '../header/screen';
 import GameView from './view';
 import Application from '../../Application';
 
@@ -8,6 +8,14 @@ export default class GameScreen {
   constructor(model) {
     this.model = model;
     this._interval = null;
+
+    this.header = headerView(this.model.state);
+
+    this.game = new GameView(this.model.state);
+
+    this.root = document.createElement(`div`);
+    this.root.appendChild(this.header.element);
+    this.root.appendChild(this.game.element);
   }
 
   get element() {
@@ -27,39 +35,41 @@ export default class GameScreen {
   runTimer() {
     this._interval = setInterval(() => {
       this.model.tick();
-      if (!this.model.state.timer) {
-        this.stopGame();
-        this.model.nextTask();
-        this.runTimer();
-        console.log('как такое возможно:???');
-              console.log(this.model.state.timer);
+      if (!this.model.time) {
+        this.answer();
       }
-      this.updateGame();
-    }, 1000);
+      this.updateTime();
+    }, Time.frequency);
+  }
+
+  updateTime() {
+    this.header.changeTime(this.model.time);
+  }
+
+  updateLives() {
+    this.header.changeLives(this.model.state.lives);
   }
 
   updateGame() {
-    this.header = renderHeader(this.model.state);
-    this.game = new GameView(this.model.state);
-    this.game.onAnswer = this.answer.bind(this);
-
-    this.root = document.createDocumentFragment();
-    this.root.appendChild(this.header);
-    this.root.appendChild(this.game.element);
-
-    changeView(this.element);
+    // const game = new GameView(this.model.state).element.children[0];
+    // game.onAnswer = this.answer.bind(this);
+    // this.root.replaceChild(game, this.game.children[0]);
+    //
+    // this.game = game;
   }
 
-  answer(correctAnswer) {
+  answer(correctAnswer = false) {
+    this.stopGame();
+
     if (!correctAnswer) {
       this.model.die();
+      this.updateLives();
     }
 
-    this.model.addAnswer({isCorrect: correctAnswer, time: TIMER_TIME});
+    this.model.addAnswer({isCorrect: correctAnswer, time: Time.start});
 
     if (this.model.canContinue()) {
-      this.model.nextTask();
-      this.updateGame();
+      this.startGame();
     } else {
       Application.showResult(this.model.state);
     }

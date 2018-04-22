@@ -14,6 +14,7 @@ const ContentType = {
 
 export default class GameView extends AbstractView {
   constructor(state) {
+    console.log('st', state);
     super();
     this.state = state;
   }
