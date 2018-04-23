@@ -1,5 +1,4 @@
 import {Time} from '../../data/game-params';
-import {changeView} from '../../util';
 import headerView from '../header/screen';
 import GameView from './view';
 import Application from '../../Application';
@@ -7,15 +6,13 @@ import Application from '../../Application';
 export default class GameScreen {
   constructor(model) {
     this.model = model;
-    this._interval = null;
 
     this.header = headerView(this.model.state);
-
-    this.game = new GameView(this.model.state);
-
     this.root = document.createElement(`div`);
     this.root.appendChild(this.header.element);
-    this.root.appendChild(this.game.element);
+
+    this.game = null;
+    this._interval = null;
   }
 
   get element() {
@@ -51,11 +48,20 @@ export default class GameScreen {
   }
 
   updateGame() {
-    // const game = new GameView(this.model.state).element.children[0];
-    // game.onAnswer = this.answer.bind(this);
-    // this.root.replaceChild(game, this.game.children[0]);
-    //
-    // this.game = game;
+    this.updateTime();
+    this.updateLives();
+
+    const game = new GameView(this.model.state);
+    const gameElement = game.element.children[0];
+
+    if (this.game) {
+      this.root.replaceChild(gameElement, this.game);
+    } else {
+      this.root.appendChild(gameElement);
+    }
+
+    this.game = gameElement;
+    game.onAnswer = this.answer.bind(this);
   }
 
   answer(correctAnswer = false) {
@@ -63,7 +69,6 @@ export default class GameScreen {
 
     if (!correctAnswer) {
       this.model.die();
-      this.updateLives();
     }
 
     this.model.addAnswer({isCorrect: correctAnswer, time: Time.start});
