@@ -20,7 +20,7 @@ const renderContentWithData = ({timer, lives}) => {
 export default class HeaderView extends AbstractView {
   constructor(state) {
     super();
-    this.state = state;
+    this._state = state;
   }
 
   get template() {
@@ -31,7 +31,7 @@ export default class HeaderView extends AbstractView {
                   <img src='img/logo_small.svg' width='101' height='44'>
                 </button>
               </div>
-              ${this.state ? renderContentWithData(this.state) : ``}
+              ${this._state ? renderContentWithData(this._state) : ``}
             </header>`;
   }
 

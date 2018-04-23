@@ -5,7 +5,7 @@ import createTimer from './timer';
 export default class GameModel {
   constructor(playerName) {
     this.playerName = playerName;
-    this.init();
+    this._init();
   }
 
   get state() {
@@ -16,7 +16,7 @@ export default class GameModel {
     return this._state.time;
   }
 
-  init() {
+  _init() {
     this._state = Object.assign({}, INITIAL_GAME, {
       tasks: [...TASKS]
     });
@@ -26,13 +26,13 @@ export default class GameModel {
     this._state = Object.assign({}, this._state, {
       task: this._state.tasks.pop()
     });
-    this.resetTime();
-    this.timer = createTimer(this._state.time);
+    this._resetTime();
+    this._timer = createTimer(this._state.time);
   }
 
   addAnswer(answer) {
     this._state = Object.assign({}, this._state, {
-      answers: [...this._state.answers, {isCorrect: answer, time: Time.start - this.state.time}]
+      answers: [...this._state.answers, {isCorrect: answer, time: Time.start - this._state.time}]
     });
   }
 
@@ -50,7 +50,7 @@ export default class GameModel {
   }
 
   tick() {
-    const result = this.timer.tick();
+    const result = this._timer.tick();
 
     this._state = Object.assign({}, this._state, {
       time: result.time
@@ -59,7 +59,7 @@ export default class GameModel {
     return result;
   }
 
-  resetTime() {
+  _resetTime() {
     this._state = Object.assign({}, this._state, {
       time: Time.start
     });

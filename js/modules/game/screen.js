@@ -5,78 +5,78 @@ import Application from '../../Application';
 
 export default class GameScreen {
   constructor(model) {
-    this.model = model;
+    this._model = model;
 
-    this.header = headerView(this.model.state);
-    this.root = document.createElement(`div`);
-    this.root.appendChild(this.header.element);
+    this._header = headerView(this._model.state);
+    this._root = document.createElement(`div`);
+    this._root.appendChild(this._header.element);
 
-    this.game = null;
+    this._game = null;
     this._interval = null;
   }
 
   get element() {
-    return this.root;
+    return this._root;
   }
 
   startGame() {
-    this.model.nextTask();
-    this.updateGame();
-    this.runTimer();
+    this._model.nextTask();
+    this._updateGame();
+    this._runTimer();
   }
 
   stopGame() {
     clearInterval(this._interval);
   }
 
-  runTimer() {
+  _runTimer() {
     this._interval = setInterval(() => {
-      this.model.tick();
-      if (!this.model.time) {
-        this.answer();
+      this._model.tick();
+      if (!this._model.time) {
+        this._answer();
       }
-      this.updateTime();
+      this._updateTime();
     }, Time.frequency);
   }
 
-  updateTime() {
-    this.header.changeTime(this.model.time);
+  _updateTime() {
+    this._header.changeTime(this._model.time);
   }
 
-  updateLives() {
-    this.header.changeLives(this.model.state.lives);
+  _updateLives() {
+    this._header.changeLives(this._model.state.lives);
   }
 
-  updateGame() {
-    this.updateTime();
-    this.updateLives();
+  _updateGame() {
+    this._updateTime();
+    this._updateLives();
 
-    const game = new GameView(this.model.state);
+    const game = new GameView(this._model.state);
     const gameElement = game.element.children[0];
 
-    if (this.game) {
-      this.root.replaceChild(gameElement, this.game);
+    if (this._game) {
+      this._root.replaceChild(gameElement, this._game);
     } else {
-      this.root.appendChild(gameElement);
+      this._root.appendChild(gameElement);
     }
 
-    this.game = gameElement;
-    game.onAnswer = this.answer.bind(this);
+    this._game = gameElement;
+    game.onAnswer = this._answer.bind(this);
   }
 
-  answer(correctAnswer = false) {
+  _answer(correctAnswer = false) {
     this.stopGame();
 
     if (!correctAnswer) {
-      this.model.die();
+      this._model.die();
     }
 
-    this.model.addAnswer(correctAnswer);
+    this._model.addAnswer(correctAnswer);
 
-    if (this.model.canContinue()) {
+    if (this._model.canContinue()) {
       this.startGame();
     } else {
-      Application.showResult(this.model.state);
+      Application.showResult(this._model.state);
     }
   }
 }
