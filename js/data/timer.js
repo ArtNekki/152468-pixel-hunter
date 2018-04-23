@@ -9,7 +9,7 @@ export default (time) => {
 
   return {
     tick() {
-      if (time > 0) {
+      if (time >= 0) {
         time--;
       }
 
@@ -18,7 +18,7 @@ export default (time) => {
         time
       };
 
-      if (time === 0) {
+      if (time < 0) {
         result.done = true;
       }
 

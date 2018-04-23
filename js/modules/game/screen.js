@@ -31,8 +31,7 @@ export default class GameScreen {
 
   _runTimer() {
     this._interval = setInterval(() => {
-      this._model.tick();
-      if (!this._model.time) {
+      if (this._model.tick().done) {
         this._answer();
       }
       this._updateTime();
