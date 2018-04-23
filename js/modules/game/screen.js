@@ -71,7 +71,7 @@ export default class GameScreen {
       this.model.die();
     }
 
-    this.model.addAnswer({isCorrect: correctAnswer, time: Time.start});
+    this.model.addAnswer(correctAnswer);
 
     if (this.model.canContinue()) {
       this.startGame();

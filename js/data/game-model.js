@@ -13,7 +13,7 @@ export default class GameModel {
   }
 
   get time() {
-    return this._state.timer;
+    return this._state.time;
   }
 
   init() {
@@ -27,12 +27,12 @@ export default class GameModel {
       task: this._state.tasks.pop()
     });
     this.resetTime();
-    this.timer = createTimer(this._state.timer);
+    this.timer = createTimer(this._state.time);
   }
 
   addAnswer(answer) {
     this._state = Object.assign({}, this._state, {
-      answers: [...this._state.answers, ...[answer]]
+      answers: [...this._state.answers, {isCorrect: answer, time: Time.start - this.state.time}]
     });
   }
 
@@ -53,7 +53,7 @@ export default class GameModel {
     const result = this.timer.tick();
 
     this._state = Object.assign({}, this._state, {
-      timer: result.time
+      time: result.time
     });
 
     return result;
@@ -61,7 +61,7 @@ export default class GameModel {
 
   resetTime() {
     this._state = Object.assign({}, this._state, {
-      timer: Time.start
+      time: Time.start
     });
   }
 }

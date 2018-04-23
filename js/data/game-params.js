@@ -1,6 +1,6 @@
 // Время
 export const Time = {
-  start: 10,
+  start: 30,
   critical: 5,
   frequency: 1000
 };
@@ -11,7 +11,7 @@ export const INITIAL_GAME = {
   tasks: [],
   answers: [],
   lives: 3,
-  timer: Time.start
+  time: Time.start
 };
 
 // Количество раундов в игре
