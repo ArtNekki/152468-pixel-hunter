@@ -1,7 +1,7 @@
 import AbstractView from '../../abstract-view';
 import {calculateTotalGameScore} from './util';
 import {Life, AnswerPoint, GAME_ROUNDS_COUNT, AnswerTime} from '../../data/game-params';
-import HeaderView from '../header/view';
+import headerView from '../header/screen';
 import renderStats from '../../partials/stats/index';
 
 // Сопоставление результата и заголовка
@@ -71,7 +71,7 @@ export default class ResultView extends AbstractView {
       return answer.isCorrect;
     });
 
-    return `${new HeaderView().template}
+    return `
       <div class='result'>
         <h1>${resultToTitle[isWin]}</h1>
         <table class='result__table'>
@@ -89,5 +89,11 @@ export default class ResultView extends AbstractView {
           </tr>
         </table>
       </div>`;
+  }
+
+  render() {
+    const element = super.render();
+    element.prepend(headerView().element);
+    return element;
   }
 }

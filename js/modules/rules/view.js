@@ -1,9 +1,9 @@
 import AbstractView from '../../abstract-view';
-import HeaderView from '../header/view';
+import headerView from '../header/screen';
 
 export default class RulesView extends AbstractView {
   get template() {
-    return `${new HeaderView().template}
+    return `
             <div class='rules'>
               <h1 class='rules__title'>Правила</h1>
               <p class='rules__description'>Угадай 10 раз для каждого изображения фото <img
@@ -24,6 +24,12 @@ export default class RulesView extends AbstractView {
 
   goNext() {
 
+  }
+
+  render() {
+    const element = super.render();
+    element.prepend(headerView().element);
+    return element;
   }
 
   bind() {
