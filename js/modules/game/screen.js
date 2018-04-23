@@ -76,7 +76,11 @@ export default class GameScreen {
     if (this._model.canContinue()) {
       this.startGame();
     } else {
-      Application.showResult(this._model.state);
+      this._finishGame();
     }
+  }
+
+  _finishGame() {
+    Application.showResult(this._model.state);
   }
 }

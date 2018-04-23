@@ -1,16 +1,35 @@
+import IntroScreen from './modules/intro/screen';
+import GreetingScreen from './modules/greeting/screen';
+import RulesScreen from './modules/rules/screen';
 import GameScreen from './modules/game/screen';
+import ResultScreen from './modules/result/screen';
 import GameModel from './data/game-model';
-import renderResult from './modules/result/screen';
 import {changeView} from './util';
 
 export default class Application {
+  static showIntro() {
+    const introScreen = new IntroScreen();
+    changeView(introScreen.element);
+  }
+
+  static showGreeting() {
+    const greetingScreen = new GreetingScreen();
+    changeView(greetingScreen.element);
+  }
+
+  static showRules() {
+    const rulesScreen = new RulesScreen();
+    changeView(rulesScreen.element);
+  }
+
   static showGame(playerName) {
     const gameScreen = new GameScreen(new GameModel(playerName));
     changeView(gameScreen.element);
     gameScreen.startGame();
   }
 
-  static showResult(state) {
-    renderResult(state);
+  static showResult(data) {
+    const resultScreen = new ResultScreen(data);
+    changeView(resultScreen.element);
   }
 }

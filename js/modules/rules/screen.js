@@ -1,13 +1,15 @@
-import {changeView} from '../../util';
 import RulesView from './view';
 import Application from '../../Application';
 
-export default () => {
-  const rulesView = new RulesView();
+export default class RulesScreen {
+  constructor() {
+    this._view = new RulesView();
+    this._view.goNext = (name) => {
+      Application.showGame(name);
+    };
+  }
 
-  changeView(rulesView.element);
-
-  rulesView.goNext = (name) => {
-    Application.showGame(name);
-  };
-};
+  get element() {
+    return this._view.element;
+  }
+}

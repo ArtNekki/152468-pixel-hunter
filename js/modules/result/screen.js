@@ -1,8 +1,11 @@
-import {changeView} from '../../util';
 import ResultView from './view';
 
-export default (state) => {
-  const resultView = new ResultView(state);
+export default class ResultScreen {
+  constructor(data) {
+    this._view = new ResultView(data);
+  }
 
-  changeView(resultView.element);
-};
+  get element() {
+    return this._view.element;
+  }
+}

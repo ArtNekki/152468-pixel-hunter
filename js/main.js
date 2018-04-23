@@ -1,5 +1,5 @@
-import showIntro from './modules/intro/screen';
+import Application from './Application';
 
 document.addEventListener(`DOMContentLoaded`, () => {
-  showIntro();
+  Application.showIntro();
 });
