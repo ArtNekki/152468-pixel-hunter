@@ -1,4 +1,5 @@
 import ResultView from './view';
+import headerView from '../header/screen';
 
 export default class ResultScreen {
   constructor(data) {
@@ -6,6 +7,8 @@ export default class ResultScreen {
   }
 
   get element() {
-    return this._view.element;
+    const element = this._view.element;
+    element.prepend(headerView().element);
+    return element;
   }
 }

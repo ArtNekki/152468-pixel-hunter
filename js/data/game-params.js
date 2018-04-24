@@ -1,6 +1,6 @@
 // Время
 export const Time = {
-  start: 10,
+  start: 30,
   critical: 5,
   frequency: 1000
 };

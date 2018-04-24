@@ -1,5 +1,4 @@
 import AbstractView from '../../abstract-view';
-import headerView from '../header/screen';
 
 export default class RulesView extends AbstractView {
   get template() {
@@ -24,12 +23,6 @@ export default class RulesView extends AbstractView {
 
   goNext() {
 
-  }
-
-  render() {
-    const element = super.render();
-    element.prepend(headerView().element);
-    return element;
   }
 
   bind() {
