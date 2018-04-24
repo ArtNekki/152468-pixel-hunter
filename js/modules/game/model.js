@@ -1,6 +1,6 @@
-import {INITIAL_GAME, GAME_ROUNDS_COUNT, Time} from './game-params';
-import {TASKS} from './structure';
-import createTimer from './timer';
+import {INITIAL_GAME, GAME_ROUNDS_COUNT, Time} from '../../data/game-params';
+import {TASKS} from '../../data/structure';
+import createTimer from '../../data/timer';
 
 export default class GameModel {
   constructor(playerName) {
@@ -10,10 +10,6 @@ export default class GameModel {
 
   get state() {
     return this._state;
-  }
-
-  get time() {
-    return this._state.time;
   }
 
   _init() {

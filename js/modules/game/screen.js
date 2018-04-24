@@ -2,10 +2,11 @@ import {Time} from '../../data/game-params';
 import headerView from '../header/screen';
 import GameView from './view';
 import Application from '../../Application';
+import GameModel from './model';
 
 export default class GameScreen {
-  constructor(model) {
-    this._model = model;
+  constructor(playerName) {
+    this._model = new GameModel(playerName);
 
     this._header = headerView(this._model.state);
     this._root = document.createElement(`div`);
@@ -39,11 +40,11 @@ export default class GameScreen {
   }
 
   _updateTime() {
-    this._header.time = this._model.time;
+    this._header.changeTime(this._model.state);
   }
 
   _updateLives() {
-    this._header.lives = this._model.state.lives;
+    this._header.changeLives(this._model.state);
   }
 
   _updateGame() {

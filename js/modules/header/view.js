@@ -35,7 +35,7 @@ export default class HeaderView extends AbstractView {
             </header>`;
   }
 
-  set time(time) {
+  changeTime({time}) {
     if (time <= Time.critical) {
       this._timer.classList.add(`game__timer--critical`);
     } else {
@@ -45,7 +45,7 @@ export default class HeaderView extends AbstractView {
     this._timer.textContent = time;
   }
 
-  set lives(lives) {
+  changeLives({lives}) {
     this._lives.innerHTML = renderLives(lives);
   }
 

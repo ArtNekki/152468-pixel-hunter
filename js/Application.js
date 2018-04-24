@@ -3,23 +3,12 @@ import GreetingScreen from './modules/greeting/screen';
 import RulesScreen from './modules/rules/screen';
 import GameScreen from './modules/game/screen';
 import ResultScreen from './modules/result/screen';
-import GameModel from './data/game-model';
-import FooterView from './modules/footer/view';
 
 const container = document.querySelector(`#main`);
-let footer;
 
 export const changeView = (element) => {
-  if (!footer) {
-    footer = new FooterView().element;
-  }
-
   container.innerHTML = ``;
   container.append(element);
-
-  if (!container.parentNode.contains(footer)) {
-    container.after(footer);
-  }
 };
 
 export default class Application {
@@ -39,7 +28,7 @@ export default class Application {
   }
 
   static showGame(playerName) {
-    const gameScreen = new GameScreen(new GameModel(playerName));
+    const gameScreen = new GameScreen(playerName);
     changeView(gameScreen.element);
     gameScreen.startGame();
   }
