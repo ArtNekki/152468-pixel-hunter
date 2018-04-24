@@ -39,11 +39,11 @@ export default class GameScreen {
   }
 
   _updateTime() {
-    this._header.changeTime(this._model.time);
+    this._header.time = this._model.time;
   }
 
   _updateLives() {
-    this._header.changeLives(this._model.state.lives);
+    this._header.lives = this._model.state.lives;
   }
 
   _updateGame() {
