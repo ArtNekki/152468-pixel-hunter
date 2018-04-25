@@ -26,7 +26,7 @@ export default class GameScreen {
     this._updateGameData();
   }
 
-  stopGame() {
+  _stopTimer() {
     clearInterval(this._interval);
   }
 
@@ -72,7 +72,7 @@ export default class GameScreen {
   }
 
   _answer(correctAnswer = false) {
-    this.stopGame();
+    this._stopTimer();
 
     if (!correctAnswer) {
       this._model.die();
