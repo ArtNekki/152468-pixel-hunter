@@ -4,15 +4,14 @@ import createTimer from '../../data/timer';
 
 export default class GameModel {
   constructor(playerName) {
-    this.playerName = playerName;
-    this._init();
+    this._playerName = playerName;
   }
 
   get state() {
     return this._state;
   }
 
-  _init() {
+  init() {
     this._state = Object.assign({}, INITIAL_GAME, {
       tasks: [...TASKS]
     });

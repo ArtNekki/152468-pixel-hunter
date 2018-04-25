@@ -7,13 +7,6 @@ import GameModel from './model';
 export default class GameScreen {
   constructor(playerName) {
     this._model = new GameModel(playerName);
-
-    this._header = headerView(this._model.state);
-    this._root = document.createElement(`div`);
-    this._root.appendChild(this._header.element);
-
-    this._game = null;
-    this._interval = null;
   }
 
   get element() {
@@ -21,9 +14,16 @@ export default class GameScreen {
   }
 
   startGame() {
-    this._model.nextTask();
-    this._updateGame();
-    this._runTimer();
+    // Активируем начальные данные модели
+    this._model.init();
+
+    //
+    this._root = document.createElement(`div`);
+    this._header = headerView(this._model.state);
+    this._root.appendChild(this._header.element);
+
+    // Обновляем данные игры
+    this._updateGameData();
   }
 
   stopGame() {
@@ -47,10 +47,17 @@ export default class GameScreen {
     this._header.changeLives(this._model.state);
   }
 
-  _updateGame() {
+  _updateGameData() {
+    // Получаем задание
+    this._model.nextTask();
+    // Запускаем таймер
+    this._runTimer();
+    // Обновляем время
     this._updateTime();
+    // Обновляем жизни
     this._updateLives();
 
+    // Обновляем gameView
     const game = new GameView(this._model.state);
     const gameElement = game.element.children[0];
 
@@ -74,7 +81,7 @@ export default class GameScreen {
     this._model.addAnswer(correctAnswer);
 
     if (this._model.canContinue()) {
-      this.startGame();
+      this._updateGameData();
     } else {
       this._finishGame();
     }

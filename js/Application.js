@@ -29,8 +29,8 @@ export default class Application {
 
   static showGame(playerName) {
     const gameScreen = new GameScreen(playerName);
-    changeView(gameScreen.element);
     gameScreen.startGame();
+    changeView(gameScreen.element);
   }
 
   static showResult(data) {
