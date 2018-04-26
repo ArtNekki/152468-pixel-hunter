@@ -1,6 +1,5 @@
 import AbstractView from '../../abstract-view';
 import {TaskType} from '../../data/structure';
-import {getCheckedControls} from './util';
 import renderQuestions from '../../partials/questions/index';
 import renderStats from '../../partials/stats/index';
 
@@ -15,11 +14,11 @@ const ContentType = {
 export default class GameView extends AbstractView {
   constructor(state) {
     super();
-    this.state = state;
+    this._state = state;
   }
 
   get template() {
-    const {answers, task} = this.state;
+    const {answers, task} = this._state;
     const {type, title, questions} = task;
 
     return `
@@ -34,17 +33,23 @@ export default class GameView extends AbstractView {
           </div>`;
   }
 
+  _getCheckedControls(answers) {
+    return answers.filter(((answer) => {
+      return answer.checked;
+    }));
+  }
+
   onAnswer() {
 
   }
 
   bind() {
-    const {type, questions} = this.state.task;
+    const {type, questions} = this._state.task;
 
-    const game = this.element.querySelector(`.game__content`);
-    const radioButtons = Array.from(game.querySelectorAll(`[type='radio']`));
+    const content = this.element.querySelector(`.game__content`);
+    const radioButtons = Array.from(content.querySelectorAll(`[type='radio']`));
 
-    game.addEventListener(`click`, (e) => {
+    content.addEventListener(`click`, (e) => {
 
       const option = e.target.closest(`.game__option`);
 
@@ -64,8 +69,8 @@ export default class GameView extends AbstractView {
       return correctAnswer;
     });
 
-    game.addEventListener(`change`, () => {
-      const checkedAnswerControls = getCheckedControls(radioButtons);
+    content.addEventListener(`change`, () => {
+      const checkedAnswerControls = this._getCheckedControls(radioButtons);
 
       if (!checkedAnswerControls.length || ((type === TaskType.GUESS_TWO)
           && checkedAnswerControls.length !== REQUIRED_ANSWERS_COUNT)) {

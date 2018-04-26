@@ -1,8 +1,14 @@
-import {changeView} from '../../util';
 import ResultView from './view';
+import headerView from '../header/screen';
 
-export default (state) => {
-  const resultView = new ResultView(state);
+export default class ResultScreen {
+  constructor(data) {
+    this._view = new ResultView(data);
+  }
 
-  changeView(resultView.element);
-};
+  get element() {
+    const element = this._view.element;
+    element.prepend(headerView().element);
+    return element;
+  }
+}

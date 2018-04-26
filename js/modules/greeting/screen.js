@@ -1,13 +1,15 @@
-import {changeView} from '../../util';
 import GreetingView from './view';
-import showRules from '../rules/screen';
+import Application from '../../Application';
 
-export default () => {
-  const greetingView = new GreetingView();
+export default class GreetingScreen {
+  constructor() {
+    this._view = new GreetingView();
+    this._view.goNext = () => {
+      Application.showRules();
+    };
+  }
 
-  changeView(greetingView.element);
-
-  greetingView.goNext = () => {
-    showRules();
-  };
-};
+  get element() {
+    return this._view.element;
+  }
+}

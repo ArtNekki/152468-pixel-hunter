@@ -1,12 +1,15 @@
-import {changeView} from '../../util';
-import showGreeting from '../greeting/screen';
 import IntroView from './view';
+import Application from '../../Application';
 
-export default () => {
-  const introView = new IntroView();
-  changeView(introView.element);
+export default class IntroScreen {
+  constructor() {
+    this._view = new IntroView();
+    this._view.goNext = () => {
+      Application.showGreeting();
+    };
+  }
 
-  introView.goNext = () => {
-    showGreeting();
-  };
-};
+  get element() {
+    return this._view.element;
+  }
+}

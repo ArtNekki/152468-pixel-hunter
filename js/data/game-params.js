@@ -1,17 +1,21 @@
+// Время
+export const Time = {
+  start: 30,
+  critical: 5,
+  frequency: 1000
+};
+
 // Начальные параметры игры
 export const INITIAL_GAME = {
   task: {},
   tasks: [],
   answers: [],
   lives: 3,
-  timer: 25
+  time: Time.start
 };
 
 // Количество раундов в игре
 export const GAME_ROUNDS_COUNT = 10;
-
-// Начальное время таймера
-export const TIMER_TIME = 30;
 
 // Жизнь
 export const Life = {

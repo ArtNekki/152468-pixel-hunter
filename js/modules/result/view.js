@@ -1,7 +1,6 @@
 import AbstractView from '../../abstract-view';
 import {calculateTotalGameScore} from './util';
 import {Life, AnswerPoint, GAME_ROUNDS_COUNT, AnswerTime} from '../../data/game-params';
-import HeaderView from '../header/view';
 import renderStats from '../../partials/stats/index';
 
 // Сопоставление результата и заголовка
@@ -58,10 +57,10 @@ const renderExtraPoints = ({answers, lives}) => {
 export default class ResultView extends AbstractView {
   constructor(state) {
     super();
-    this.state = state;
+    this._state = state;
   }
   get template() {
-    const {answers, lives} = this.state;
+    const {answers, lives} = this._state;
 
     // Определяем победа или поражение
     const isWin = answers.length === GAME_ROUNDS_COUNT;
@@ -71,7 +70,7 @@ export default class ResultView extends AbstractView {
       return answer.isCorrect;
     });
 
-    return `${new HeaderView().template}
+    return `
       <div class='result'>
         <h1>${resultToTitle[isWin]}</h1>
         <table class='result__table'>
@@ -83,7 +82,7 @@ export default class ResultView extends AbstractView {
             <td class='result__points'>${isWin ? `×&nbsp;100` : ``}</td>
             <td class='result__total ${!isWin ? `result__total--final` : ``}'>${isWin ? correctAnswers.length * AnswerPoint.default : `FAIL`}</td>
           </tr>
-          ${isWin ? renderExtraPoints(this.state) : ``}
+          ${isWin ? renderExtraPoints(this._state) : ``}
           <tr>
             <td colspan='5' class='result__total  result__total--final'>${isWin ? calculateTotalGameScore(answers, lives) : ``}</td>
           </tr>

@@ -1,9 +1,8 @@
 import AbstractView from '../../abstract-view';
-import HeaderView from '../header/view';
 
 export default class RulesView extends AbstractView {
   get template() {
-    return `${new HeaderView().template}
+    return `
             <div class='rules'>
               <h1 class='rules__title'>Правила</h1>
               <p class='rules__description'>Угадай 10 раз для каждого изображения фото <img
@@ -44,7 +43,7 @@ export default class RulesView extends AbstractView {
     inputField.addEventListener(`input`, typeTextHandler);
     form.addEventListener(`submit`, (e) => {
       e.preventDefault();
-      this.goNext();
+      this.goNext(inputField.value);
     });
   }
 }

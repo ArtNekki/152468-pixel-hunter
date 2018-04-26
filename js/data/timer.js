@@ -1,4 +1,4 @@
-export const createTimer = (time) => {
+export default (time) => {
   if (!Number.isFinite(time)) {
     throw new Error(`Параметр 'time' должен быть числом`);
   }
@@ -9,7 +9,7 @@ export const createTimer = (time) => {
 
   return {
     tick() {
-      if (time > 0) {
+      if (time >= 0) {
         time--;
       }
 
@@ -18,7 +18,7 @@ export const createTimer = (time) => {
         time
       };
 
-      if (time === 0) {
+      if (time < 0) {
         result.done = true;
       }
 

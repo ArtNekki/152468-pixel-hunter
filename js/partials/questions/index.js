@@ -6,7 +6,7 @@ const questionsLengthToImageSize = {
   3: `width='304' height='455'`
 };
 
-export default (questions) => questions.map((q, i) => {
+export default (questions = []) => questions.map((q, i) => {
   i += 1;
 
   return `<div class='game__option ${q.isSelected ? `game__option--selected` : ``}'>
