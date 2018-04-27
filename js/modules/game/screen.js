@@ -5,8 +5,8 @@ import Application from '../../Application';
 import GameModel from './model';
 
 export default class GameScreen {
-  constructor(playerName) {
-    this._model = new GameModel(playerName);
+  constructor(data) {
+    this._model = new GameModel(data);
   }
 
   get element() {

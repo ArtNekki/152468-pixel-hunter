@@ -1,15 +1,18 @@
-const answerTypeToAnswerName = {
-  'photo': `Фото`,
-  'paint': `Рисунок`
+import renderAnswerControls from './controls';
+
+const answersLengthToImageSize = {
+  1: `width='705' height='455'`,
+  2: `width='468' height='458'`,
+  3: `width='304' height='455'`
 };
 
-const answers = [`photo`, `paint`];
+export default (answers = []) => answers.map((q, i) => {
+  i += 1;
 
-export default (index) => {
-  return answers.map((it) => {
-    return `<label class="game__answer game__answer--${it}">
-      <input name="question${index}" type="radio" value="${it}">
-      <span>${answerTypeToAnswerName[it]}</span>
-    </label>`;
-  }).join(``);
-};
+  return `<div class='game__option ${q.isSelected ? `game__option--selected` : ``}'>
+      <img src=${q.img} alt='Option ${i}' ${answersLengthToImageSize[answers.length]}>
+      ${answers.length < 3 ? renderAnswerControls(i) : ``}
+    </div>`;
+}).join(``);
+
+// ${(`isSelected` in q) ? `` : renderAnswerControls(i)}

@@ -1,10 +1,11 @@
 import {INITIAL_GAME, GAME_ROUNDS_COUNT, Time} from '../../data/game-params';
-import {TASKS} from '../../data/structure';
 import createTimer from '../../data/timer';
 
 export default class GameModel {
-  constructor(playerName) {
+  constructor({taskData: data, playerName}) {
     this._playerName = playerName;
+    this._data = data;
+    console.log('data', data);
   }
 
   get state() {
@@ -13,7 +14,7 @@ export default class GameModel {
 
   init() {
     this._state = Object.assign({}, INITIAL_GAME, {
-      tasks: [...TASKS]
+      tasks: [...this._data]
     });
   }
 
