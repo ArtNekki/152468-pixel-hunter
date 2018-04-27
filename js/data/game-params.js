@@ -34,3 +34,8 @@ export const AnswerTime = {
   slow: 20,
   fast: 10
 };
+
+export const AnswerType = {
+  paint: `paint`,
+  photo: `photo`
+};

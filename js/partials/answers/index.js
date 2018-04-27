@@ -1,4 +1,6 @@
 import renderAnswerControls from './controls';
+import {TaskType} from '../../data/structure';
+import {AnswerType} from '../../data/game-params';
 
 const answersLengthToImageSize = {
   1: `width='705' height='455'`,
@@ -6,13 +8,21 @@ const answersLengthToImageSize = {
   3: `width='304' height='455'`
 };
 
-export default (answers = []) => answers.map((q, i) => {
-  i += 1;
+const getSearchableElement = (answers) => {
+  const paint = answers.filter((answer) => {
+    return answer.type === AnswerType.paint;
+  });
 
-  return `<div class='game__option ${q.isSelected ? `game__option--selected` : ``}'>
-      <img src=${q.img} alt='Option ${i}' ${answersLengthToImageSize[answers.length]}>
-      ${answers.length < 3 ? renderAnswerControls(i) : ``}
-    </div>`;
-}).join(``);
+  return paint.length === 1 ? AnswerType.paint : AnswerType.photo;
+};
 
-// ${(`isSelected` in q) ? `` : renderAnswerControls(i)}
+export default ({type: taskType, answers}) => {
+  return answers.map((answer, i) => {
+    i += 1;
+
+    return `<div class='game__option ${(taskType === TaskType.FIND) && (answer.type === getSearchableElement(answers)) ? `game__option--selected` : ``}'>
+        <img src=${answer.img} alt='Option ${i}' ${answersLengthToImageSize[answers.length]} type=${answer.type} />
+        ${(taskType !== TaskType.FIND) ? renderAnswerControls(i) : ``}
+      </div>`;
+  }).join(``);
+};

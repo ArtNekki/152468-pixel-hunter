@@ -19,13 +19,13 @@ export default class GameView extends AbstractView {
 
   get template() {
     const {answers, task} = this._state;
-    const {type, title, answers: taskAnswers} = task;
+    const {type, title} = task;
 
     return `
         <div class='game'>
             <p class='game__task'>${title}</p>
             <form class='game__content ${ContentType[type] || ``}'>
-              ${renderAnswers(taskAnswers)}
+              ${renderAnswers(task)}
             </form>
             <div class='stats'>
               ${renderStats(answers)}
