@@ -1,9 +1,11 @@
+import {AnswerType} from '../../data/game-params';
+
 const answerTypeToAnswerName = {
   'photo': `Фото`,
   'paint': `Рисунок`
 };
 
-const answers = [`photo`, `paint`];
+const answers = Object.values(AnswerType);
 
 export default (index) => {
   return answers.map((it) => {

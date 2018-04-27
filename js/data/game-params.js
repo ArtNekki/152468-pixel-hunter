@@ -36,6 +36,6 @@ export const AnswerTime = {
 };
 
 export const AnswerType = {
-  paint: `paint`,
-  photo: `photo`
+  photo: `photo`,
+  paint: `paint`
 };
