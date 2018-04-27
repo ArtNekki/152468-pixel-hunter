@@ -1,6 +1,8 @@
 import adaptServerData from './data/data-adapter';
 
-const SERVER_URL = `https://es.dump.academy/pixel-hunter/questions`;
+const SERVER_URL = `https://es.dump.academy/pixel-hunter`;
+const DEFAULT_NAME = `nekki`;
+const APP_ID = 22101985;
 
 // Проверяем пришли ли данные
 const checkStatus = (response) => {
@@ -53,10 +55,29 @@ const loadQuestions = (data) => {
 
 export default class Loader {
   static loadData() {
-    return window.fetch(SERVER_URL)
+    return window.fetch(`${SERVER_URL}/questions`)
         .then(checkStatus)
         .then(toJSON)
         .then(loadQuestions)
         .then(adaptServerData);
+  }
+
+  static saveResults(data, name = DEFAULT_NAME) {
+    const requestSettings = {
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': `application/json`
+      },
+      method: `POST`
+    };
+
+    return window.fetch(`${SERVER_URL}/stats/${APP_ID}-${name}`, requestSettings)
+        .then(checkStatus);
+  }
+
+  static loadResults(name = DEFAULT_NAME) {
+    return window.fetch(`${SERVER_URL}/stats/${APP_ID}-${name}`)
+        .then(checkStatus)
+        .then(toJSON);
   }
 }

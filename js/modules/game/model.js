@@ -5,7 +5,10 @@ export default class GameModel {
   constructor({taskData: data, playerName}) {
     this._playerName = playerName;
     this._data = data;
-    console.log('data', data);
+  }
+
+  get player() {
+    return this._playerName;
   }
 
   get state() {

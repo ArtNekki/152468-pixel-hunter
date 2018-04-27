@@ -88,6 +88,6 @@ export default class GameScreen {
   }
 
   _finishGame() {
-    Application.showResult(this._model.state);
+    Application.finish(this._model);
   }
 }
