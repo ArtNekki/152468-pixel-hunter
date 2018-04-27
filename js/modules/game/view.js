@@ -1,6 +1,6 @@
 import AbstractView from '../../abstract-view';
 import {TaskType} from '../../data/structure';
-import renderQuestions from '../../partials/questions/index';
+import renderAnswers from '../../partials/answers/index';
 import renderStats from '../../partials/stats/index';
 
 const REQUIRED_ANSWERS_COUNT = 2;
@@ -19,13 +19,13 @@ export default class GameView extends AbstractView {
 
   get template() {
     const {answers, task} = this._state;
-    const {type, title, questions} = task;
+    const {type, title} = task;
 
     return `
         <div class='game'>
             <p class='game__task'>${title}</p>
             <form class='game__content ${ContentType[type] || ``}'>
-              ${renderQuestions(questions)}
+              ${renderAnswers(task)}
             </form>
             <div class='stats'>
               ${renderStats(answers)}
@@ -44,7 +44,7 @@ export default class GameView extends AbstractView {
   }
 
   bind() {
-    const {type, questions} = this._state.task;
+    const {type, answers: taskAnswers} = this._state.task;
 
     const content = this.element.querySelector(`.game__content`);
     const radioButtons = Array.from(content.querySelectorAll(`[type='radio']`));
@@ -77,8 +77,8 @@ export default class GameView extends AbstractView {
         return;
       }
 
-      const correctAnswer = questions.every((question, i) => {
-        return question.type === checkedAnswerControls[i].value;
+      const correctAnswer = taskAnswers.every((answer, i) => {
+        return answer.type === checkedAnswerControls[i].value;
       });
 
       this.onAnswer(correctAnswer);

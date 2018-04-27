@@ -1,8 +1,8 @@
 // Тип заданий
 export const TaskType = {
-  GUESS_TWO: `game-1`,
-  GUESS_ONE: `game-2`,
-  FIND: `game-3`
+  GUESS_TWO: `two-of-two`,
+  GUESS_ONE: `tinder-like`,
+  FIND: `one-of-three`
 };
 
 // Сопоставляем тип задания и заголовок названия
