@@ -1,4 +1,5 @@
 import {TaskType} from './structure';
+import {AnswerType} from './game-params';
 
 const serverTitleToClientTitle = {
   'two-of-two': TaskType.GUESS_TWO,
@@ -7,8 +8,8 @@ const serverTitleToClientTitle = {
 };
 
 const serverAnswerTypeToClientAnswerType = {
-  'painting': `paint`,
-  'photo': `photo`
+  'painting': AnswerType.paint,
+  'photo': AnswerType.photo
 };
 
 const formatAnswers = (answers) => {

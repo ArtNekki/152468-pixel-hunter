@@ -1,8 +1,8 @@
 import {AnswerType} from '../../data/game-params';
 
 const answerTypeToAnswerName = {
-  'photo': `Фото`,
-  'paint': `Рисунок`
+  [AnswerType.photo]: `Фото`,
+  [AnswerType.paint]: `Рисунок`
 };
 
 const answers = Object.values(AnswerType);

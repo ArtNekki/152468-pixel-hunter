@@ -1,5 +1,5 @@
 import {INITIAL_GAME, GAME_ROUNDS_COUNT, Time} from '../../data/game-params';
-import createTimer from '../../data/timer';
+import createTimer from '../../timer/timer';
 
 export default class GameModel {
   constructor({taskData: data, playerName}) {
