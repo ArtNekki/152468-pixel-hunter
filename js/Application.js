@@ -12,12 +12,16 @@ let taskData;
 export default class Application {
 
   static start() {
-    Application.showIntro();
-    Loader.loadData()
-        .then(Application.showGreeting)
-        .catch((error) => {
-          Application.showError(error);
-        });
+    if (!taskData) {
+      Application.showIntro();
+      Loader.loadData()
+          .then(Application.showGreeting)
+          .catch((error) => {
+            Application.showError(error);
+          });
+    } else {
+      Application.showGreeting(taskData);
+    }
   }
 
   static finish({state, player}) {

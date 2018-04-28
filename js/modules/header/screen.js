@@ -6,14 +6,14 @@ export default (state) => {
 
   headerView.goBack = () => {
     if (!state) {
-      Application.showIntro();
+      Application.start();
       return;
     }
 
     const back = window.confirm(`Хотите вернуться на экран приветствия? Все ваши ответы будут потеряны`);
 
     if (back) {
-      Application.showGreeting();
+      Application.start();
     }
   };
 
