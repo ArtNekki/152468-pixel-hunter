@@ -1,4 +1,4 @@
-import adaptServerData from './data/data-adapter';
+import adaptServerData from './modules/game/adapter';
 
 const SERVER_URL = `https://es.dump.academy/pixel-hunter`;
 const DEFAULT_NAME = `nekki`;

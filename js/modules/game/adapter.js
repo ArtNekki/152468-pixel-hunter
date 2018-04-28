@@ -1,5 +1,4 @@
-import {TaskType} from './structure';
-import {AnswerType} from './game-params';
+import {AnswerType, TaskType} from '../../settings';
 
 const serverTitleToClientTitle = {
   'two-of-two': TaskType.GUESS_TWO,

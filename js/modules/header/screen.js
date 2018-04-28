@@ -13,7 +13,7 @@ export default (state) => {
     const back = window.confirm(`Хотите вернуться на экран приветствия? Все ваши ответы будут потеряны`);
 
     if (back) {
-      Application.showIntro();
+      Application.showGreeting();
     }
   };
 

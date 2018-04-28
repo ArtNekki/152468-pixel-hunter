@@ -1,4 +1,4 @@
-import {INITIAL_GAME, GAME_ROUNDS_COUNT, Time} from '../../data/game-params';
+import {INITIAL_GAME, GAME_ROUNDS_COUNT, Time} from '../../settings';
 import createTimer from '../../timer/timer';
 
 export default class GameModel {

@@ -1,6 +1,5 @@
 import renderAnswerControls from './controls';
-import {TaskType} from '../../data/structure';
-import {AnswerType} from '../../data/game-params';
+import {AnswerType, TaskType} from '../../settings';
 
 const answersLengthToImageSize = {
   1: `width='705' height='455'`,

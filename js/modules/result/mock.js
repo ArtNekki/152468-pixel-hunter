@@ -1,4 +1,4 @@
-import {GAME_ROUNDS_COUNT, AnswerTime} from './game-params';
+import {GAME_ROUNDS_COUNT, AnswerTime} from '../../settings';
 
 // Количество жизней
 export const LIFE = {

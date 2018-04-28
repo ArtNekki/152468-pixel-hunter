@@ -1,4 +1,4 @@
-import {Time} from '../../data/game-params';
+import {Time} from '../../settings';
 import headerView from '../header/screen';
 import GameView from './view';
 import Application from '../../Application';

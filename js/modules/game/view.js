@@ -1,5 +1,5 @@
 import AbstractView from '../../abstract-view';
-import {TaskType} from '../../data/structure';
+import {TaskType} from '../../settings';
 import renderAnswers from '../../partials/answers/index';
 import renderStats from '../../partials/stats/index';
 

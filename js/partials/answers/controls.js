@@ -1,4 +1,4 @@
-import {AnswerType} from '../../data/game-params';
+import {AnswerType} from '../../settings';
 
 const answerTypeToAnswerName = {
   [AnswerType.photo]: `Фото`,

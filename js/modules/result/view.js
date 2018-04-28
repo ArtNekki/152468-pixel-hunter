@@ -1,7 +1,7 @@
 import AbstractView from '../../abstract-view';
 // import {formatDate} from '../../util';
 import {calculateTotalGameScore} from './util';
-import {Life, AnswerPoint, GAME_ROUNDS_COUNT, AnswerTime} from '../../data/game-params';
+import {Life, AnswerPoint, GAME_ROUNDS_COUNT, AnswerTime} from '../../settings';
 import renderStats from '../../partials/stats/index';
 
 // Сопоставление результата и заголовка
