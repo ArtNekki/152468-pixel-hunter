@@ -1,4 +1,4 @@
-import {Time} from '../../data/game-params';
+import {Time} from '../../settings';
 import headerView from '../header/screen';
 import GameView from './view';
 import Application from '../../Application';
@@ -88,6 +88,6 @@ export default class GameScreen {
   }
 
   _finishGame() {
-    Application.showResult(this._model.state);
+    Application.finish(this._model);
   }
 }

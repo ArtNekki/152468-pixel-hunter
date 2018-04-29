@@ -141,19 +141,4 @@
 
     background-color: rgba(223, 78, 78, 0.4);
   }
-
-}
-
-@keyframes blink {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.1;
-  }
-
-  100% {
-    opacity: 1;
-  }
 }

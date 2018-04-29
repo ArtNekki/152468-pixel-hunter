@@ -12,6 +12,7 @@ export const createElement = (template = ``, tagName = `template`) => {
   return element.content || element;
 };
 
-export const isObject = (value) => {
-  return (typeof value === `object`) && !Array.isArray(value);
+export const formatDate = (ms) => {
+  const date = new Date(ms);
+  return date.toLocaleString(`ru`);
 };

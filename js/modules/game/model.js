@@ -1,11 +1,14 @@
-import {INITIAL_GAME, GAME_ROUNDS_COUNT, Time} from '../../data/game-params';
-import createTimer from '../../data/timer';
+import {INITIAL_GAME, GAME_ROUNDS_COUNT, Time} from '../../settings';
+import createTimer from '../../timer/timer';
 
 export default class GameModel {
   constructor({taskData: data, playerName}) {
     this._playerName = playerName;
     this._data = data;
-    console.log('data', data);
+  }
+
+  get player() {
+    return this._playerName;
   }
 
   get state() {

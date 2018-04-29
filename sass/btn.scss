@@ -1,0 +1,10 @@
+.btn {
+  padding: 10px 20px;
+  border: none;
+  background: lightgrey;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(#a8c8c4, 0.4);
+  }
+}

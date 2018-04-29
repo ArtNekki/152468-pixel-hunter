@@ -1,4 +1,4 @@
-import {AnswerTime, GAME_ROUNDS_COUNT} from '../../data/game-params';
+import {AnswerTime, GAME_ROUNDS_COUNT} from '../../settings';
 
 const StatusState = {
   unknown: `unknown`,

@@ -30,6 +30,11 @@
 
 }
 
+.result__title--archieve {
+  width: 100%;
+  text-align: left;
+}
+
 .result__total {
   min-width: 40px;
 
@@ -40,6 +45,3 @@
     @include bold-text;
   }
 }
-
-
-

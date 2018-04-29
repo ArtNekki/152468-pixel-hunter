@@ -1,4 +1,4 @@
-import {TaskType} from './structure';
+import {AnswerType, TaskType} from '../../settings';
 
 const serverTitleToClientTitle = {
   'two-of-two': TaskType.GUESS_TWO,
@@ -7,8 +7,8 @@ const serverTitleToClientTitle = {
 };
 
 const serverAnswerTypeToClientAnswerType = {
-  'painting': `paint`,
-  'photo': `photo`
+  'painting': AnswerType.paint,
+  'photo': AnswerType.photo
 };
 
 const formatAnswers = (answers) => {

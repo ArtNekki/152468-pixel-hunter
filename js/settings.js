@@ -35,7 +35,15 @@ export const AnswerTime = {
   fast: 10
 };
 
+// Тип вопросов
 export const AnswerType = {
   photo: `photo`,
   paint: `paint`
+};
+
+// Тип заданий
+export const TaskType = {
+  GUESS_TWO: `two-of-two`,
+  GUESS_ONE: `tinder-like`,
+  FIND: `one-of-three`
 };
