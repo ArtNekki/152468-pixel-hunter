@@ -1,3 +1,4 @@
+@import "animation";
 @import "central";
 @import "intro";
 @import "greeting";
@@ -10,6 +11,8 @@
 @import "fonts";
 @import "stats";
 @import "result";
+@import "confirm";
+@import "btn";
 
 html {
   min-height: 100%;
