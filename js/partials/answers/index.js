@@ -1,12 +1,6 @@
 import renderAnswerControls from './controls';
 import {AnswerType, TaskType} from '../../settings';
 
-const answersLengthToImageSize = {
-  1: `width='705' height='455'`,
-  2: `width='468' height='458'`,
-  3: `width='304' height='455'`
-};
-
 const getSearchableElement = (answers) => {
   const paint = answers.filter((answer) => {
     return answer.type === AnswerType.paint;
@@ -16,11 +10,12 @@ const getSearchableElement = (answers) => {
 };
 
 export default ({type: taskType, answers}) => {
+
   return answers.map((answer, i) => {
     i += 1;
 
     return `<div class='game__option ${(taskType === TaskType.FIND) && (answer.type === getSearchableElement(answers)) ? `game__option--selected` : ``}'>
-        <img src=${answer.img} alt='Option ${i}' ${answersLengthToImageSize[answers.length]} type=${answer.type} />
+        <img src=${answer.image.url} alt='Option ${i}'  width=${answer.image.width} height=${answer.image.height} type=${answer.type} />
         ${(taskType !== TaskType.FIND) ? renderAnswerControls(i) : ``}
       </div>`;
   }).join(``);

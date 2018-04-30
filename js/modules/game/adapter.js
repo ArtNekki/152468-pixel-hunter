@@ -14,7 +14,11 @@ const serverAnswerTypeToClientAnswerType = {
 const formatAnswers = (answers) => {
   return answers.map((it) => {
     return {
-      img: it.image.url,
+      image: {
+        url: it.image.url,
+        width: it.image.width,
+        height: it.image.height
+      },
       type: serverAnswerTypeToClientAnswerType[it.type]
     };
   });

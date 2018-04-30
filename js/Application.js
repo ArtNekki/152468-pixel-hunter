@@ -43,6 +43,7 @@ export default class Application {
 
   static showGreeting(data) {
     taskData = data;
+
     const greetingScreen = new GreetingScreen();
     changeView(greetingScreen.element);
   }
