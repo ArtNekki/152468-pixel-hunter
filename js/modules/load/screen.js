@@ -1,8 +1,8 @@
 import LoadView from './view';
 
 export default class LoadScreen {
-  constructor(name) {
-    this._view = new LoadView(name);
+  constructor(text) {
+    this._view = new LoadView(text);
   }
 
   get element() {

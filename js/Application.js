@@ -25,7 +25,7 @@ export default class Application {
   }
 
   static finish({state, player}) {
-    Application.showLoad(player);
+    Application.showResultPreloader(`${player}, подожите. Ваш результат загружается!`);
     Loader.saveResults(state, player)
         .then(() => Loader.loadResults(player))
         .then((result) => {
@@ -64,8 +64,8 @@ export default class Application {
     changeView(resultScreen.element);
   }
 
-  static showLoad(player) {
-    const loadScreen = new LoadScreen(player);
+  static showResultPreloader(text) {
+    const loadScreen = new LoadScreen(text);
     changeView(loadScreen.element);
   }
 

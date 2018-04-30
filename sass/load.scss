@@ -1,0 +1,13 @@
+.load {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+}
+
+.load__text {
+  animation-name: blink;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
