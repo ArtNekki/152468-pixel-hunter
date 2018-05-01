@@ -8,39 +8,37 @@ import ErrorScreen from './modules/error/screen';
 import LoadScreen from './modules/load/screen';
 import Loader from './loader';
 
-let taskData;
+let gameData;
 export default class Application {
 
-  static start() {
+  static async start() {
     const greetingScreen = new GreetingScreen();
-    const introScreen = new IntroScreen();
 
-    if (!taskData) {
-      const startCrossFade = crossFadeScreen({outElement: introScreen.element, inElement: greetingScreen.element, duration: 2});
+    if (!gameData) {
+      const introScreen = new IntroScreen();
+      const runCrossFade = crossFadeScreen({outElement: introScreen.element, inElement: greetingScreen.element, duration: 2});
 
-      Loader.loadData()
-          .then((data) => {
-            taskData = data;
-            startCrossFade();
-          })
-          .catch((error) => {
-            Application.showError(error);
-          });
+      try {
+        gameData = await Loader.loadData();
+        runCrossFade();
+      } catch (e) {
+        Application.showError(e);
+      }
     } else {
-      Application.showGreeting(taskData);
+      changeView(greetingScreen.element);
     }
   }
 
-  static finish({state, player}) {
+  static async finish({state, player}) {
     Application.showResultPreloader(`${player}, подожите. Ваш результат загружается!`);
-    Loader.saveResults(state, player)
-        .then(() => Loader.loadResults(player))
-        .then((result) => {
-          Application.showResult(result, player);
-        })
-        .catch((error) => {
-          Application.showError(error);
-        });
+
+    try {
+      await Loader.saveResults(state, player);
+      const result = await Loader.loadResults(player);
+      Application.showResult(result, player);
+    } catch (error) {
+      Application.showError(error);
+    }
   }
 
   static showIntro() {
@@ -59,7 +57,9 @@ export default class Application {
   }
 
   static showGame(playerName) {
-    const gameScreen = new GameScreen({taskData, playerName});
+    const data = gameData;
+
+    const gameScreen = new GameScreen({data, playerName});
     gameScreen.startGame();
     changeView(gameScreen.element);
   }

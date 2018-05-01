@@ -32,7 +32,7 @@ const loadImage = (dataImage) => {
       onSuccess(dataImage);
     };
 
-    image.onError = () => {
+    image.onerror = () => {
       onError(`Картинка не загружена ${dataImage.url}`);
     };
   });
