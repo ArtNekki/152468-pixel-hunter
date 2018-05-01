@@ -1,4 +1,4 @@
-import {changeView} from './util';
+import {changeView, crossFadeScreen} from './util';
 import IntroScreen from './modules/intro/screen';
 import GreetingScreen from './modules/greeting/screen';
 import RulesScreen from './modules/rules/screen';
@@ -12,10 +12,17 @@ let taskData;
 export default class Application {
 
   static start() {
+    const greetingScreen = new GreetingScreen();
+    const introScreen = new IntroScreen();
+
     if (!taskData) {
-      Application.showIntro();
+      const startCrossFade = crossFadeScreen({outElement: introScreen.element, inElement: greetingScreen.element, duration: 2});
+
       Loader.loadData()
-          .then(Application.showGreeting)
+          .then((data) => {
+            taskData = data;
+            startCrossFade();
+          })
           .catch((error) => {
             Application.showError(error);
           });
@@ -41,9 +48,7 @@ export default class Application {
     changeView(introScreen.element);
   }
 
-  static showGreeting(data) {
-    taskData = data;
-
+  static showGreeting() {
     const greetingScreen = new GreetingScreen();
     changeView(greetingScreen.element);
   }
