@@ -64,7 +64,7 @@ export default class ResultView extends AbstractView {
   _renderResultTable({answers, lives}, i) {
 
     // Определяем победа или поражение
-    const isWin = answers.length === GAME_ROUNDS_COUNT;
+    const isWin = (lives > 0) && (answers.length === GAME_ROUNDS_COUNT);
 
     // Получаем список правильных ответов
     const correctAnswers = answers.filter((answer) => {
@@ -102,10 +102,10 @@ export default class ResultView extends AbstractView {
 
   get template() {
     const results = this._state.reverse();
-    const isWin = results[0].answers.length === GAME_ROUNDS_COUNT;
+    // const isWin = (lives > 0) && (answers.length === GAME_ROUNDS_COUNT);
 
     return `<div class='result'>
-              <h1>${this._formatTitle(isWin)}</h1>
+
               ${this._renderResult(results)}
             </div>`;
   }

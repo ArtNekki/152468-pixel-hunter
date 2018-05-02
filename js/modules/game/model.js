@@ -48,6 +48,14 @@ export default class GameModel {
     return (lives > -1) && answers.length < GAME_ROUNDS_COUNT;
   }
 
+  isDead() {
+    return this._state.lives <= 0;
+  }
+
+  hasNextTask() {
+    return this._state.tasks.length;
+  }
+
   tick() {
     const result = this._timer.tick();
 

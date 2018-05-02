@@ -33,7 +33,7 @@ export default class GameScreen {
   _runTimer() {
     this._interval = setInterval(() => {
       if (this._model.tick().done) {
-        this._answer();
+        this._onAnswer(false);
       }
       this._updateTime();
     }, Time.frequency);
@@ -68,23 +68,24 @@ export default class GameScreen {
     }
 
     this._game = gameElement;
-    game.onAnswer = this._answer.bind(this);
+    game.onAnswer = this._onAnswer.bind(this);
   }
 
-  _answer(correctAnswer = false) {
+  _onAnswer(answer) {
     this._stopTimer();
 
-    if (!correctAnswer) {
+    this._model.addAnswer(answer);
+
+    if ((this._model.isDead() && !answer) || !this._model.hasNextTask()) {
+      this._finishGame();
+      return;
+    }
+
+    if (!answer) {
       this._model.die();
     }
 
-    this._model.addAnswer(correctAnswer);
-
-    if (this._model.canContinue()) {
-      this._updateGameData();
-    } else {
-      this._finishGame();
-    }
+    this._updateGameData();
   }
 
   _finishGame() {
