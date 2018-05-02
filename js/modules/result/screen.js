@@ -1,4 +1,4 @@
-import ResultView from './view';
+import ResultView from './result-view';
 import headerView from '../header/screen';
 
 export default class ResultScreen {
