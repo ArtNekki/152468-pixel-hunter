@@ -14,9 +14,9 @@ const getStatItem = ({isCorrect, time} = {}) => {
   if (isCorrect) {
     status = StatusState.correct;
 
-    if (time < AnswerTime.fast) {
+    if (time < AnswerTime.FAST) {
       status = StatusState.fast;
-    } else if (time > AnswerTime.slow) {
+    } else if (time > AnswerTime.SLOW) {
       status = StatusState.slow;
     }
 

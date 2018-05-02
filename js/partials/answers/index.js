@@ -3,10 +3,10 @@ import {AnswerType, TaskType} from '../../settings';
 
 const getSearchableElement = (answers) => {
   const paint = answers.filter((answer) => {
-    return answer.type === AnswerType.paint;
+    return answer.type === AnswerType.PAINT;
   });
 
-  return paint.length === 1 ? AnswerType.paint : AnswerType.photo;
+  return paint.length === 1 ? AnswerType.PAINT : AnswerType.PHOTO;
 };
 
 export default ({type: taskType, answers}) => {

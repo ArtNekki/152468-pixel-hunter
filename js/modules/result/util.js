@@ -31,14 +31,14 @@ export const calculateAnswerScore = (answer) => {
     return score;
   }
 
-  score += AnswerPoint.default;
+  score += AnswerPoint.DEFAULT;
 
-  if (answer.time < AnswerTime.fast) {
-    score += AnswerPoint.bonus;
+  if (answer.time < AnswerTime.FAST) {
+    score += AnswerPoint.BONUS;
   }
 
-  if (answer.time > AnswerTime.slow) {
-    score += AnswerPoint.fine;
+  if (answer.time > AnswerTime.SLOW) {
+    score += AnswerPoint.FINE;
   }
 
   return score;
@@ -57,7 +57,7 @@ export const calculateTotalGameScore = (answers, lives) => {
     return -1;
   }
 
-  if (lives < 0 || lives > Life.count) {
+  if (lives < 0 || lives > Life.COUNT) {
     throw new Error(`Переданное количество жизней должно быть от 0 до 3`);
   }
 
@@ -65,5 +65,5 @@ export const calculateTotalGameScore = (answers, lives) => {
     return sum + calculateAnswerScore(current);
   }, 0);
 
-  return answersScore + lives * Life.bonus;
+  return answersScore + lives * Life.BONUS;
 };

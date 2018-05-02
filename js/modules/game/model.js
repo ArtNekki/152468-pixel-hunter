@@ -31,7 +31,7 @@ export default class GameModel {
 
   addAnswer(answer) {
     this._state = Object.assign({}, this._state, {
-      answers: [...this._state.answers, {isCorrect: answer, time: Time.start - this._state.time}]
+      answers: [...this._state.answers, {isCorrect: answer, time: Time.START - this._state.time}]
     });
   }
 
@@ -68,7 +68,7 @@ export default class GameModel {
 
   _resetTime() {
     this._state = Object.assign({}, this._state, {
-      time: Time.start
+      time: Time.START
     });
   }
 }

@@ -36,7 +36,7 @@ export default class GameScreen {
         this._onAnswer(false);
       }
       this._updateTime();
-    }, Time.frequency);
+    }, Time.FREQUENCY);
   }
 
   _updateTime() {

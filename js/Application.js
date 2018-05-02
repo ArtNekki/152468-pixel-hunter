@@ -41,16 +41,6 @@ export default class Application {
     }
   }
 
-  static showIntro() {
-    const introScreen = new IntroScreen();
-    changeView(introScreen.element);
-  }
-
-  static showGreeting() {
-    const greetingScreen = new GreetingScreen();
-    changeView(greetingScreen.element);
-  }
-
   static showRules() {
     const rulesScreen = new RulesScreen();
     changeView(rulesScreen.element);
@@ -64,14 +54,14 @@ export default class Application {
     changeView(gameScreen.element);
   }
 
-  static showResult(result, player) {
-    const resultScreen = new ResultScreen({result, player});
-    changeView(resultScreen.element);
-  }
-
   static showResultPreloader(text) {
     const loadScreen = new LoadScreen(text);
     changeView(loadScreen.element);
+  }
+
+  static showResult(result, player) {
+    const resultScreen = new ResultScreen({result, player});
+    changeView(resultScreen.element);
   }
 
   static showError(error) {

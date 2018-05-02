@@ -20,12 +20,12 @@ export default class ResultView extends AbstractView {
   _renderExtraPoints({answers, lives}) {
     // Получаем список быстрых ответов
     const fastAnswers = answers.filter((answer) => {
-      return (answer.time < AnswerTime.fast) && answer.isCorrect;
+      return (answer.time < AnswerTime.FAST) && answer.isCorrect;
     });
 
     // Получаем список медленных ответов
     const slowAnswers = answers.filter((answer) => {
-      return (answer.time > AnswerTime.slow) && answer.isCorrect;
+      return (answer.time > AnswerTime.SLOW) && answer.isCorrect;
     });
 
     // Список бонусов
@@ -34,19 +34,19 @@ export default class ResultView extends AbstractView {
         type: `fast`,
         title: `Бонус за скорость:`,
         count: fastAnswers.length,
-        points: fastAnswers.length * AnswerPoint.bonus
+        points: fastAnswers.length * AnswerPoint.BONUS
       },
       {
         type: `alive`,
         title: `Бонус за жизни:`,
         count: lives,
-        points: lives * Life.bonus
+        points: lives * Life.BONUS
       },
       {
         type: `slow`,
         title: `Штраф за медлительность:`,
         count: slowAnswers.length,
-        points: slowAnswers.length * AnswerPoint.fine
+        points: slowAnswers.length * AnswerPoint.FINE
       }
     ];
 
@@ -80,7 +80,7 @@ export default class ResultView extends AbstractView {
             ${renderStats(answers)}
           </td>
           <td class='result__points'>${isWin ? `×&nbsp;100` : ``}</td>
-          <td class='result__total ${!isWin ? `result__total--final` : ``}'>${isWin ? correctAnswers.length * AnswerPoint.default : `FAIL`}</td>
+          <td class='result__total ${!isWin ? `result__total--final` : ``}'>${isWin ? correctAnswers.length * AnswerPoint.DEFAULT : `FAIL`}</td>
         </tr>
         ${isWin ? this._renderExtraPoints({answers, lives}) : ``}
         <tr>

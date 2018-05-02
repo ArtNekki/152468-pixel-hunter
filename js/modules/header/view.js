@@ -6,7 +6,7 @@ const drawHeart = (full) => {
 };
 
 const renderLives = (lives) => {
-  return `${new Array(Life.count - lives).fill(drawHeart(false)).join(``)}
+  return `${new Array(Life.COUNT - lives).fill(drawHeart(false)).join(``)}
           ${new Array(lives).fill(drawHeart(true)).join(``)}`;
 };
 
@@ -36,7 +36,7 @@ export default class HeaderView extends AbstractView {
   }
 
   changeTime({time}) {
-    if (time <= Time.critical) {
+    if (time <= Time.CRITICAL) {
       this._timer.classList.add(`game__timer--critical`);
     } else {
       this._timer.classList.remove(`game__timer--critical`);

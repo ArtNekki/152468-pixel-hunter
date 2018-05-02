@@ -7,8 +7,8 @@ const serverTitleToClientTitle = {
 };
 
 const serverAnswerTypeToClientAnswerType = {
-  'painting': AnswerType.paint,
-  'photo': AnswerType.photo
+  'painting': AnswerType.PAINT,
+  'photo': AnswerType.PHOTO
 };
 
 const formatAnswers = (answers) => {
