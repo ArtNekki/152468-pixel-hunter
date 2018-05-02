@@ -8,7 +8,8 @@ export const Time = {
 // Жизнь
 export const Life = {
   COUNT: 3,
-  BONUS: 50
+  BONUS: 50,
+  NONE: 0
 };
 
 // Начальные параметры игры

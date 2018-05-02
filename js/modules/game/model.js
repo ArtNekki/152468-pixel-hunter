@@ -1,4 +1,4 @@
-import {INITIAL_GAME, GAME_ROUNDS_COUNT, Time} from '../../settings';
+import {INITIAL_GAME, Life, Time} from '../../settings';
 import createTimer from '../../timer/timer';
 
 export default class GameModel {
@@ -43,13 +43,8 @@ export default class GameModel {
     });
   }
 
-  canContinue() {
-    const {lives, answers} = this._state;
-    return (lives > -1) && answers.length < GAME_ROUNDS_COUNT;
-  }
-
   isDead() {
-    return this._state.lives <= 0;
+    return this._state.lives <= Life.NONE;
   }
 
   hasNextTask() {
