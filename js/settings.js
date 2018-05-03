@@ -14,8 +14,8 @@ export const Life = {
 
 // Начальные параметры игры
 export const INITIAL_GAME = {
-  task: {},
-  tasks: [],
+  question: {},
+  questions: [],
   answers: [],
   lives: Life.COUNT,
   time: Time.START
@@ -43,7 +43,7 @@ export const AnswerType = {
 };
 
 // Тип заданий
-export const TaskType = {
+export const QuestionType = {
   GUESS_TWO: `two-of-two`,
   GUESS_ONE: `tinder-like`,
   FIND: `one-of-three`

@@ -17,13 +17,13 @@ export default class GameModel {
 
   init() {
     this._state = Object.assign({}, INITIAL_GAME, {
-      tasks: [...this._data]
+      questions: [...this._data]
     });
   }
 
-  nextTask() {
+  nextQuestion() {
     this._state = Object.assign({}, this._state, {
-      task: this._state.tasks.pop()
+      question: this._state.questions.pop()
     });
     this._resetTime();
     this._timer = createTimer(this._state.time);
@@ -47,8 +47,8 @@ export default class GameModel {
     return this._state.lives <= Life.NONE;
   }
 
-  hasNextTask() {
-    return this._state.tasks.length;
+  hasNextQuestion() {
+    return this._state.questions.length;
   }
 
   tick() {

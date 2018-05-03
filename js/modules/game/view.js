@@ -1,5 +1,5 @@
 import AbstractView from '../../abstract-view';
-import {TaskType} from '../../settings';
+import {QuestionType} from '../../settings';
 import renderAnswers from '../../partials/answers/index';
 import renderStats from '../../partials/stats/index';
 
@@ -7,8 +7,8 @@ const REQUIRED_ANSWERS_COUNT = 2;
 
 // Сопоставление количества картинок и типа контейнера
 const ContentType = {
-  [TaskType.GUESS_ONE]: `game__content--wide`,
-  [TaskType.FIND]: `game__content--triple`
+  [QuestionType.GUESS_ONE]: `game__content--wide`,
+  [QuestionType.FIND]: `game__content--triple`
 };
 
 export default class GameView extends AbstractView {
@@ -18,14 +18,14 @@ export default class GameView extends AbstractView {
   }
 
   get template() {
-    const {answers, task} = this._state;
-    const {type, title} = task;
+    const {answers, question} = this._state;
+    const {type, title} = question;
 
     return `
         <div class='game'>
             <p class='game__task'>${title}</p>
             <form class='game__content ${ContentType[type] || ``}'>
-              ${renderAnswers(task)}
+              ${renderAnswers(question)}
             </form>
             <div class='stats'>
               ${renderStats(answers)}
@@ -40,12 +40,12 @@ export default class GameView extends AbstractView {
   }
 
   bind() {
-    const {type, answers: taskAnswers} = this._state.task;
+    const {type, answers: questionAnswers} = this._state.question;
 
     const content = this.element.querySelector(`.game__content`);
     const radioButtons = Array.from(content.querySelectorAll(`[type='radio']`));
 
-    content.addEventListener(`click`, (e) => {
+    content.addEventListener(`mousedown`, (e) => {
 
       const option = e.target.closest(`.game__option`);
 
@@ -68,12 +68,12 @@ export default class GameView extends AbstractView {
     content.addEventListener(`change`, () => {
       const checkedAnswerControls = this._getCheckedControls(radioButtons);
 
-      if (!checkedAnswerControls.length || ((type === TaskType.GUESS_TWO)
+      if (!checkedAnswerControls.length || ((type === QuestionType.GUESS_TWO)
           && checkedAnswerControls.length !== REQUIRED_ANSWERS_COUNT)) {
         return;
       }
 
-      const correctAnswer = taskAnswers.every((answer, i) => {
+      const correctAnswer = questionAnswers.every((answer, i) => {
         return answer.type === checkedAnswerControls[i].value;
       });
 

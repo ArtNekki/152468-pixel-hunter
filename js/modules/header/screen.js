@@ -1,5 +1,5 @@
 import HeaderView from './view';
-import Confirm from '../confirm/index';
+import Confirm from '../confirm/screen';
 import Application from '../../Application';
 
 export default (state) => {

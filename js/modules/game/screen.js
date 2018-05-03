@@ -36,7 +36,7 @@ export default class GameScreen {
 
   _updateGameData() {
     // Получаем задание
-    this._model.nextTask();
+    this._model.nextQuestion();
     // Запускаем таймер
     this._runTimer();
     // Обновляем время
@@ -80,7 +80,7 @@ export default class GameScreen {
 
     this._model.addAnswer(answer);
 
-    if ((this._model.isDead() && !answer) || !this._model.hasNextTask()) {
+    if ((this._model.isDead() && !answer) || !this._model.hasNextQuestion()) {
       this._finishGame();
       return;
     }

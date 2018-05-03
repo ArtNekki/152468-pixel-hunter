@@ -1,5 +1,5 @@
 import renderAnswerControls from './controls';
-import {AnswerType, TaskType} from '../../settings';
+import {AnswerType, QuestionType} from '../../settings';
 
 const getSearchableElement = (answers) => {
   const paint = answers.filter((answer) => {
@@ -9,14 +9,14 @@ const getSearchableElement = (answers) => {
   return paint.length === 1 ? AnswerType.PAINT : AnswerType.PHOTO;
 };
 
-export default ({type: taskType, answers}) => {
+export default ({type: questionType, answers}) => {
 
   return answers.map((answer, i) => {
     i += 1;
 
-    return `<div class='game__option ${(taskType === TaskType.FIND) && (answer.type === getSearchableElement(answers)) ? `game__option--selected` : ``}'>
+    return `<div class='game__option ${(questionType === QuestionType.FIND) && (answer.type === getSearchableElement(answers)) ? `game__option--selected` : ``}'>
         <img src=${answer.image.url} alt='Option ${i}'  width=${answer.image.width} height=${answer.image.height} type=${answer.type} />
-        ${(taskType !== TaskType.FIND) ? renderAnswerControls(i) : ``}
+        ${(questionType !== QuestionType.FIND) ? renderAnswerControls(i) : ``}
       </div>`;
   }).join(``);
 };

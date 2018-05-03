@@ -1,8 +1,8 @@
 import AbstractView from '../../abstract-view';
 
-const ActionType = {
-  ok: `ok`,
-  cancel: `cancel`
+const Action = {
+  OK: `ok`,
+  CANCEL: `cancel`
 };
 
 export default class ConfirmView extends AbstractView {
@@ -27,11 +27,11 @@ export default class ConfirmView extends AbstractView {
     this.element.querySelector(`.confirm`).addEventListener(`click`, (e) => {
       const action = e.target.dataset.action;
 
-      if (action === ActionType.ok) {
+      if (action === Action.OK) {
         this.onOk();
       }
 
-      if (action === ActionType.cancel) {
+      if (action === Action.CANCEL) {
         this.onCancel();
       }
     });

@@ -1,6 +1,6 @@
 import ConfirmView from './view';
 
-export default class Confirm {
+export default class ConfirmScreen {
   constructor(text) {
     this._view = new ConfirmView(text);
     this._view.onOk = this.onOk.bind(this);
