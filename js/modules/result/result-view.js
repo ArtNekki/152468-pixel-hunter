@@ -21,14 +21,12 @@ export default class ResultView extends AbstractView {
             </div>`;
   }
 
-  get wrongAnswers() {
-    return this._result[0].answers.filter((answer) => {
+  _isWin() {
+    const wrongAnswers = this._result[0].answers.filter((answer) => {
       return !answer.isCorrect;
     });
-  }
 
-  _isWin() {
-    return this.wrongAnswers.length <= Life.COUNT;
+    return wrongAnswers.length <= Life.COUNT;
   }
 
   _renderResultTables() {
