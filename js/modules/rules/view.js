@@ -21,10 +21,6 @@ export default class RulesView extends AbstractView {
             </div>`;
   }
 
-  goNext() {
-
-  }
-
   bind() {
     const form = this.element.querySelector(`.rules__form`);
     const inputField = form.querySelector(`.rules__input`);
@@ -45,5 +41,9 @@ export default class RulesView extends AbstractView {
       e.preventDefault();
       this.goNext(inputField.value);
     });
+  }
+
+  goNext() {
+
   }
 }

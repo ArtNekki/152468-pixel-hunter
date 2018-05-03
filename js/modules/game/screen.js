@@ -26,19 +26,6 @@ export default class GameScreen {
     this._updateGameData();
   }
 
-  _stopTimer() {
-    clearInterval(this._interval);
-  }
-
-  _runTimer() {
-    this._interval = setInterval(() => {
-      if (this._model.tick().done) {
-        this._onAnswer(false);
-      }
-      this._updateTime();
-    }, Time.FREQUENCY);
-  }
-
   _updateTime() {
     this._header.changeTime(this._model.state);
   }
@@ -71,6 +58,23 @@ export default class GameScreen {
     game.onAnswer = this._onAnswer.bind(this);
   }
 
+  _finishGame() {
+    Application.finish(this._model);
+  }
+
+  _runTimer() {
+    this._interval = setInterval(() => {
+      if (this._model.tick().done) {
+        this._onAnswer(false);
+      }
+      this._updateTime();
+    }, Time.FREQUENCY);
+  }
+
+  _stopTimer() {
+    clearInterval(this._interval);
+  }
+
   _onAnswer(answer) {
     this._stopTimer();
 
@@ -86,9 +90,5 @@ export default class GameScreen {
     }
 
     this._updateGameData();
-  }
-
-  _finishGame() {
-    Application.finish(this._model);
   }
 }

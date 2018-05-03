@@ -49,10 +49,6 @@ export default class HeaderView extends AbstractView {
     this._lives.innerHTML = renderLives(lives);
   }
 
-  goBack() {
-
-  }
-
   bind() {
     const {element} = this;
 
@@ -63,5 +59,9 @@ export default class HeaderView extends AbstractView {
     backButton.addEventListener(`click`, () => {
       this.goBack();
     });
+  }
+
+  goBack() {
+
   }
 }

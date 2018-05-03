@@ -23,14 +23,6 @@ export default class ConfirmView extends AbstractView {
     </div>`;
   }
 
-  onOk() {
-
-  }
-
-  onCancel() {
-
-  }
-
   bind() {
     this.element.querySelector(`.confirm`).addEventListener(`click`, (e) => {
       const action = e.target.dataset.action;
@@ -43,5 +35,13 @@ export default class ConfirmView extends AbstractView {
         this.onCancel();
       }
     });
+  }
+
+  onOk() {
+
+  }
+
+  onCancel() {
+
   }
 }

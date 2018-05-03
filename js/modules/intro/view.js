@@ -8,13 +8,13 @@ export default class IntroView extends AbstractView {
             </div>`;
   }
 
-  goNext() {
-
-  }
-
   bind() {
     this.element.querySelector(`.intro__asterisk`).addEventListener(`click`, () => {
       this.goNext();
     });
+  }
+
+  goNext() {
+
   }
 }

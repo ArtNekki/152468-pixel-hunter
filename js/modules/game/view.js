@@ -39,10 +39,6 @@ export default class GameView extends AbstractView {
     }));
   }
 
-  onAnswer() {
-
-  }
-
   bind() {
     const {type, answers: taskAnswers} = this._state.task;
 
@@ -83,5 +79,9 @@ export default class GameView extends AbstractView {
 
       this.onAnswer(correctAnswer);
     });
+  }
+
+  onAnswer() {
+
   }
 }
