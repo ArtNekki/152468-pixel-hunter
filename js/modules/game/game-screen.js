@@ -80,6 +80,10 @@ export default class GameScreen {
 
     this._model.addAnswer(answer);
 
+    if ((!this._model.isDead() && !answer) && !this._model.hasNextQuestion()) {
+      this._model.die();
+    }
+
     if ((this._model.isDead() && !answer) || !this._model.hasNextQuestion()) {
       this._finishGame();
       return;
