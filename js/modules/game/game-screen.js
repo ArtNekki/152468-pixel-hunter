@@ -1,8 +1,8 @@
 import {Time} from '../../settings';
 import headerView from '../header/screen';
-import GameView from './view';
+import GameView from './game-view';
+import GameModel from './game-model';
 import Application from '../../Application';
-import GameModel from './model';
 
 export default class GameScreen {
   constructor(data) {

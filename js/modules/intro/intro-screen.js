@@ -1,4 +1,4 @@
-import IntroView from './view';
+import IntroView from './intro-view';
 
 export default class IntroScreen {
   constructor() {

@@ -1,7 +1,7 @@
 import AbstractView from '../../abstract-view';
 import {QuestionType} from '../../settings';
-import renderAnswers from '../../partials/answers/index';
-import renderStats from '../../partials/stats/index';
+import renderAnswers from '../../partials/answers';
+import renderStats from '../../partials/stats';
 
 const REQUIRED_ANSWERS_COUNT = 2;
 

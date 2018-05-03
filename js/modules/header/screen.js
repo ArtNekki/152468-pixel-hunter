@@ -1,5 +1,5 @@
-import HeaderView from './view';
-import Confirm from '../confirm/screen';
+import HeaderView from './header-view';
+import ConfirmScreen from '../confirm/confirm-screen';
 import Application from '../../Application';
 
 export default (state) => {
@@ -11,7 +11,7 @@ export default (state) => {
       return;
     }
 
-    const confirm = new Confirm(`Хотите вернуться на экран приветствия? Все ваши ответы будут потеряны!`);
+    const confirm = new ConfirmScreen(`Хотите вернуться на экран приветствия? Все ваши ответы будут потеряны!`);
     confirm.isOk = () => {
       Application.start();
     };

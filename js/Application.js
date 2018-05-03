@@ -1,11 +1,11 @@
 import {changeView, crossFadeScreen} from './util';
-import IntroScreen from './modules/intro/screen';
-import GreetingScreen from './modules/greeting/screen';
-import RulesScreen from './modules/rules/screen';
-import GameScreen from './modules/game/screen';
-import ResultScreen from './modules/result/screen';
-import ErrorScreen from './modules/error/screen';
-import LoadScreen from './modules/load/screen';
+import IntroScreen from './modules/intro/intro-screen';
+import GreetingScreen from './modules/greeting/greeting-screen';
+import RulesScreen from './modules/rules/rules-screen';
+import GameScreen from './modules/game/game-screen';
+import ResultScreen from './modules/result/result-screen';
+import ErrorScreen from './modules/error/error-screen';
+import LoadScreen from './modules/load/load-screen';
 import Loader from './loader';
 
 let gameData;

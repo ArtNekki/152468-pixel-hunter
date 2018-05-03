@@ -1,3 +1,6 @@
+// Количество раундов в игре
+export const GAME_ROUNDS_COUNT = 10;
+
 // Время
 export const Time = {
   START: 30,
@@ -13,16 +16,13 @@ export const Life = {
 };
 
 // Начальные параметры игры
-export const INITIAL_GAME = {
+export const initialGame = {
   question: {},
   questions: [],
   answers: [],
   lives: Life.COUNT,
   time: Time.START
 };
-
-// Количество раундов в игре
-export const GAME_ROUNDS_COUNT = 10;
 
 // Количество очков за ответ
 export const AnswerPoint = {

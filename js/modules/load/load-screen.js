@@ -1,4 +1,4 @@
-import LoadView from './view';
+import LoadView from './load-view';
 
 export default class LoadScreen {
   constructor(text) {

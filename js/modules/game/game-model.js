@@ -1,5 +1,5 @@
-import {INITIAL_GAME, Life, Time} from '../../settings';
-import createTimer from '../../timer/timer';
+import {initialGame, Life, Time} from '../../settings';
+import createTimer from '../../timer/';
 
 export default class GameModel {
   constructor({data, playerName}) {
@@ -16,7 +16,7 @@ export default class GameModel {
   }
 
   init() {
-    this._state = Object.assign({}, INITIAL_GAME, {
+    this._state = Object.assign({}, initialGame, {
       questions: [...this._data]
     });
   }

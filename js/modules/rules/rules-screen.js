@@ -1,4 +1,4 @@
-import RulesView from './view';
+import RulesView from './rules-view';
 import headerView from '../header/screen';
 import Application from '../../Application';
 

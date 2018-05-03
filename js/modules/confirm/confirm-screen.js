@@ -1,4 +1,4 @@
-import ConfirmView from './view';
+import ConfirmView from './confirm-view';
 
 export default class ConfirmScreen {
   constructor(text) {

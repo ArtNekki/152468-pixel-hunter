@@ -26,7 +26,7 @@ export default class RulesView extends AbstractView {
     const inputField = form.querySelector(`.rules__input`);
     const submitButton = form.querySelector(`.rules__button`);
 
-    const typeTextHandler = (e) => {
+    const onTypeText = (e) => {
       const {value} = e.target;
 
       if (value.length) {
@@ -36,7 +36,7 @@ export default class RulesView extends AbstractView {
       }
     };
 
-    inputField.addEventListener(`input`, typeTextHandler);
+    inputField.addEventListener(`input`, onTypeText);
     form.addEventListener(`submit`, (e) => {
       e.preventDefault();
       this.goNext(inputField.value);
