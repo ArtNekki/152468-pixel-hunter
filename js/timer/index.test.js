@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import createTimer from './timer';
+import createTimer from './index';
 
 describe(`Функция создания таймера`, () => {
 
