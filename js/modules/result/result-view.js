@@ -3,15 +3,15 @@ import ResultTableView from './result-table-view';
 import {Life} from '../../settings';
 
 const resultToTitle = {
-  [true]: `Победа`,
-  [false]: `Поражение`
+  [true]: `Победа!`,
+  [false]: `Поражение.`
 };
 
 export default class ResultView extends AbstractView {
   constructor({player, result}) {
     super();
     this._player = player;
-    this._result = result.reverse();
+    this._results = result.reverse();
   }
 
   get template() {
@@ -22,7 +22,7 @@ export default class ResultView extends AbstractView {
   }
 
   _isWin() {
-    const wrongAnswers = this._result[0].answers.filter((answer) => {
+    const wrongAnswers = this._results[0].answers.filter((answer) => {
       return !answer.isCorrect;
     });
 
@@ -32,9 +32,9 @@ export default class ResultView extends AbstractView {
   _renderResultTables() {
     let resultTables = ``;
 
-    for (const result of this._result) {
-      resultTables += new ResultTableView(result).template;
-    }
+    this._results.forEach((result, i) => {
+      resultTables += new ResultTableView(result, i).template;
+    });
 
     return resultTables;
   }

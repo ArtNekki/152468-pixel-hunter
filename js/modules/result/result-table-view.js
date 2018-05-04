@@ -4,10 +4,13 @@ import {calculateTotalGameScore} from './util';
 import {AnswerPoint, AnswerTime, Life} from '../../settings';
 
 export default class ResultTableView extends AbstractView {
-  constructor({answers, lives}) {
+  constructor({answers, lives}, position) {
     super();
     this._answers = answers;
     this._lives = lives;
+
+    // отчет начинается от 1, а не 0, поэтому добавил + 1
+    this._position = position + 1;
 
     this._correctAnswers = answers.filter((answer) => {
       return answer.isCorrect;
@@ -28,7 +31,7 @@ export default class ResultTableView extends AbstractView {
     return `
       <table class='result__table'>
         <tr>
-          <td class='result__number'>1</td>
+          <td class='result__number'>${this._position}.</td>
           <td colspan='2'>
             ${renderStats(this._answers)}
           </td>

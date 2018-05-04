@@ -12,13 +12,13 @@ const ContentType = {
 };
 
 export default class GameView extends AbstractView {
-  constructor(state) {
+  constructor(data) {
     super();
-    this._state = state;
+    this._data = data;
   }
 
   get template() {
-    const {answers, question} = this._state;
+    const {answers, question} = this._data;
     const {type, title} = question;
 
     return `
@@ -40,7 +40,7 @@ export default class GameView extends AbstractView {
   }
 
   bind() {
-    const {type, answers: questionAnswers} = this._state.question;
+    const {type, answers: questionAnswers} = this._data.question;
 
     const content = this.element.querySelector(`.game__content`);
     const radioButtons = Array.from(content.querySelectorAll(`[type='radio']`));
