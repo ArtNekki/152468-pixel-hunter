@@ -19,7 +19,7 @@ export default class GameScreen {
 
     //
     this._root = document.createElement(`div`);
-    this._header = new HeaderScreen(this._model.state);
+    this._header = new HeaderScreen(this._model.state, this.stopTimer.bind(this));
     this._root.appendChild(this._header.element);
 
     // Обновляем данные игры
@@ -67,16 +67,17 @@ export default class GameScreen {
       if (this._model.tick().done) {
         this._onAnswer(false);
       }
+
       this._updateTime();
     }, Time.FREQUENCY);
   }
 
-  _stopTimer() {
+  stopTimer() {
     clearInterval(this._interval);
   }
 
   _onAnswer(answer) {
-    this._stopTimer();
+    this.stopTimer();
 
     this._model.addAnswer(answer);
 
