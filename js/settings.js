@@ -1,48 +1,49 @@
-// Время
-export const Time = {
-  start: 30,
-  critical: 5,
-  frequency: 1000
-};
-
-// Начальные параметры игры
-export const INITIAL_GAME = {
-  task: {},
-  tasks: [],
-  answers: [],
-  lives: 3,
-  time: Time.start
-};
-
 // Количество раундов в игре
 export const GAME_ROUNDS_COUNT = 10;
 
+// Время
+export const Time = {
+  START: 30,
+  CRITICAL: 5,
+  FREQUENCY: 1000
+};
+
 // Жизнь
 export const Life = {
-  count: INITIAL_GAME.lives,
-  bonus: 50
+  COUNT: 3,
+  BONUS: 50,
+  NONE: 0
+};
+
+// Начальные параметры игры
+export const initialGame = {
+  question: {},
+  questions: [],
+  answers: [],
+  lives: Life.COUNT,
+  time: Time.START
 };
 
 // Количество очков за ответ
 export const AnswerPoint = {
-  default: 100,
-  bonus: 50,
-  fine: -50
+  DEFAULT: 100,
+  BONUS: 50,
+  FINE: -50
 };
 
 export const AnswerTime = {
-  slow: 20,
-  fast: 10
+  SLOW: 20,
+  FAST: 10
 };
 
 // Тип вопросов
 export const AnswerType = {
-  photo: `photo`,
-  paint: `paint`
+  PHOTO: `photo`,
+  PAINT: `paint`
 };
 
 // Тип заданий
-export const TaskType = {
+export const QuestionType = {
   GUESS_TWO: `two-of-two`,
   GUESS_ONE: `tinder-like`,
   FIND: `one-of-three`

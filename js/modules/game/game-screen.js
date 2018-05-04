@@ -1,8 +1,8 @@
 import {Time} from '../../settings';
-import headerView from '../header/screen';
-import GameView from './view';
+import HeaderScreen from '../header/header-screen';
+import GameView from './game-view';
+import GameModel from './game-model';
 import Application from '../../Application';
-import GameModel from './model';
 
 export default class GameScreen {
   constructor(data) {
@@ -19,37 +19,24 @@ export default class GameScreen {
 
     //
     this._root = document.createElement(`div`);
-    this._header = headerView(this._model.state);
+    this._header = new HeaderScreen(this._model.state, this.stopTimer.bind(this));
     this._root.appendChild(this._header.element);
 
     // Обновляем данные игры
     this._updateGameData();
   }
 
-  _stopTimer() {
-    clearInterval(this._interval);
-  }
-
-  _runTimer() {
-    this._interval = setInterval(() => {
-      if (this._model.tick().done) {
-        this._answer();
-      }
-      this._updateTime();
-    }, Time.frequency);
-  }
-
   _updateTime() {
-    this._header.changeTime(this._model.state);
+    this._header.view.changeTime(this._model.state);
   }
 
   _updateLives() {
-    this._header.changeLives(this._model.state);
+    this._header.view.changeLives(this._model.state);
   }
 
   _updateGameData() {
     // Получаем задание
-    this._model.nextTask();
+    this._model.nextQuestion();
     // Запускаем таймер
     this._runTimer();
     // Обновляем время
@@ -68,26 +55,45 @@ export default class GameScreen {
     }
 
     this._game = gameElement;
-    game.onAnswer = this._answer.bind(this);
-  }
-
-  _answer(correctAnswer = false) {
-    this._stopTimer();
-
-    if (!correctAnswer) {
-      this._model.die();
-    }
-
-    this._model.addAnswer(correctAnswer);
-
-    if (this._model.canContinue()) {
-      this._updateGameData();
-    } else {
-      this._finishGame();
-    }
+    game.onAnswer = this._onAnswer.bind(this);
   }
 
   _finishGame() {
     Application.finish(this._model);
+  }
+
+  _runTimer() {
+    this._interval = setInterval(() => {
+      if (this._model.tick().done) {
+        this._onAnswer(false);
+      }
+
+      this._updateTime();
+    }, Time.FREQUENCY);
+  }
+
+  stopTimer() {
+    clearInterval(this._interval);
+  }
+
+  _onAnswer(answer) {
+    this.stopTimer();
+
+    this._model.addAnswer(answer);
+
+    if ((!this._model.isDead() && !answer) && !this._model.hasNextQuestion()) {
+      this._model.die();
+    }
+
+    if ((this._model.isDead() && !answer) || !this._model.hasNextQuestion()) {
+      this._finishGame();
+      return;
+    }
+
+    if (!answer) {
+      this._model.die();
+    }
+
+    this._updateGameData();
   }
 }

@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import {LIFE, answer, answers} from './mock';
+import {LifeValue, answer, answers} from './mock';
 import {calculateAnswerScore, calculateTotalGameScore} from './util';
 
 describe(`функция calculateAnswerScore: проверка параметров`, () => {
@@ -75,7 +75,7 @@ describe(`Функция calculateTotalGameScore: проверка параме�
     const arr = answers.normal.slice();
     arr.length = 9;
 
-    assert.equal(-1, calculateTotalGameScore(arr, LIFE.max));
+    assert.equal(-1, calculateTotalGameScore(arr, LifeValue.MAX));
   });
 
   it(`Должен выдавать ошибку, если параметр 'lives' не число`, () => {
@@ -92,30 +92,30 @@ describe(`Функция calculateTotalGameScore: проверка параме�
   });
 
   it(`Функция должна возвращать число`, () => {
-    assert.isNumber(calculateTotalGameScore(answers.normal, LIFE.max));
+    assert.isNumber(calculateTotalGameScore(answers.normal, LifeValue.MAX));
   });
 });
 
 describe(`Функция calculateTotalGameScore: подсчет общего количества очков, с учетом количества жизней`, () => {
 
   it(`При медленной скорости ответов`, () => {
-    assert.equal(calculateTotalGameScore(answers.slow, LIFE.max), 650);
-    assert.equal(calculateTotalGameScore(answers.slow, LIFE.medium), 600);
-    assert.equal(calculateTotalGameScore(answers.slow, LIFE.min), 550);
-    assert.equal(calculateTotalGameScore(answers.slow, LIFE.none), 500);
+    assert.equal(calculateTotalGameScore(answers.slow, LifeValue.MAX), 650);
+    assert.equal(calculateTotalGameScore(answers.slow, LifeValue.MEDIUM), 600);
+    assert.equal(calculateTotalGameScore(answers.slow, LifeValue.MIN), 550);
+    assert.equal(calculateTotalGameScore(answers.slow, LifeValue.NONE), 500);
   });
 
   it(`При нормальной скорости ответов`, () => {
-    assert.equal(calculateTotalGameScore(answers.normal, LIFE.max), 1150);
-    assert.equal(calculateTotalGameScore(answers.normal, LIFE.medium), 1100);
-    assert.equal(calculateTotalGameScore(answers.normal, LIFE.min), 1050);
-    assert.equal(calculateTotalGameScore(answers.normal, LIFE.none), 1000);
+    assert.equal(calculateTotalGameScore(answers.normal, LifeValue.MAX), 1150);
+    assert.equal(calculateTotalGameScore(answers.normal, LifeValue.MEDIUM), 1100);
+    assert.equal(calculateTotalGameScore(answers.normal, LifeValue.MIN), 1050);
+    assert.equal(calculateTotalGameScore(answers.normal, LifeValue.NONE), 1000);
   });
 
   it(`При быстрой скорости ответов`, () => {
-    assert.equal(calculateTotalGameScore(answers.fast, LIFE.max), 1650);
-    assert.equal(calculateTotalGameScore(answers.fast, LIFE.medium), 1600);
-    assert.equal(calculateTotalGameScore(answers.fast, LIFE.min), 1550);
-    assert.equal(calculateTotalGameScore(answers.fast, LIFE.none), 1500);
+    assert.equal(calculateTotalGameScore(answers.fast, LifeValue.MAX), 1650);
+    assert.equal(calculateTotalGameScore(answers.fast, LifeValue.MEDIUM), 1600);
+    assert.equal(calculateTotalGameScore(answers.fast, LifeValue.MIN), 1550);
+    assert.equal(calculateTotalGameScore(answers.fast, LifeValue.NONE), 1500);
   });
 });

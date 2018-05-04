@@ -1,55 +1,51 @@
 import AbstractView from '../../abstract-view';
-import {TaskType} from '../../settings';
-import renderAnswers from '../../partials/answers/index';
-import renderStats from '../../partials/stats/index';
+import {QuestionType} from '../../settings';
+import renderAnswers from '../../partials/answers';
+import renderStats from '../../partials/stats';
 
 const REQUIRED_ANSWERS_COUNT = 2;
 
 // Сопоставление количества картинок и типа контейнера
 const ContentType = {
-  [TaskType.GUESS_ONE]: `game__content--wide`,
-  [TaskType.FIND]: `game__content--triple`
+  [QuestionType.GUESS_ONE]: `game__content--wide`,
+  [QuestionType.FIND]: `game__content--triple`
 };
 
 export default class GameView extends AbstractView {
-  constructor(state) {
+  constructor({answers, question}) {
     super();
-    this._state = state;
+    this._answers = answers;
+    this._question = question;
   }
 
   get template() {
-    const {answers, task} = this._state;
-    const {type, title} = task;
+    const {type, title} = this._question;
 
     return `
         <div class='game'>
             <p class='game__task'>${title}</p>
             <form class='game__content ${ContentType[type] || ``}'>
-              ${renderAnswers(task)}
+              ${renderAnswers(this._question)}
             </form>
             <div class='stats'>
-              ${renderStats(answers)}
+              ${renderStats(this._answers)}
             </div>
           </div>`;
   }
 
-  _getCheckedControls(answers) {
-    return answers.filter(((answer) => {
-      return answer.checked;
+  _getCheckedControls(controls) {
+    return controls.filter(((control) => {
+      return control.checked;
     }));
   }
 
-  onAnswer() {
-
-  }
-
   bind() {
-    const {type, answers: taskAnswers} = this._state.task;
+    const {type: questionType, answers: questionAnswers} = this._question;
 
     const content = this.element.querySelector(`.game__content`);
     const radioButtons = Array.from(content.querySelectorAll(`[type='radio']`));
 
-    content.addEventListener(`click`, (e) => {
+    content.addEventListener(`mousedown`, (e) => {
 
       const option = e.target.closest(`.game__option`);
 
@@ -72,16 +68,20 @@ export default class GameView extends AbstractView {
     content.addEventListener(`change`, () => {
       const checkedAnswerControls = this._getCheckedControls(radioButtons);
 
-      if (!checkedAnswerControls.length || ((type === TaskType.GUESS_TWO)
+      if (!checkedAnswerControls.length || ((questionType === QuestionType.GUESS_TWO)
           && checkedAnswerControls.length !== REQUIRED_ANSWERS_COUNT)) {
         return;
       }
 
-      const correctAnswer = taskAnswers.every((answer, i) => {
+      const correctAnswer = questionAnswers.every((answer, i) => {
         return answer.type === checkedAnswerControls[i].value;
       });
 
       this.onAnswer(correctAnswer);
     });
+  }
+
+  onAnswer() {
+
   }
 }

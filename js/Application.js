@@ -1,50 +1,44 @@
-import {changeView} from './util';
-import IntroScreen from './modules/intro/screen';
-import GreetingScreen from './modules/greeting/screen';
-import RulesScreen from './modules/rules/screen';
-import GameScreen from './modules/game/screen';
-import ResultScreen from './modules/result/screen';
-import ErrorScreen from './modules/error/screen';
-import LoadScreen from './modules/load/screen';
+import {changeView, crossFadeScreen} from './util';
+import IntroScreen from './modules/intro/intro-screen';
+import GreetingScreen from './modules/greeting/greeting-screen';
+import RulesScreen from './modules/rules/rules-screen';
+import GameScreen from './modules/game/game-screen';
+import ResultScreen from './modules/result/result-screen';
+import ErrorScreen from './modules/error/error-screen';
+import LoadScreen from './modules/load/load-screen';
 import Loader from './loader';
 
-let taskData;
+let gameData;
 export default class Application {
 
-  static start() {
-    if (!taskData) {
-      Application.showIntro();
-      Loader.loadData()
-          .then(Application.showGreeting)
-          .catch((error) => {
-            Application.showError(error);
-          });
+  static async start() {
+    const greetingScreen = new GreetingScreen();
+
+    if (!gameData) {
+      const introScreen = new IntroScreen();
+      const runCrossFade = crossFadeScreen({outElement: introScreen.element, inElement: greetingScreen.element, duration: 2});
+
+      try {
+        gameData = await Loader.loadData();
+        runCrossFade();
+      } catch (e) {
+        Application.showError(e);
+      }
     } else {
-      Application.showGreeting(taskData);
+      changeView(greetingScreen.element);
     }
   }
 
-  static finish({state, player}) {
-    Application.showLoad(player);
-    Loader.saveResults(state, player)
-        .then(() => Loader.loadResults(player))
-        .then((result) => {
-          Application.showResult(result, player);
-        })
-        .catch((error) => {
-          Application.showError(error);
-        });
-  }
+  static async finish({state, player}) {
+    Application.showResultPreloader(`${player}, подожите. Ваш результат загружается!`);
 
-  static showIntro() {
-    const introScreen = new IntroScreen();
-    changeView(introScreen.element);
-  }
-
-  static showGreeting(data) {
-    taskData = data;
-    const greetingScreen = new GreetingScreen();
-    changeView(greetingScreen.element);
+    try {
+      await Loader.saveResults(state, player);
+      const results = await Loader.loadResults(player);
+      Application.showResult(results, player);
+    } catch (error) {
+      Application.showError(error);
+    }
   }
 
   static showRules() {
@@ -53,19 +47,21 @@ export default class Application {
   }
 
   static showGame(playerName) {
-    const gameScreen = new GameScreen({taskData, playerName});
+    const data = gameData;
+
+    const gameScreen = new GameScreen({data, playerName});
     gameScreen.startGame();
     changeView(gameScreen.element);
   }
 
-  static showResult(result, player) {
-    const resultScreen = new ResultScreen({result, player});
-    changeView(resultScreen.element);
+  static showResultPreloader(text) {
+    const loadScreen = new LoadScreen(text);
+    changeView(loadScreen.element);
   }
 
-  static showLoad(player) {
-    const loadScreen = new LoadScreen(player);
-    changeView(loadScreen.element);
+  static showResult(results, player) {
+    const resultScreen = new ResultScreen({results, player});
+    changeView(resultScreen.element);
   }
 
   static showError(error) {

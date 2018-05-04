@@ -1,8 +1,8 @@
 import {AnswerType} from '../../settings';
 
 const answerTypeToAnswerName = {
-  [AnswerType.photo]: `Фото`,
-  [AnswerType.paint]: `Рисунок`
+  [AnswerType.PHOTO]: `Фото`,
+  [AnswerType.PAINT]: `Рисунок`
 };
 
 const answers = Object.values(AnswerType);

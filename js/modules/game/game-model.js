@@ -1,8 +1,8 @@
-import {INITIAL_GAME, GAME_ROUNDS_COUNT, Time} from '../../settings';
-import createTimer from '../../timer/timer';
+import {initialGame, Life, Time} from '../../settings';
+import createTimer from '../../timer/';
 
 export default class GameModel {
-  constructor({taskData: data, playerName}) {
+  constructor({data, playerName}) {
     this._playerName = playerName;
     this._data = data;
   }
@@ -16,14 +16,14 @@ export default class GameModel {
   }
 
   init() {
-    this._state = Object.assign({}, INITIAL_GAME, {
-      tasks: [...this._data]
+    this._state = Object.assign({}, initialGame, {
+      questions: [...this._data]
     });
   }
 
-  nextTask() {
+  nextQuestion() {
     this._state = Object.assign({}, this._state, {
-      task: this._state.tasks.pop()
+      question: this._state.questions.pop()
     });
     this._resetTime();
     this._timer = createTimer(this._state.time);
@@ -31,7 +31,7 @@ export default class GameModel {
 
   addAnswer(answer) {
     this._state = Object.assign({}, this._state, {
-      answers: [...this._state.answers, {isCorrect: answer, time: Time.start - this._state.time}]
+      answers: [...this._state.answers, {isCorrect: answer, time: Time.START - this._state.time}]
     });
   }
 
@@ -43,9 +43,12 @@ export default class GameModel {
     });
   }
 
-  canContinue() {
-    const {lives, answers} = this._state;
-    return (lives > -1) && answers.length < GAME_ROUNDS_COUNT;
+  isDead() {
+    return this._state.lives <= Life.NONE;
+  }
+
+  hasNextQuestion() {
+    return this._state.questions.length;
   }
 
   tick() {
@@ -60,7 +63,7 @@ export default class GameModel {
 
   _resetTime() {
     this._state = Object.assign({}, this._state, {
-      time: Time.start
+      time: Time.START
     });
   }
 }

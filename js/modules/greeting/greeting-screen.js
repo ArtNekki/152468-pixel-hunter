@@ -1,4 +1,4 @@
-import GreetingView from './view';
+import GreetingView from './greeting-view';
 import Application from '../../Application';
 
 export default class GreetingScreen {

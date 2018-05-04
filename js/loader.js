@@ -1,4 +1,5 @@
 import adaptServerData from './modules/game/adapter';
+import resize from './resize';
 
 const SERVER_URL = `https://es.dump.academy/pixel-hunter`;
 const DEFAULT_NAME = `nekki`;
@@ -17,23 +18,27 @@ const checkStatus = (response) => {
 const toJSON = (response) => response.json();
 
 // Оборачиваем каждую картинку в промис и загружаем
-const loadImage = (url) => {
+const loadImage = (dataImage) => {
   return new Promise((onSuccess, onError) => {
-    const img = new Image();
-    img.src = url;
+    const image = new Image();
+    image.src = dataImage.url;
 
-    img.onload = () => {
-      onSuccess(url);
+    image.onload = () => {
+      const imageSize = resize({width: dataImage.width, height: dataImage.height}, {width: image.width, height: image.height});
+
+      dataImage.width = imageSize.width;
+      dataImage.height = imageSize.height;
+
+      onSuccess(dataImage);
     };
 
-    img.onError = (error) => {
-      onError(error);
+    image.onerror = () => {
+      onError(`Картинка не загружена ${dataImage.url}`);
     };
   });
 };
 
-// Передает данные, когда все картинки загружены
-const loadQuestions = (data) => {
+const preloadImages = (data) => {
   const answers = [];
 
   data.forEach((it) => {
@@ -41,16 +46,10 @@ const loadQuestions = (data) => {
   });
 
   const images = answers.map((answer) => {
-    return loadImage(answer.image.url);
+    return loadImage(answer.image);
   });
 
-  return Promise.all(images)
-      .then(() => {
-        return Promise.resolve(data);
-      })
-      .catch((err) => {
-        return err;
-      });
+  return Promise.all(images).then(() => Promise.resolve(data));
 };
 
 export default class Loader {
@@ -58,8 +57,8 @@ export default class Loader {
     return window.fetch(`${SERVER_URL}/questions`)
         .then(checkStatus)
         .then(toJSON)
-        .then(loadQuestions)
-        .then(adaptServerData);
+        .then(adaptServerData)
+        .then(preloadImages);
   }
 
   static saveResults(data, name = DEFAULT_NAME) {

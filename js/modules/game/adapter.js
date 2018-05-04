@@ -1,30 +1,29 @@
-import {AnswerType, TaskType} from '../../settings';
+import {AnswerType, QuestionType} from '../../settings';
 
 const serverTitleToClientTitle = {
-  'two-of-two': TaskType.GUESS_TWO,
-  'one-of-three': TaskType.FIND,
-  'tinder-like': TaskType.GUESS_ONE
+  'two-of-two': QuestionType.GUESS_TWO,
+  'one-of-three': QuestionType.FIND,
+  'tinder-like': QuestionType.GUESS_ONE
 };
 
 const serverAnswerTypeToClientAnswerType = {
-  'painting': AnswerType.paint,
-  'photo': AnswerType.photo
+  'painting': AnswerType.PAINT,
+  'photo': AnswerType.PHOTO
 };
 
 const formatAnswers = (answers) => {
   return answers.map((it) => {
-    return {
-      img: it.image.url,
+    return Object.assign({}, it, {
       type: serverAnswerTypeToClientAnswerType[it.type]
-    };
+    });
   });
 };
 
-const formatQuestion = (question) => {
+const formatQuestion = (data) => {
   return {
-    type: serverTitleToClientTitle[question.type],
-    title: question.question,
-    answers: formatAnswers(question.answers)
+    type: serverTitleToClientTitle[data.type],
+    title: data.question,
+    answers: formatAnswers(data.answers)
   };
 };
 

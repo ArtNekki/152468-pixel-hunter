@@ -1,27 +1,22 @@
 import renderAnswerControls from './controls';
-import {AnswerType, TaskType} from '../../settings';
-
-const answersLengthToImageSize = {
-  1: `width='705' height='455'`,
-  2: `width='468' height='458'`,
-  3: `width='304' height='455'`
-};
+import {AnswerType, QuestionType} from '../../settings';
 
 const getSearchableElement = (answers) => {
-  const paint = answers.filter((answer) => {
-    return answer.type === AnswerType.paint;
+  const paints = answers.filter((answer) => {
+    return answer.type === AnswerType.PAINT;
   });
 
-  return paint.length === 1 ? AnswerType.paint : AnswerType.photo;
+  return paints.length === 1 ? AnswerType.PAINT : AnswerType.PHOTO;
 };
 
-export default ({type: taskType, answers}) => {
+export default ({type: questionType, answers}) => {
+
   return answers.map((answer, i) => {
     i += 1;
 
-    return `<div class='game__option ${(taskType === TaskType.FIND) && (answer.type === getSearchableElement(answers)) ? `game__option--selected` : ``}'>
-        <img src=${answer.img} alt='Option ${i}' ${answersLengthToImageSize[answers.length]} type=${answer.type} />
-        ${(taskType !== TaskType.FIND) ? renderAnswerControls(i) : ``}
+    return `<div class='game__option ${(questionType === QuestionType.FIND) && (answer.type === getSearchableElement(answers)) ? `game__option--selected` : ``}'>
+        <img src=${answer.image.url} alt='Option ${i}'  width=${answer.image.width} height=${answer.image.height} type=${answer.type} />
+        ${(questionType !== QuestionType.FIND) ? renderAnswerControls(i) : ``}
       </div>`;
   }).join(``);
 };

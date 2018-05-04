@@ -6,7 +6,7 @@ const drawHeart = (full) => {
 };
 
 const renderLives = (lives) => {
-  return `${new Array(Life.count - lives).fill(drawHeart(false)).join(``)}
+  return `${new Array(Life.COUNT - lives).fill(drawHeart(false)).join(``)}
           ${new Array(lives).fill(drawHeart(true)).join(``)}`;
 };
 
@@ -18,9 +18,9 @@ const renderContentWithData = ({timer, lives}) => {
 };
 
 export default class HeaderView extends AbstractView {
-  constructor(state) {
+  constructor(data) {
     super();
-    this._state = state;
+    this._data = data;
   }
 
   get template() {
@@ -31,12 +31,12 @@ export default class HeaderView extends AbstractView {
                   <img src='img/logo_small.svg' width='101' height='44'>
                 </button>
               </div>
-              ${this._state ? renderContentWithData(this._state) : ``}
+              ${this._data ? renderContentWithData(this._data) : ``}
             </header>`;
   }
 
   changeTime({time}) {
-    if (time <= Time.critical) {
+    if (time <= Time.CRITICAL) {
       this._timer.classList.add(`game__timer--critical`);
     } else {
       this._timer.classList.remove(`game__timer--critical`);
@@ -49,10 +49,6 @@ export default class HeaderView extends AbstractView {
     this._lives.innerHTML = renderLives(lives);
   }
 
-  goBack() {
-
-  }
-
   bind() {
     const {element} = this;
 
@@ -63,5 +59,9 @@ export default class HeaderView extends AbstractView {
     backButton.addEventListener(`click`, () => {
       this.goBack();
     });
+  }
+
+  goBack() {
+
   }
 }

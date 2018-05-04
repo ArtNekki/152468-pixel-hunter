@@ -17,13 +17,13 @@ export default class GreetingView extends AbstractView {
       </div>`;
   }
 
-  goNext() {
-
-  }
-
   bind() {
     this.element.querySelector(`.greeting__continue`).addEventListener(`click`, () => {
       this.goNext();
     });
+  }
+
+  goNext() {
+
   }
 }
