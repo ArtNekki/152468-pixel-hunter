@@ -34,8 +34,8 @@ export default class Application {
 
     try {
       await Loader.saveResults(state, player);
-      const result = await Loader.loadResults(player);
-      Application.showResult(result, player);
+      const results = await Loader.loadResults(player);
+      Application.showResult(results, player);
     } catch (error) {
       Application.showError(error);
     }
@@ -59,8 +59,8 @@ export default class Application {
     changeView(loadScreen.element);
   }
 
-  static showResult(result, player) {
-    const resultScreen = new ResultScreen({result, player});
+  static showResult(results, player) {
+    const resultScreen = new ResultScreen({results, player});
     changeView(resultScreen.element);
   }
 

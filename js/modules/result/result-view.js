@@ -8,10 +8,10 @@ const resultToTitle = {
 };
 
 export default class ResultView extends AbstractView {
-  constructor({player, result}) {
+  constructor({results, player}) {
     super();
     this._player = player;
-    this._results = result.reverse();
+    this._results = results.reverse();
   }
 
   get template() {
@@ -33,7 +33,8 @@ export default class ResultView extends AbstractView {
     let resultTables = ``;
 
     this._results.forEach((result, i) => {
-      resultTables += new ResultTableView(result, i).template;
+      // нумерация ответов начинается от 1, а не 0, поэтому добавил i + 1
+      resultTables += new ResultTableView(result, i + 1).template;
     });
 
     return resultTables;

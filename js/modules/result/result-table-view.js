@@ -8,9 +8,7 @@ export default class ResultTableView extends AbstractView {
     super();
     this._answers = answers;
     this._lives = lives;
-
-    // отчет начинается от 1, а не 0, поэтому добавил + 1
-    this._position = position + 1;
+    this._position = position;
 
     this._correctAnswers = answers.filter((answer) => {
       return answer.isCorrect;

@@ -2,11 +2,11 @@ import renderAnswerControls from './controls';
 import {AnswerType, QuestionType} from '../../settings';
 
 const getSearchableElement = (answers) => {
-  const paint = answers.filter((answer) => {
+  const paints = answers.filter((answer) => {
     return answer.type === AnswerType.PAINT;
   });
 
-  return paint.length === 1 ? AnswerType.PAINT : AnswerType.PHOTO;
+  return paints.length === 1 ? AnswerType.PAINT : AnswerType.PHOTO;
 };
 
 export default ({type: questionType, answers}) => {
