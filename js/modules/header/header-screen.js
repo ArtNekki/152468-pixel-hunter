@@ -2,11 +2,23 @@ import HeaderView from './header-view';
 import ConfirmScreen from '../confirm/confirm-screen';
 import Application from '../../Application';
 
-export default (state) => {
-  const headerView = new HeaderView(state);
+export default class HeaderScreen {
+  constructor(data) {
+    this._data = data;
+    this._view = new HeaderView(data);
+    this._view.goBack = this._goBack.bind(this);
+  }
 
-  headerView.goBack = () => {
-    if (!state) {
+  get element() {
+    return this._view.element;
+  }
+
+  get view() {
+    return this._view;
+  }
+
+  _goBack() {
+    if (!this._data) {
       Application.start();
       return;
     }
@@ -15,7 +27,5 @@ export default (state) => {
     confirm.isOk = () => {
       Application.start();
     };
-  };
-
-  return headerView;
-};
+  }
+}

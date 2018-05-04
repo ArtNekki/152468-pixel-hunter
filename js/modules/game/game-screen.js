@@ -1,5 +1,5 @@
 import {Time} from '../../settings';
-import headerView from '../header/screen';
+import HeaderScreen from '../header/header-screen';
 import GameView from './game-view';
 import GameModel from './game-model';
 import Application from '../../Application';
@@ -19,7 +19,7 @@ export default class GameScreen {
 
     //
     this._root = document.createElement(`div`);
-    this._header = headerView(this._model.state);
+    this._header = new HeaderScreen(this._model.state);
     this._root.appendChild(this._header.element);
 
     // Обновляем данные игры
@@ -27,11 +27,11 @@ export default class GameScreen {
   }
 
   _updateTime() {
-    this._header.changeTime(this._model.state);
+    this._header.view.changeTime(this._model.state);
   }
 
   _updateLives() {
-    this._header.changeLives(this._model.state);
+    this._header.view.changeLives(this._model.state);
   }
 
   _updateGameData() {

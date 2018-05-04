@@ -1,5 +1,5 @@
 import RulesView from './rules-view';
-import headerView from '../header/screen';
+import HeaderScreen from '../header/header-screen';
 import Application from '../../Application';
 
 export default class RulesScreen {
@@ -12,7 +12,7 @@ export default class RulesScreen {
 
   get element() {
     const element = this._view.element;
-    element.prepend(headerView().element);
+    element.prepend(new HeaderScreen().element);
     return element;
   }
 }
