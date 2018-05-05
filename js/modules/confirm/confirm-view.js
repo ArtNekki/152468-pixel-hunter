@@ -24,7 +24,7 @@ export default class ConfirmView extends AbstractView {
   }
 
   bind() {
-    this.element.querySelector(`.confirm`).addEventListener(`click`, (e) => {
+    this.element.addEventListener(`click`, (e) => {
       const action = e.target.dataset.action;
 
       if (action === Action.OK) {

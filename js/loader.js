@@ -49,7 +49,8 @@ const preloadImages = (data) => {
     return loadImage(answer.image);
   });
 
-  return Promise.all(images).then(() => Promise.resolve(data));
+  return Promise.all(images)
+      .then(() => Promise.resolve(data));
 };
 
 export default class Loader {

@@ -12,7 +12,7 @@ export default class RulesScreen {
 
   get element() {
     const element = this._view.element;
-    element.prepend(new HeaderScreen().element);
+    element.insertBefore(new HeaderScreen().element, element.firstChild);
     return element;
   }
 }

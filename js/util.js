@@ -2,31 +2,26 @@ const container = document.querySelector(`#main`);
 
 export const changeView = (element) => {
   container.innerHTML = ``;
-  container.append(element);
+  container.appendChild(element);
 };
 
-export const createElement = (template = ``, tagName = `template`) => {
+export const createElement = (template = ``, tagName = `div`) => {
   const element = document.createElement(tagName);
   element.innerHTML = template;
 
-  return element.content || element;
-};
-
-export const formatDate = (ms) => {
-  const date = new Date(ms);
-  return date.toLocaleString(`ru`);
+  return element.children[0];
 };
 
 export const crossFadeScreen = ({outElement, inElement, duration}) => {
-  outElement = outElement.children[0];
-  inElement = inElement.children[0];
+  outElement = outElement;
+  inElement = inElement;
 
   outElement.style.position = `absolute`;
   inElement.style.display = `none`;
 
   const fragment = document.createDocumentFragment();
-  fragment.append(outElement);
-  fragment.append(inElement);
+  fragment.appendChild(outElement);
+  fragment.appendChild(inElement);
   changeView(fragment);
 
   return () => {

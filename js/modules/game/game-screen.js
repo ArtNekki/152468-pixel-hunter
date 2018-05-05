@@ -46,7 +46,7 @@ export default class GameScreen {
 
     // Обновляем gameView
     const game = new GameView(this._model.state);
-    const gameElement = game.element.children[0];
+    const gameElement = game.element;
 
     if (this._game) {
       this._root.replaceChild(gameElement, this._game);
