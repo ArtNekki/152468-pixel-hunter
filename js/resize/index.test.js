@@ -29,15 +29,15 @@ const createTestForFrame = (frame) => {
 
   describe(`Resize into frame: ${frame.width}x${frame.height}`, () => {
 
-    describe(`when "width === height"`, () => {
+    describe(`when 'width === height'`, () => {
       sequence({width: frame.width, height: frame.height});
     });
 
-    describe(`when "width > height"`, () => {
+    describe(`when 'width > height'`, () => {
       sequence({width: frame.width, height: Math.floor(frame.height / 2)});
     });
 
-    describe(`when "width < height"`, () => {
+    describe(`when 'width < height'`, () => {
       sequence({width: Math.floor(frame.width / 2), height: frame.height});
     });
 

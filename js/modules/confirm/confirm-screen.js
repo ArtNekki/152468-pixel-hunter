@@ -3,18 +3,22 @@ import ConfirmView from './confirm-view';
 export default class ConfirmScreen {
   constructor(text) {
     this._view = new ConfirmView(text);
-    this._view.onOk = this.onOk.bind(this);
-    this._view.onCancel = this.onCancel.bind(this);
+    this._view.onOk = this._onOk.bind(this);
+    this._view.onCancel = this._onCancel.bind(this);
     this._element = this._view.element;
     document.body.appendChild(this._element);
   }
 
-  onOk() {
+  _onOk() {
     this.isOk();
-    this.onCancel();
+    this._close();
   }
 
-  onCancel() {
+  _onCancel() {
+    this._close();
+  }
+
+  _close() {
     document.body.removeChild(this._element);
   }
 

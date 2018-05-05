@@ -1,27 +1,27 @@
 import {AnswerTime, GAME_ROUNDS_COUNT} from '../../settings';
 
 const StatusState = {
-  unknown: `unknown`,
-  correct: `correct`,
-  fast: `fast`,
-  slow: `slow`,
-  wrong: `wrong`
+  UNKNOWN: `unknown`,
+  CORRECT: `correct`,
+  FAST: `fast`,
+  SLOW: `slow`,
+  WRONG: `wrong`
 };
 
 const getStatItem = ({isCorrect, time} = {}) => {
-  let status = StatusState.unknown;
+  let status = StatusState.UNKNOWN;
 
   if (isCorrect) {
-    status = StatusState.correct;
+    status = StatusState.CORRECT;
 
     if (time < AnswerTime.FAST) {
-      status = StatusState.fast;
+      status = StatusState.FAST;
     } else if (time > AnswerTime.SLOW) {
-      status = StatusState.slow;
+      status = StatusState.SLOW;
     }
 
   } else if (isCorrect === false) {
-    status = StatusState.wrong;
+    status = StatusState.WRONG;
   }
 
   return `<li class='stats__result stats__result--${status}'></li>`;
