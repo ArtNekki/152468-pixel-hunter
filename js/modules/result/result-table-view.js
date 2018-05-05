@@ -38,24 +38,24 @@ export default class ResultTableView extends AbstractView {
         </tr>
         ${this._isWin && this._fastAnswers.length ? `<tr>
           <td></td>
-          <td class="result__extra">Бонус за скорость:</td>
-          <td class="result__extra">${this._fastAnswers.length}&nbsp;<span class="stats__result stats__result--fast"></span></td>
-          <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">${this._fastAnswers.length * AnswerPoint.BONUS}</td>
+          <td class='result__extra'>Бонус за скорость:</td>
+          <td class='result__extra'>${this._fastAnswers.length}&nbsp;<span class='stats__result stats__result--fast'></span></td>
+          <td class='result__points'>×&nbsp;50</td>
+          <td class='result__total'>${this._fastAnswers.length * AnswerPoint.BONUS}</td>
         </tr>` : ``}
         ${this._isWin && this._lives ? `<tr>
           <td></td>
-          <td class="result__extra">Бонус за жизни:</td>
-          <td class="result__extra">${this._lives}&nbsp;<span class="stats__result stats__result--alive"></span></td>
-          <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">${this._lives * Life.BONUS}</td>
+          <td class='result__extra'>Бонус за жизни:</td>
+          <td class='result__extra'>${this._lives}&nbsp;<span class='stats__result stats__result--alive'></span></td>
+          <td class='result__points'>×&nbsp;50</td>
+          <td class='result__total'>${this._lives * Life.BONUS}</td>
         </tr>` : ``}
         ${this._isWin && this._slowAnswers.length ? `<tr>
           <td></td>
-          <td class="result__extra">Штраф за медлительность:</td>
-          <td class="result__extra">${this._slowAnswers.length}&nbsp;<span class="stats__result stats__result--slow"></span></td>
-          <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">${this._slowAnswers.length * AnswerPoint.FINE}</td>
+          <td class='result__extra'>Штраф за медлительность:</td>
+          <td class='result__extra'>${this._slowAnswers.length}&nbsp;<span class='stats__result stats__result--slow'></span></td>
+          <td class='result__points'>×&nbsp;50</td>
+          <td class='result__total'>${this._slowAnswers.length * AnswerPoint.FINE}</td>
         </tr>` : ``}
         <tr>
           <td colspan='5' class='result__total  result__total--final'>${this._isWin ? calculateTotalGameScore(this._answers, this._lives) : ``}</td>

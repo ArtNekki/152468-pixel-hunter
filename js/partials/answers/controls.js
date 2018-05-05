@@ -1,17 +1,17 @@
 import {AnswerType} from '../../settings';
 
-const answerTypeToAnswerName = {
+const answerTypeToControlName = {
   [AnswerType.PHOTO]: `Фото`,
   [AnswerType.PAINT]: `Рисунок`
 };
 
-const answers = Object.values(AnswerType);
+const controls = Object.values(AnswerType);
 
 export default (index) => {
-  return answers.map((it) => {
-    return `<label class="game__answer game__answer--${it}">
-      <input name="question${index}" type="radio" value="${it}">
-      <span>${answerTypeToAnswerName[it]}</span>
+  return controls.map((it) => {
+    return `<label class='game__answer game__answer--${it}'>
+      <input name='question${index}' type='radio' value='${it}'>
+      <span>${answerTypeToControlName[it]}</span>
     </label>`;
   }).join(``);
 };
