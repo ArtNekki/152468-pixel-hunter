@@ -5,8 +5,8 @@ export default class ConfirmScreen {
     this._view = new ConfirmView(text);
     this._view.onOk = this.onOk.bind(this);
     this._view.onCancel = this.onCancel.bind(this);
-    this._element = this._view.element.children[0];
-    document.body.append(this._element);
+    this._element = this._view.element;
+    document.body.appendChild(this._element);
   }
 
   onOk() {
