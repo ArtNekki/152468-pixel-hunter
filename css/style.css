@@ -45,14 +45,9 @@
   text-align: center;
   font-size: 172px;
   color: #de1f1f;
-  cursor: pointer;
   position: relative;
   top: 220px;
   left: 30px; }
-  .intro__asterisk:hover {
-    color: #df4e4e; }
-  .intro__asterisk:active {
-    color: #af3636; }
 
 .intro__motto {
   font-size: 18px;

@@ -1,2 +1,0 @@
-# pixel-hunter
-Anton Mayacky
